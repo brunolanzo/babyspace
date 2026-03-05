@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Entrar — BabySpace</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500&family=Nunito:wght@700;800&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --color-primary: #FF8C69;
+      --color-primary-light: #FFE4D6;
+      --color-secondary: #C3B1E1;
+      --color-secondary-light: #EDE9F8;
+      --color-accent: #A8D8B9;
+      --color-yellow: #FFE5A0;
+      --color-text: #3D3535;
+      --color-text-light: #8A7F80;
+      --color-bg: #FFFAF8;
+      --radius-lg: 24px;
+      --radius-md: 16px;
+      --radius-sm: 12px;
+      --shadow-card: 0 4px 24px rgba(61,53,53,0.07);
+      --transition: 0.3s ease;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'DM Sans', sans-serif; color: var(--color-text); background: linear-gradient(180deg, var(--color-bg) 0%, var(--color-primary-light) 100%); min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 24px; position: relative; overflow-x: hidden; }
+    h1,h2,h3,h4 { font-family: 'Nunito', sans-serif; font-weight: 800; line-height: 1.2; }
+    a { text-decoration: none; color: inherit; }
+
+    @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-14px)} }
+    @keyframes floatSlow { 0%,100%{transform:translateY(0) rotate(0deg)} 50%{transform:translateY(-10px) rotate(6deg)} }
+
+    .deco { position: fixed; border-radius: 50%; opacity: 0.45; z-index: 0; pointer-events: none; }
+    .deco-1 { width: 100px; height: 100px; background: var(--color-secondary); top: 10%; left: 8%; animation: float 6s ease-in-out infinite; }
+    .deco-2 { width: 50px; height: 50px; background: var(--color-yellow); bottom: 15%; left: 15%; animation: floatSlow 7s ease-in-out infinite; }
+    .deco-3 { width: 70px; height: 70px; background: var(--color-accent); top: 20%; right: 10%; animation: float 5s ease-in-out infinite 1s; }
+    .deco-4 { width: 40px; height: 40px; background: var(--color-primary-light); bottom: 25%; right: 12%; animation: floatSlow 6s ease-in-out infinite 0.5s; }
+
+    .auth-wrapper { width: 100%; max-width: 440px; z-index: 1; }
+    .auth-logo { display: flex; align-items: center; justify-content: center; gap: 8px; font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 1.5rem; color: var(--color-primary); margin-bottom: 32px; }
+    .auth-logo svg { flex-shrink: 0; }
+
+    .auth-card { background: #fff; border-radius: var(--radius-lg); box-shadow: var(--shadow-card); padding: 40px; }
+
+    .auth-illus { text-align: center; margin-bottom: 20px; }
+    .auth-card h1 { font-size: 1.8rem; text-align: center; margin-bottom: 8px; }
+    .auth-card .subtitle { text-align: center; color: var(--color-text-light); font-size: 0.95rem; margin-bottom: 28px; }
+
+    .form-group { margin-bottom: 18px; }
+    .form-group label { display: block; font-weight: 500; font-size: 0.9rem; margin-bottom: 6px; color: var(--color-text); }
+    .input-wrap { position: relative; }
+    .form-input { width: 100%; padding: 14px 16px; border: 1.5px solid #E8E2DF; border-radius: var(--radius-sm); font-family: 'DM Sans', sans-serif; font-size: 0.95rem; color: var(--color-text); background: #fff; transition: all var(--transition); outline: none; }
+    .form-input:focus { border-color: var(--color-primary); box-shadow: 0 0 0 3px rgba(255,140,105,0.15); }
+    .form-input.error { border-color: #E74C3C; }
+    .input-wrap .eye-toggle { position: absolute; right: 14px; top: 50%; transform: translateY(-50%); background: none; border: none; cursor: pointer; color: var(--color-text-light); padding: 4px; }
+    .input-wrap .eye-toggle:hover { color: var(--color-primary); }
+
+    .form-row { display: flex; align-items: center; justify-content: space-between; margin-bottom: 24px; font-size: 0.88rem; }
+    .form-row label { display: flex; align-items: center; gap: 8px; cursor: pointer; font-weight: 400; margin-bottom: 0; }
+    .form-row input[type="checkbox"] { width: 18px; height: 18px; accent-color: var(--color-primary); border-radius: 4px; cursor: pointer; }
+    .form-row a { color: var(--color-primary); font-weight: 500; }
+    .form-row a:hover { text-decoration: underline; }
+
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 6px; padding: 14px 24px; border-radius: 50px; font-family: 'Nunito', sans-serif; font-weight: 700; font-size: 0.95rem; border: none; cursor: pointer; transition: all var(--transition); width: 100%; }
+    .btn-primary { background: var(--color-primary); color: #fff; }
+    .btn-primary:hover { background: #e57a59; transform: translateY(-2px); box-shadow: 0 6px 20px rgba(255,140,105,0.35); }
+    .btn-outline { background: transparent; color: var(--color-text); border: 1.5px solid #E8E2DF; }
+    .btn-outline:hover { border-color: var(--color-primary); color: var(--color-primary); background: rgba(255,140,105,0.04); }
+
+    .divider { display: flex; align-items: center; gap: 16px; margin: 24px 0; color: var(--color-text-light); font-size: 0.85rem; }
+    .divider::before, .divider::after { content: ''; flex: 1; height: 1px; background: #E8E2DF; }
+
+    .social-buttons { display: flex; gap: 12px; margin-bottom: 24px; }
+    .social-buttons .btn { flex: 1; font-size: 0.88rem; padding: 12px 16px; }
+    .social-buttons .btn svg { flex-shrink: 0; }
+
+    .auth-footer { text-align: center; font-size: 0.9rem; color: var(--color-text-light); margin-top: 24px; }
+    .auth-footer a { color: var(--color-primary); font-weight: 600; }
+    .auth-footer a:hover { text-decoration: underline; }
+
+    .error-msg { color: #E74C3C; font-size: 0.8rem; margin-top: 4px; display: none; }
+    .form-group.has-error .error-msg { display: block; }
+    .form-group.has-error .form-input { border-color: #E74C3C; }
+
+    @media(max-width:480px) {
+      body { padding: 16px; align-items: flex-start; padding-top: 40px; }
+      .auth-card { padding: 28px 20px; }
+      .auth-card h1 { font-size: 1.5rem; }
+      .social-buttons { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+  <div class="deco deco-1"></div>
+  <div class="deco deco-2"></div>
+  <div class="deco deco-3"></div>
+  <div class="deco deco-4"></div>
+
+  <div class="auth-wrapper">
+    <a href="index.html" class="auth-logo">
+      <svg width="32" height="32" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="14" fill="#FF8C69" opacity="0.15"/><path d="M16 6 L18.5 12 L25 12.5 L20 17 L21.5 24 L16 20.5 L10.5 24 L12 17 L7 12.5 L13.5 12 Z" fill="#FF8C69"/></svg>
+      BabySpace
+    </a>
+
+    <div class="auth-card">
+      <div class="auth-illus">
+        <svg width="80" height="80" viewBox="0 0 80 80" fill="none">
+          <circle cx="40" cy="40" r="32" fill="#FFE4D6"/>
+          <rect x="26" y="28" width="28" height="22" rx="4" fill="#fff" stroke="#FF8C69" stroke-width="2"/>
+          <circle cx="40" cy="22" r="8" fill="#A8D8B9" opacity="0.6"/>
+          <path d="M34 39 Q40 45 46 39" stroke="#FF8C69" stroke-width="2" stroke-linecap="round" fill="none"/>
+          <circle cx="40" cy="22" r="4" fill="#FF8C69" opacity="0.3"/>
+          <rect x="36" y="18" width="8" height="8" rx="4" fill="#FFE5A0" opacity="0.6"/>
+          <path d="M40 16 L41 19 L44 19.5 L42 21 L42.5 24 L40 22.5 L37.5 24 L38 21 L36 19.5 L39 19Z" fill="#FF8C69" opacity="0.5"/>
+        </svg>
+      </div>
+
+      <h1>Entrar na sua conta</h1>
+      <p class="subtitle">Que bom ter você de volta!</p>
+
+      <form id="loginForm" novalidate>
+        <div class="form-group">
+          <label for="email">E-mail</label>
+          <input type="email" id="email" class="form-input" placeholder="seu@email.com" required>
+          <p class="error-msg">Digite um e-mail válido</p>
+        </div>
+
+        <div class="form-group">
+          <label for="password">Senha</label>
+          <div class="input-wrap">
+            <input type="password" id="password" class="form-input" placeholder="Sua senha" required>
+            <button type="button" class="eye-toggle" onclick="togglePassword('password', this)" aria-label="Mostrar senha">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+            </button>
+          </div>
+          <p class="error-msg">Digite sua senha</p>
+        </div>
+
+        <div class="form-row">
+          <label><input type="checkbox"> Lembrar de mim</label>
+          <a href="esqueci-senha.html">Esqueci minha senha</a>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Entrar</button>
+      </form>
+
+      <div class="divider">ou entre com</div>
+
+      <div class="social-buttons">
+        <button type="button" class="btn btn-outline">
+          <svg width="18" height="18" viewBox="0 0 18 18"><path d="M17.64 9.2c0-.637-.057-1.251-.164-1.84H9v3.481h4.844a4.14 4.14 0 01-1.796 2.716v2.259h2.908c1.702-1.567 2.684-3.875 2.684-6.615z" fill="#4285F4"/><path d="M9 18c2.43 0 4.467-.806 5.956-2.18l-2.908-2.259c-.806.54-1.837.86-3.048.86-2.344 0-4.328-1.584-5.036-3.711H.957v2.332A8.997 8.997 0 009 18z" fill="#34A853"/><path d="M3.964 10.71A5.41 5.41 0 013.682 9c0-.593.102-1.17.282-1.71V4.958H.957A8.996 8.996 0 000 9c0 1.452.348 2.827.957 4.042l3.007-2.332z" fill="#FBBC05"/><path d="M9 3.58c1.321 0 2.508.454 3.44 1.345l2.582-2.58C13.463.891 11.426 0 9 0A8.997 8.997 0 00.957 4.958L3.964 7.29C4.672 5.163 6.656 3.58 9 3.58z" fill="#EA4335"/></svg>
+          Google
+        </button>
+        <button type="button" class="btn btn-outline">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="#1877F2"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+          Facebook
+        </button>
+      </div>
+    </div>
+
+    <p class="auth-footer">Ainda não tem conta? <a href="cadastro.html">Cadastre-se</a></p>
+  </div>
+
+  <script>
+    function togglePassword(id, btn) {
+      const input = document.getElementById(id);
+      const isPassword = input.type === 'password';
+      input.type = isPassword ? 'text' : 'password';
+      btn.innerHTML = isPassword
+        ? '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M17.94 17.94A10.07 10.07 0 0112 20c-7 0-11-8-11-8a18.45 18.45 0 015.06-5.94M9.9 4.24A9.12 9.12 0 0112 4c7 0 11 8 11 8a18.5 18.5 0 01-2.16 3.19m-6.72-1.07a3 3 0 11-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/></svg>'
+        : '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>';
+    }
+
+    document.getElementById('loginForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      let valid = true;
+      const email = document.getElementById('email');
+      const pass = document.getElementById('password');
+
+      email.parentElement.classList.remove('has-error');
+      pass.parentElement.parentElement.classList.remove('has-error');
+
+      if (!email.value || !email.value.includes('@')) {
+        email.parentElement.classList.add('has-error');
+        valid = false;
+      }
+      if (!pass.value) {
+        pass.parentElement.parentElement.classList.add('has-error');
+        valid = false;
+      }
+      if (valid) {
+        window.location.href = 'dashboard.html';
+      }
+    });
+  </script>
+</body>
+</html>
