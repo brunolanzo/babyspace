@@ -1,0 +1,588 @@
+<!-- ===== NAVBAR ===== -->
+<nav class="navbar" id="navbar">
+  <div class="container">
+    <a href="#" class="nav-logo">
+      <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+        <circle cx="16" cy="16" r="14" fill="#FF8C69" opacity="0.15"/>
+        <path d="M16 6 L18.5 12 L25 12.5 L20 17 L21.5 24 L16 20.5 L10.5 24 L12 17 L7 12.5 L13.5 12 Z" fill="#FF8C69"/>
+      </svg>
+      BabySpace
+    </a>
+
+    <div class="nav-links">
+      <a href="#como-funciona">Como funciona</a>
+      <a href="#recursos">Recursos</a>
+      <a href="#tipos">Tipos de Cha</a>
+      <a href="#depoimentos">Depoimentos</a>
+      <a href="#tarifas">Tarifas</a>
+    </div>
+
+    <div class="nav-actions">
+      <a href="/login" class="btn btn-outline" style="padding:10px 20px; font-size:0.9rem;">Entrar</a>
+      <a href="/cadastro" class="btn btn-primary" style="padding:10px 20px; font-size:0.9rem;">Comecar gratis</a>
+    </div>
+
+    <button class="nav-hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- Mobile Menu -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#como-funciona" onclick="closeMobile()">Como funciona</a>
+  <a href="#recursos" onclick="closeMobile()">Recursos</a>
+  <a href="#tipos" onclick="closeMobile()">Tipos de Cha</a>
+  <a href="#depoimentos" onclick="closeMobile()">Depoimentos</a>
+  <a href="#tarifas" onclick="closeMobile()">Tarifas</a>
+  <a href="/login" class="btn btn-outline">Entrar</a>
+  <a href="/cadastro" class="btn btn-primary">Comecar gratis</a>
+</div>
+
+<!-- ===== HERO ===== -->
+<section class="hero" id="hero">
+  <div class="hero-deco hero-deco-1"></div>
+  <div class="hero-deco hero-deco-2"></div>
+  <div class="hero-deco hero-deco-3"></div>
+  <div class="hero-deco hero-deco-4"></div>
+
+  <div class="container">
+    <div class="hero-content">
+      <h1>O espaco do seu <span>bebe</span> comeca aqui</h1>
+      <p>Crie seu cha de bebe, envie convites pelo WhatsApp e receba todos os presentes em dinheiro na sua conta. Simples, lindo e gratuito.</p>
+      <div class="hero-buttons">
+        <a href="/cadastro" class="btn btn-primary btn-lg">Criar meu cha gratis</a>
+        <a href="#como-funciona" class="btn btn-outline btn-lg">Ver como funciona</a>
+      </div>
+    </div>
+
+    <div class="hero-illustration">
+      <!-- Pregnant woman with phone -- Headspace-style -->
+      <svg viewBox="0 0 400 420" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Background circle -->
+        <circle cx="200" cy="210" r="160" fill="#FFE4D6" opacity="0.5"/>
+        <!-- Body -->
+        <ellipse cx="200" cy="310" rx="70" ry="85" fill="#C3B1E1"/>
+        <!-- Belly bump -->
+        <ellipse cx="220" cy="300" rx="55" ry="65" fill="#D4C4EC"/>
+        <!-- Head -->
+        <circle cx="200" cy="175" r="52" fill="#FFD5C2"/>
+        <!-- Hair -->
+        <ellipse cx="200" cy="150" rx="56" ry="42" fill="#3D3535"/>
+        <ellipse cx="170" cy="175" rx="14" ry="30" fill="#3D3535"/>
+        <!-- Hair detail -->
+        <ellipse cx="232" cy="170" rx="10" ry="22" fill="#3D3535"/>
+        <!-- Eyes -->
+        <circle cx="185" cy="182" r="4" fill="#3D3535"/>
+        <circle cx="215" cy="182" r="4" fill="#3D3535"/>
+        <!-- Smile -->
+        <path d="M190 196 Q200 206 210 196" stroke="#3D3535" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+        <!-- Blush -->
+        <ellipse cx="174" cy="193" rx="8" ry="5" fill="#FF8C69" opacity="0.3"/>
+        <ellipse cx="226" cy="193" rx="8" ry="5" fill="#FF8C69" opacity="0.3"/>
+        <!-- Arm (left) -->
+        <path d="M145 280 Q130 310 140 340" stroke="#FFD5C2" stroke-width="18" stroke-linecap="round" fill="none"/>
+        <!-- Arm (right) holding phone -->
+        <path d="M255 270 Q275 295 260 320" stroke="#FFD5C2" stroke-width="18" stroke-linecap="round" fill="none"/>
+        <!-- Phone -->
+        <rect x="245" y="300" width="36" height="60" rx="8" fill="#3D3535"/>
+        <rect x="249" y="306" width="28" height="44" rx="4" fill="#A8D8B9"/>
+        <!-- Phone heart -->
+        <path d="M263 320 Q258 314 263 318 Q268 314 263 320" fill="#FF8C69" stroke="#FF8C69" stroke-width="2"/>
+        <!-- Small star decoration -->
+        <path d="M310 160 L313 168 L321 169 L315 174 L317 182 L310 178 L303 182 L305 174 L299 169 L307 168 Z" fill="#FFE5A0"/>
+        <!-- Small heart decoration -->
+        <path d="M120 250 Q112 238 120 244 Q128 238 120 250" fill="#FF8C69" opacity="0.5" stroke="#FF8C69" stroke-width="1.5"/>
+        <!-- Legs -->
+        <rect x="170" y="380" width="24" height="30" rx="12" fill="#FFD5C2"/>
+        <rect x="206" y="380" width="24" height="30" rx="12" fill="#FFD5C2"/>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- ===== COMO FUNCIONA ===== -->
+<section class="how-it-works fade-section" id="como-funciona">
+  <div class="container">
+    <h2 class="section-title">Como funciona</h2>
+    <p class="section-subtitle">Tres passinhos simples para o cha dos seus sonhos</p>
+
+    <div class="steps-grid">
+      <!-- Step 1 -->
+      <div class="step-card">
+        <div class="step-number">1</div>
+        <svg viewBox="0 0 72 72" fill="none">
+          <rect x="16" y="8" width="40" height="52" rx="8" fill="#FFE4D6"/>
+          <rect x="20" y="16" width="24" height="4" rx="2" fill="#FF8C69"/>
+          <rect x="20" y="24" width="32" height="3" rx="1.5" fill="#FF8C69" opacity="0.4"/>
+          <rect x="20" y="31" width="28" height="3" rx="1.5" fill="#FF8C69" opacity="0.4"/>
+          <rect x="20" y="38" width="30" height="3" rx="1.5" fill="#FF8C69" opacity="0.4"/>
+          <path d="M36 48 Q30 42 36 45 Q42 42 36 48" fill="#FF8C69" stroke="#FF8C69" stroke-width="1.5"/>
+          <circle cx="48" cy="14" r="8" fill="#A8D8B9"/>
+          <path d="M45 14 L47 16 L51 12" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <h3>Monte seu cha</h3>
+        <p>Escolha um tema lindo, personalize com fotos e adicione os presentes da sua lista</p>
+      </div>
+
+      <!-- Step 2 -->
+      <div class="step-card">
+        <div class="step-number">2</div>
+        <svg viewBox="0 0 72 72" fill="none">
+          <rect x="10" y="18" width="52" height="36" rx="6" fill="#FFE4D6"/>
+          <path d="M10 24 L36 40 L62 24" stroke="#FF8C69" stroke-width="2.5" fill="none"/>
+          <path d="M36 10 Q30 4 36 8 Q42 4 36 10" fill="#FF8C69">
+            <animateTransform attributeName="transform" type="translate" values="0,0;0,-3;0,0" dur="2s" repeatCount="indefinite"/>
+          </path>
+          <circle cx="36" cy="18" r="3" fill="#FFE5A0"/>
+        </svg>
+        <h3>Envie o convite</h3>
+        <p>Compartilhe pelo WhatsApp em segundos. Seus convidados verao uma pagina linda</p>
+      </div>
+
+      <!-- Step 3 -->
+      <div class="step-card">
+        <div class="step-number">3</div>
+        <svg viewBox="0 0 72 72" fill="none">
+          <path d="M20 46 Q20 56 36 56 Q52 56 52 46 L52 32 Q52 22 36 22 Q20 22 20 32 Z" fill="#FFE4D6"/>
+          <circle cx="30" cy="18" r="7" fill="#FFE5A0" stroke="#FF8C69" stroke-width="1.5"/>
+          <circle cx="42" cy="14" r="6" fill="#FFE5A0" stroke="#FF8C69" stroke-width="1.5"/>
+          <circle cx="50" cy="22" r="5" fill="#FFE5A0" stroke="#FF8C69" stroke-width="1.5"/>
+          <text x="29" y="21" font-size="8" font-family="Nunito" font-weight="800" fill="#FF8C69">$</text>
+          <path d="M26 40 Q20 30 30 36" stroke="#A8D8B9" stroke-width="3" stroke-linecap="round" fill="none"/>
+          <path d="M46 40 Q52 30 42 36" stroke="#A8D8B9" stroke-width="3" stroke-linecap="round" fill="none"/>
+        </svg>
+        <h3>Receba em dinheiro</h3>
+        <p>Os presentes chegam direto na sua conta. Sem fraldas encalhadas!</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Wave divider -->
+<div class="wave-divider">
+  <svg viewBox="0 0 1440 80" preserveAspectRatio="none">
+    <path d="M0,40 C360,80 720,0 1080,40 C1260,60 1380,50 1440,40 L1440,80 L0,80 Z" fill="#EDE9F8"/>
+  </svg>
+</div>
+
+<!-- ===== TIPOS DE CHA ===== -->
+<section class="tea-types fade-section" id="tipos">
+  <div class="container">
+    <h2 class="section-title">Para cada momento, um espaco especial</h2>
+    <p class="section-subtitle">Escolha o tipo de cha perfeito para voce</p>
+
+    <div class="tea-grid">
+      <!-- Cha de Bebe -->
+      <div class="tea-card">
+        <svg viewBox="0 0 80 80" fill="none">
+          <!-- Bear face -->
+          <circle cx="40" cy="44" r="24" fill="#FFE4D6"/>
+          <circle cx="28" cy="28" r="10" fill="#FFE4D6"/>
+          <circle cx="52" cy="28" r="10" fill="#FFE4D6"/>
+          <circle cx="28" cy="28" r="6" fill="#FF8C69" opacity="0.3"/>
+          <circle cx="52" cy="28" r="6" fill="#FF8C69" opacity="0.3"/>
+          <circle cx="34" cy="42" r="3" fill="#3D3535"/>
+          <circle cx="46" cy="42" r="3" fill="#3D3535"/>
+          <ellipse cx="40" cy="50" rx="4" ry="3" fill="#FF8C69" opacity="0.6"/>
+          <path d="M36 54 Q40 58 44 54" stroke="#3D3535" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+          <path d="M40 8 L41.5 12 L46 12.5 L42.5 15 L43.5 20 L40 17.5 L36.5 20 L37.5 15 L34 12.5 L38.5 12 Z" fill="#FFE5A0"/>
+        </svg>
+        <h3>Cha de Bebe</h3>
+        <p>O classico que a gente ama</p>
+      </div>
+
+      <!-- Cha de Fraldas -->
+      <div class="tea-card">
+        <svg viewBox="0 0 80 80" fill="none">
+          <path d="M20 30 Q20 18 40 18 Q60 18 60 30 L60 52 Q60 62 50 62 L30 62 Q20 62 20 52 Z" fill="#FFE4D6"/>
+          <ellipse cx="40" cy="40" rx="14" ry="16" fill="#C3B1E1" opacity="0.4"/>
+          <path d="M28 28 Q40 36 52 28" stroke="#FF8C69" stroke-width="2" stroke-linecap="round" fill="none"/>
+          <circle cx="32" cy="50" r="2" fill="#A8D8B9"/>
+          <circle cx="40" cy="52" r="2" fill="#A8D8B9"/>
+          <circle cx="48" cy="50" r="2" fill="#A8D8B9"/>
+        </svg>
+        <h3>Cha de Fraldas</h3>
+        <p>So fraldas, so em dinheiro</p>
+      </div>
+
+      <!-- Cha Revelacao -->
+      <div class="tea-card">
+        <svg viewBox="0 0 80 80" fill="none">
+          <ellipse cx="40" cy="50" rx="18" ry="22" fill="#C3B1E1" opacity="0.5"/>
+          <path d="M34 50 Q34 28 40 22 Q46 28 46 50" fill="#FF8C69" opacity="0.3"/>
+          <path d="M30 50 L50 50" stroke="#FF8C69" stroke-width="2"/>
+          <circle cx="40" cy="50" r="3" fill="#FF8C69"/>
+          <path d="M40 16 L40 22" stroke="#FFE5A0" stroke-width="2" stroke-linecap="round"/>
+          <path d="M34 18 L36 22" stroke="#FFE5A0" stroke-width="2" stroke-linecap="round"/>
+          <path d="M46 18 L44 22" stroke="#FFE5A0" stroke-width="2" stroke-linecap="round"/>
+          <text x="36" y="56" font-size="14" font-weight="800" fill="#fff">?</text>
+        </svg>
+        <h3>Cha Revelacao</h3>
+        <p>A surpresa mais esperada do ano</p>
+      </div>
+
+      <!-- Cha Rifa -->
+      <div class="tea-card">
+        <svg viewBox="0 0 80 80" fill="none">
+          <rect x="16" y="20" width="48" height="32" rx="6" fill="#FFE4D6"/>
+          <rect x="16" y="20" width="48" height="10" rx="6" fill="#FF8C69" opacity="0.3"/>
+          <line x1="36" y1="20" x2="36" y2="52" stroke="#FF8C69" stroke-width="1" stroke-dasharray="3 3"/>
+          <circle cx="36" cy="20" r="3" fill="#fff" stroke="#FF8C69" stroke-width="1.5"/>
+          <circle cx="36" cy="52" r="3" fill="#fff" stroke="#FF8C69" stroke-width="1.5"/>
+          <text x="21" y="42" font-size="8" font-family="Nunito" font-weight="800" fill="#FF8C69">RIFA</text>
+          <path d="M50 58 L53 62 L60 60 L57 66 L62 70 L55 70 L52 76 L50 70 L43 70 L48 66 L45 60 Z" fill="#FFE5A0" opacity="0.8"/>
+        </svg>
+        <h3>Cha Rifa</h3>
+        <p>Online, divertido e com sorteio automatico</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== RECURSOS ===== -->
+<section class="features fade-section" id="recursos">
+  <div class="container">
+    <h2 class="section-title">Tudo que voce precisa em um so lugar</h2>
+    <p class="section-subtitle">Recursos pensados com carinho para tornar seu cha perfeito</p>
+
+    <div class="features-grid">
+      <div class="features-list">
+        <h3>Recursos gratuitos</h3>
+        <ul>
+          <li><span class="check">&#10003;</span> Convite online com tema personalizado</li>
+          <li><span class="check">&#10003;</span> Confirmacao de presenca (RSVP)</li>
+          <li><span class="check">&#10003;</span> Lista de presentes em dinheiro</li>
+          <li><span class="check">&#10003;</span> Album de fotos da gravidez</li>
+          <li><span class="check">&#10003;</span> Mural de recadinhos dos convidados</li>
+          <li><span class="check">&#10003;</span> Blog do cha</li>
+          <li><span class="check">&#10003;</span> Compartilhamento via WhatsApp</li>
+          <li><span class="check">&#10003;</span> 1 resgate gratuito</li>
+        </ul>
+
+        <h3>Recursos Premium <span class="premium-badge">Premium</span> <span class="premium-price">R$39,90 unico</span></h3>
+        <ul>
+          <li><span class="check" style="background:var(--color-secondary);">&#10003;</span> Musicas no seu cha</li>
+          <li><span class="check" style="background:var(--color-secondary);">&#10003;</span> Presentes personalizados</li>
+          <li><span class="check" style="background:var(--color-secondary);">&#10003;</span> Ate 3 resgates gratis</li>
+          <li><span class="check" style="background:var(--color-secondary);">&#10003;</span> Lembretes automaticos por WhatsApp</li>
+          <li><span class="check" style="background:var(--color-secondary);">&#10003;</span> Memorias do cha em PDF</li>
+          <li><span class="check" style="background:var(--color-secondary);">&#10003;</span> Aviso de nascimento do bebe</li>
+          <li><span class="check" style="background:var(--color-secondary);">&#10003;</span> Presentes divertidos e criativos</li>
+        </ul>
+      </div>
+
+      <div class="phone-mockup">
+        <div class="phone-frame">
+          <div class="phone-notch"></div>
+          <div class="phone-screen">
+            <div class="phone-screen-header">BabySpace</div>
+            <svg width="60" height="60" viewBox="0 0 60 60" fill="none" style="margin-bottom:12px;">
+              <circle cx="30" cy="30" r="28" fill="#FFE4D6"/>
+              <path d="M30 18 Q24 12 30 16 Q36 12 30 18" fill="#FF8C69"/>
+              <text x="16" y="38" font-size="10" font-family="Nunito" font-weight="800" fill="#FF8C69">Baby</text>
+            </svg>
+            <div class="phone-screen-card">
+              <div class="phone-screen-card-title">Carrinho de Bebe</div>
+              <div class="phone-screen-card-text">R$ 450,00</div>
+            </div>
+            <div class="phone-screen-card" style="background:var(--color-secondary-light);">
+              <div class="phone-screen-card-title">Kit Enxoval</div>
+              <div class="phone-screen-card-text">R$ 280,00</div>
+            </div>
+            <div class="phone-screen-card">
+              <div class="phone-screen-card-title">Berco Portatil</div>
+              <div class="phone-screen-card-text">R$ 350,00</div>
+            </div>
+            <div class="phone-screen-btn">Presentear com amor</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== TARIFAS ===== -->
+<section class="pricing fade-section" id="tarifas">
+  <div class="container">
+    <h2 class="section-title">Transparencia total</h2>
+    <p class="section-subtitle">Sem surpresas. Voce sabe exatamente o que acontece com cada presente.</p>
+
+    <div class="pricing-content">
+      <div class="pricing-highlight">
+        <p class="price-label">Para as mamaes</p>
+        <p class="price-big">GRATIS</p>
+        <p class="price-desc">Para os convidados: tarifa inclusa no presente</p>
+
+        <div class="pricing-example">
+          <div class="pricing-example-step">
+            <p class="pe-label">Voce adiciona</p>
+            <p class="pe-value">R$19,00</p>
+          </div>
+          <span class="pricing-example-arrow">&#8594;</span>
+          <div class="pricing-example-step">
+            <p class="pe-label">Convidado paga</p>
+            <p class="pe-value">R$21,47</p>
+          </div>
+          <span class="pricing-example-arrow">&#8594;</span>
+          <div class="pricing-example-step">
+            <p class="pe-label">Voce recebe</p>
+            <p class="pe-value" style="color:var(--color-primary);">R$19,00</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="pricing-table">
+        <h3>Prazos de recebimento</h3>
+        <table>
+          <tr><td>Pix</td><td>Imediato</td></tr>
+          <tr><td>Boleto</td><td>Ate 3 dias uteis</td></tr>
+          <tr><td>Cartao de credito</td><td>33 dias corridos</td></tr>
+          <tr><td>Transferencia</td><td>Ate 2 dias uteis</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== DEPOIMENTOS ===== -->
+<section class="testimonials fade-section" id="depoimentos">
+  <div class="container">
+    <h2 class="section-title">Mamaes que amaram</h2>
+    <p class="section-subtitle">Historias reais de quem viveu a experiencia BabySpace</p>
+
+    <div class="testimonials-carousel">
+      <div class="testimonials-track" id="carouselTrack">
+        <!-- Slide 1 -->
+        <div class="testimonial-card">
+          <div class="testimonial-item">
+            <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+            <p class="testimonial-text">"Meu cha foi todo online e recebi mais presentes do que imaginava! A pagina ficou tao linda que todo mundo elogiou. Melhor decisao que tomei na gravidez."</p>
+            <div class="testimonial-author">
+              <div class="testimonial-avatar">CA</div>
+              <div>
+                <p class="testimonial-name">Camila Andrade</p>
+                <p class="testimonial-handle">@camilamae2024</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="testimonial-item">
+            <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+            <p class="testimonial-text">"Simplesmente amei! Enviei o link pelo WhatsApp e em 2 dias ja tinha a maior parte dos presentes. O dinheiro caiu direto na minha conta, sem complicacao nenhuma."</p>
+            <div class="testimonial-author">
+              <div class="testimonial-avatar">JR</div>
+              <div>
+                <p class="testimonial-name">Juliana Ribeiro</p>
+                <p class="testimonial-handle">@ju.maternidade</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="testimonial-item">
+            <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+            <p class="testimonial-text">"Como moro longe da familia, achei que meu cha seria dificil. Com o BabySpace, todo mundo participou de qualquer lugar! Minha sogra de Manaus ate deixou recadinho."</p>
+            <div class="testimonial-author">
+              <div class="testimonial-avatar">FS</div>
+              <div>
+                <p class="testimonial-name">Fernanda Santos</p>
+                <p class="testimonial-handle">@fernandinha.baby</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Slide 2 -->
+        <div class="testimonial-card">
+          <div class="testimonial-item">
+            <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+            <p class="testimonial-text">"Eu estava gravida de gemeos e nao tinha energia pra organizar nada. O BabySpace resolveu tudo em 15 minutos. Recebi presentes incriveis sem sair do sofa!"</p>
+            <div class="testimonial-author">
+              <div class="testimonial-avatar">ML</div>
+              <div>
+                <p class="testimonial-name">Marina Lima</p>
+                <p class="testimonial-handle">@marina.gemeos</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="testimonial-item">
+            <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+            <p class="testimonial-text">"O mural de recadinhos me fez chorar de emocao! Cada convidado escreveu uma mensagem linda pro meu bebe. Vou guardar pra sempre. Obrigada, BabySpace!"</p>
+            <div class="testimonial-author">
+              <div class="testimonial-avatar">BP</div>
+              <div>
+                <p class="testimonial-name">Beatriz Pereira</p>
+                <p class="testimonial-handle">@bia.esperando</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="testimonial-item">
+            <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+            <p class="testimonial-text">"Fiz o cha rifa e foi muito divertido! O sorteio automatico deixou tudo mais pratico e as amigas adoraram participar. Super recomendo pra quem quer algo diferente."</p>
+            <div class="testimonial-author">
+              <div class="testimonial-avatar">AT</div>
+              <div>
+                <p class="testimonial-name">Amanda Torres</p>
+                <p class="testimonial-handle">@amandatorres.mae</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="carousel-dots" id="carouselDots">
+      <button class="carousel-dot active" data-index="0" aria-label="Slide 1"></button>
+      <button class="carousel-dot" data-index="1" aria-label="Slide 2"></button>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PROVA SOCIAL ===== -->
+<section class="social-proof fade-section" id="midia">
+  <div class="container">
+    <h2 class="section-title">O BabySpace na midia</h2>
+    <p class="section-subtitle">Quem entende de maternidade ja recomenda</p>
+
+    <div class="media-logos">
+      <span class="media-logo">BabyBlog</span>
+      <span class="media-logo">MamaeModerna</span>
+      <span class="media-logo">G1 Familia</span>
+      <span class="media-logo">Gravidez&Cia</span>
+      <span class="media-logo">PaisMaster</span>
+    </div>
+
+    <div class="counters">
+      <div class="counter-item">
+        <p class="counter-value" data-target="15000" data-prefix="+">0</p>
+        <p class="counter-label">chas criados</p>
+      </div>
+      <div class="counter-item">
+        <p class="counter-value" data-target="2" data-prefix="+R$" data-suffix=" milhoes">0</p>
+        <p class="counter-label">em presentes</p>
+      </div>
+      <div class="counter-item">
+        <p class="counter-value" data-target="49" data-prefix="★ " data-decimal="true">0</p>
+        <p class="counter-label">de avaliacao</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CTA FINAL ===== -->
+<section class="cta-final fade-section" id="cta">
+  <!-- Decorative SVGs -->
+  <div class="cta-deco cta-deco-1">
+    <svg width="120" height="120" viewBox="0 0 120 120" fill="none">
+      <circle cx="60" cy="60" r="50" stroke="#fff" stroke-width="2" opacity="0.3"/>
+      <path d="M60 20 L63 30 L73 31 L65 37 L68 47 L60 41 L52 47 L55 37 L47 31 L57 30 Z" fill="#fff" opacity="0.5"/>
+      <path d="M85 70 L87 75 L92 76 L88 79 L89 84 L85 81 L81 84 L82 79 L78 76 L83 75 Z" fill="#fff" opacity="0.4"/>
+      <path d="M35 75 L37 80 L42 81 L38 84 L39 89 L35 86 L31 89 L32 84 L28 81 L33 80 Z" fill="#fff" opacity="0.4"/>
+    </svg>
+  </div>
+  <div class="cta-deco cta-deco-2">
+    <svg width="100" height="100" viewBox="0 0 100 100" fill="none">
+      <path d="M50 10 C30 10 10 30 10 50 C10 70 50 95 50 95 C50 95 90 70 90 50 C90 30 70 10 50 10 Z" stroke="#fff" stroke-width="2" opacity="0.2" fill="none"/>
+      <circle cx="20" cy="30" r="4" fill="#fff" opacity="0.3"/>
+      <circle cx="75" cy="25" r="3" fill="#fff" opacity="0.3"/>
+      <circle cx="85" cy="65" r="5" fill="#fff" opacity="0.2"/>
+    </svg>
+  </div>
+
+  <div class="container" style="position:relative; z-index:2;">
+    <h2>Seu cha inesquecivel comeca agora</h2>
+    <p>Gratis para criar. Simples de usar. Lindo de ver.</p>
+    <a href="/cadastro" class="btn btn-white btn-lg">Criar meu BabySpace gratis &#8594;</a>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="#" class="nav-logo">
+          <svg width="28" height="28" viewBox="0 0 32 32" fill="none">
+            <circle cx="16" cy="16" r="14" fill="#FF8C69" opacity="0.3"/>
+            <path d="M16 6 L18.5 12 L25 12.5 L20 17 L21.5 24 L16 20.5 L10.5 24 L12 17 L7 12.5 L13.5 12 Z" fill="#FF8C69"/>
+          </svg>
+          BabySpace
+        </a>
+        <p>O espaco do seu bebe comeca aqui. Crie chas de bebe lindos e receba presentes em dinheiro.</p>
+        <div class="footer-social">
+          <a href="#" aria-label="Instagram">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5" fill="#fff" stroke="none"/></svg>
+          </a>
+          <a href="#" aria-label="TikTok">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="#fff"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1v-3.5a6.37 6.37 0 00-.79-.05A6.34 6.34 0 003.15 15.2a6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.34-6.34V8.78a8.28 8.28 0 004.76 1.5v-3.4a4.85 4.85 0 01-1-.19z"/></svg>
+          </a>
+          <a href="#" aria-label="YouTube">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="#fff"><path d="M23.5 6.19a3.02 3.02 0 00-2.12-2.14C19.54 3.5 12 3.5 12 3.5s-7.54 0-9.38.55A3.02 3.02 0 00.5 6.19 31.6 31.6 0 000 12a31.6 31.6 0 00.5 5.81 3.02 3.02 0 002.12 2.14c1.84.55 9.38.55 9.38.55s7.54 0 9.38-.55a3.02 3.02 0 002.12-2.14A31.6 31.6 0 0024 12a31.6 31.6 0 00-.5-5.81zM9.75 15.02V8.98L15.5 12l-5.75 3.02z"/></svg>
+          </a>
+          <a href="#" aria-label="Pinterest">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="#fff"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.08 3.15 9.42 7.6 11.18-.1-.95-.2-2.41.04-3.45.22-.94 1.4-5.95 1.4-5.95s-.36-.72-.36-1.78c0-1.66.97-2.9 2.17-2.9 1.02 0 1.52.77 1.52 1.7 0 1.03-.66 2.57-1 4-.28 1.2.6 2.17 1.78 2.17 2.14 0 3.78-2.26 3.78-5.5 0-2.88-2.07-4.89-5.02-4.89-3.42 0-5.43 2.57-5.43 5.22 0 1.03.4 2.14.9 2.74.1.12.11.22.08.34-.09.38-.3 1.2-.34 1.36-.05.22-.18.26-.4.16-1.5-.7-2.43-2.88-2.43-4.64 0-3.78 2.74-7.24 7.92-7.24 4.16 0 7.4 2.97 7.4 6.93 0 4.13-2.6 7.46-6.23 7.46-1.22 0-2.36-.63-2.75-1.38l-.75 2.86c-.27 1.04-1 2.35-1.49 3.15C9.57 23.82 10.76 24 12 24c6.63 0 12-5.37 12-12S18.63 0 12 0z"/></svg>
+          </a>
+          <a href="#" aria-label="WhatsApp">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="#fff"><path d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.48-.89-.79-1.49-1.77-1.66-2.07-.17-.3-.02-.46.13-.61.14-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.61-.92-2.2-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48s1.06 2.88 1.21 3.08c.15.2 2.09 3.19 5.06 4.47.71.3 1.26.49 1.69.63.71.23 1.36.2 1.87.12.57-.08 1.76-.72 2.01-1.41.25-.7.25-1.3.17-1.42-.07-.12-.27-.2-.57-.35zm-5.44 7.43h-.02a9.87 9.87 0 01-5.03-1.38l-.36-.21-3.74.98 1-3.65-.24-.37a9.86 9.86 0 01-1.51-5.26c0-5.45 4.44-9.89 9.9-9.89a9.87 9.87 0 017 2.9 9.86 9.86 0 012.9 7c0 5.45-4.44 9.88-9.9 9.88zm8.41-18.3A11.82 11.82 0 0012.04 0C5.46 0 .1 5.35.1 11.93a11.88 11.88 0 001.59 5.95L0 24l6.3-1.65a11.87 11.87 0 005.73 1.46h.01C18.62 23.81 24 18.46 24 11.88a11.82 11.82 0 00-3.56-8.37z"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <h4>Duvidas</h4>
+        <ul>
+          <li><a href="#">Como funciona</a></li>
+          <li><a href="#">Prazos e taxas</a></li>
+          <li><a href="#">Perguntas frequentes</a></li>
+          <li><a href="#">Politica de privacidade</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Inspire-se</h4>
+        <ul>
+          <li><a href="#">Temas de cha</a></li>
+          <li><a href="#">Ideias de presentes</a></li>
+          <li><a href="#">Chas reais</a></li>
+          <li><a href="#">Lista de enxoval</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Conteudo</h4>
+        <ul>
+          <li><a href="#">Blog</a></li>
+          <li><a href="#">Dicas de gravidez</a></li>
+          <li><a href="#">Guia do cha perfeito</a></li>
+          <li><a href="#">Novidades</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Fale conosco</h4>
+        <ul>
+          <li><a href="#">Suporte</a></li>
+          <li><a href="#">WhatsApp</a></li>
+          <li><a href="#">Parcerias</a></li>
+          <li><a href="#">Trabalhe conosco</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>&copy; 2026 BabySpace. Todos os direitos reservados.</p>
+      <div class="footer-seals">
+        <span class="footer-seal">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+          SSL Seguro
+        </span>
+        <span class="footer-seal">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          Pagamento Seguro
+        </span>
+      </div>
+    </div>
+  </div>
+</footer>

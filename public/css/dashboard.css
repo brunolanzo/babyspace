@@ -1,0 +1,70 @@
+/* ===== SIDEBAR ===== */
+:root { --sidebar-w: 260px; }
+
+.sidebar { position: fixed; top: 0; left: 0; width: var(--sidebar-w); height: 100vh; background: #fff; border-right: 1px solid #f0ece9; display: flex; flex-direction: column; z-index: 100; transition: transform var(--transition); }
+.sidebar-header { padding: 24px 20px; display: flex; align-items: center; gap: 8px; }
+.sidebar-logo { display: flex; align-items: center; gap: 8px; font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 1.3rem; color: var(--color-primary); }
+.sidebar-nav { flex: 1; padding: 8px 12px; overflow-y: auto; }
+.nav-section { margin-bottom: 24px; }
+.nav-section-label { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--color-text-light); padding: 0 12px; margin-bottom: 8px; }
+.nav-item { display: flex; align-items: center; gap: 12px; padding: 11px 14px; border-radius: var(--radius-sm); font-size: 0.9rem; font-weight: 500; color: var(--color-text-light); transition: all var(--transition); cursor: pointer; margin-bottom: 2px; }
+.nav-item:hover { background: var(--color-bg); color: var(--color-text); }
+.nav-item.active { background: var(--color-primary-light); color: var(--color-primary); font-weight: 600; }
+.nav-item svg { flex-shrink: 0; }
+.nav-label { white-space: nowrap; }
+.sidebar-footer { padding: 16px 20px; border-top: 1px solid #f0ece9; display: flex; align-items: center; gap: 12px; }
+.user-avatar { width: 40px; height: 40px; border-radius: 50%; background: var(--color-primary-light); display: flex; align-items: center; justify-content: center; font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 0.85rem; color: var(--color-primary); flex-shrink: 0; }
+.user-info { overflow: hidden; }
+.user-name { font-weight: 600; font-size: 0.88rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.user-plan { font-size: 0.75rem; color: var(--color-text-light); }
+
+/* ===== MAIN ===== */
+.main { margin-left: var(--sidebar-w); min-height: 100vh; }
+.topbar { height: 64px; padding: 0 32px; display: flex; align-items: center; justify-content: space-between; background: #fff; border-bottom: 1px solid #f0ece9; position: sticky; top: 0; z-index: 50; }
+.topbar-left { display: flex; align-items: center; gap: 16px; }
+.topbar-title { font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 1.4rem; }
+.hamburger { display: none; background: none; border: none; cursor: pointer; padding: 4px; }
+.hamburger svg { display: block; }
+.topbar-right { display: flex; align-items: center; gap: 16px; }
+.notif-btn { position: relative; background: none; border: none; cursor: pointer; color: var(--color-text-light); padding: 4px; }
+.notif-btn:hover { color: var(--color-primary); }
+.notif-dot { position: absolute; top: 2px; right: 2px; width: 8px; height: 8px; border-radius: 50%; background: #E74C3C; }
+.topbar-avatar { width: 36px; height: 36px; border-radius: 50%; background: var(--color-primary-light); display: flex; align-items: center; justify-content: center; font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 0.75rem; color: var(--color-primary); }
+
+.content { padding: 28px 32px; }
+
+/* ===== OVERLAY ===== */
+.sidebar-overlay { display: none; position: fixed; inset: 0; background: rgba(61,53,53,0.4); z-index: 90; }
+
+/* ===== RESPONSIVE ===== */
+@media(max-width:1024px) {
+  .sidebar { width: 72px; }
+  .sidebar-header { padding: 20px 0; justify-content: center; }
+  .sidebar-logo span { display: none; }
+  .nav-section-label { display: none; }
+  .nav-item { justify-content: center; padding: 12px; }
+  .nav-label { display: none; }
+  .sidebar-footer { justify-content: center; }
+  .sidebar-footer .user-info { display: none; }
+  .main { margin-left: 72px; }
+}
+
+@media(max-width:768px) {
+  .sidebar { transform: translateX(-100%); width: var(--sidebar-w); }
+  .sidebar.open { transform: translateX(0); }
+  .sidebar.open ~ .sidebar-overlay { display: block; }
+  .sidebar-header { padding: 24px 20px; }
+  .sidebar-logo span { display: inline; }
+  .nav-section-label { display: block; }
+  .nav-item { justify-content: flex-start; padding: 11px 14px; }
+  .nav-label { display: inline; }
+  .sidebar-footer .user-info { display: block; }
+  .main { margin-left: 0; }
+  .hamburger { display: block; }
+  .topbar { padding: 0 16px; }
+  .content { padding: 20px 16px; }
+}
+
+@media(max-width:480px) {
+  .topbar-title { font-size: 1.1rem; }
+}

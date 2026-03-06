@@ -1,0 +1,66 @@
+/* ===== AUTH BODY ===== */
+.auth-body {
+  background: linear-gradient(180deg, var(--color-bg) 0%, var(--color-primary-light) 100%);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* ===== FLOATING DECORATIONS ===== */
+.deco { position: fixed; border-radius: 50%; opacity: 0.45; z-index: 0; pointer-events: none; }
+.deco-1 { width: 100px; height: 100px; background: var(--color-secondary); top: 10%; left: 8%; animation: float 6s ease-in-out infinite; }
+.deco-2 { width: 50px; height: 50px; background: var(--color-yellow); bottom: 15%; left: 15%; animation: floatSlow 7s ease-in-out infinite; }
+.deco-3 { width: 70px; height: 70px; background: var(--color-accent); top: 20%; right: 10%; animation: float 5s ease-in-out infinite 1s; }
+.deco-4 { width: 40px; height: 40px; background: var(--color-primary-light); bottom: 25%; right: 12%; animation: floatSlow 6s ease-in-out infinite 0.5s; }
+
+/* ===== AUTH WRAPPER ===== */
+.auth-wrapper { width: 100%; max-width: 440px; z-index: 1; }
+.auth-logo { display: flex; align-items: center; justify-content: center; gap: 8px; font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 1.5rem; color: var(--color-primary); margin-bottom: 32px; }
+.auth-logo svg { flex-shrink: 0; }
+
+/* ===== AUTH CARD ===== */
+.auth-card { background: #fff; border-radius: var(--radius-lg); box-shadow: var(--shadow-card); padding: 40px; }
+.auth-illus { text-align: center; margin-bottom: 20px; }
+.auth-card h1 { font-size: 1.8rem; text-align: center; margin-bottom: 8px; }
+.auth-card .subtitle { text-align: center; color: var(--color-text-light); font-size: 0.95rem; margin-bottom: 28px; }
+
+/* ===== AUTH INPUT WRAP ===== */
+.input-wrap { position: relative; }
+.input-wrap .eye-toggle { position: absolute; right: 14px; top: 50%; transform: translateY(-50%); background: none; border: none; cursor: pointer; color: var(--color-text-light); padding: 4px; }
+.input-wrap .eye-toggle:hover { color: var(--color-primary); }
+
+/* ===== AUTH FORM ROW ===== */
+.auth-form-row { display: flex; align-items: center; justify-content: space-between; margin-bottom: 24px; font-size: 0.88rem; }
+.auth-form-row label { display: flex; align-items: center; gap: 8px; cursor: pointer; font-weight: 400; margin-bottom: 0; }
+.auth-form-row input[type="checkbox"] { width: 18px; height: 18px; accent-color: var(--color-primary); border-radius: 4px; cursor: pointer; }
+.auth-form-row a { color: var(--color-primary); font-weight: 500; }
+.auth-form-row a:hover { text-decoration: underline; }
+
+/* Auth full-width button override */
+.auth-card .btn { width: 100%; padding: 14px 24px; font-size: 0.95rem; }
+
+/* ===== CHECKBOX GROUP (CADASTRO) ===== */
+.checkbox-group { display: flex; align-items: flex-start; gap: 8px; margin-bottom: 24px; font-size: 0.88rem; }
+.checkbox-group input[type="checkbox"] { width: 18px; height: 18px; accent-color: var(--color-primary); margin-top: 2px; flex-shrink: 0; cursor: pointer; }
+.checkbox-group a { color: var(--color-primary); font-weight: 500; }
+
+/* ===== STRENGTH METER ===== */
+.strength-meter { display: flex; gap: 4px; margin-top: 8px; }
+.strength-bar { height: 4px; flex: 1; border-radius: 2px; background: #E8E2DF; transition: background var(--transition); }
+.strength-label { font-size: 0.78rem; color: var(--color-text-light); margin-top: 4px; }
+
+/* ===== AUTH FOOTER ===== */
+.auth-footer { text-align: center; font-size: 0.9rem; color: var(--color-text-light); margin-top: 24px; }
+.auth-footer a { color: var(--color-primary); font-weight: 600; }
+.auth-footer a:hover { text-decoration: underline; }
+
+/* ===== RESPONSIVE ===== */
+@media(max-width:480px) {
+  .auth-body { padding: 16px; align-items: flex-start; padding-top: 40px; }
+  .auth-card { padding: 28px 20px; }
+  .auth-card h1 { font-size: 1.5rem; }
+}

@@ -1,0 +1,75 @@
+<%- include('../partials/sidebar') %>
+
+<div class="main">
+  <%- include('../partials/topbar') %>
+
+  <div class="content">
+    <div class="page-header">
+      <div><p style="color:var(--color-text-light);font-size:0.9rem">Gerencie seus convidados e acompanhe o RSVP</p></div>
+      <div class="header-actions">
+        <button class="btn btn-outline" onclick="openModal()">+ Adicionar</button>
+        <button class="btn btn-whatsapp">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="#fff"><path d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.48-.89-.79-1.49-1.77-1.66-2.07-.17-.3-.02-.46.13-.61.14-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.61-.92-2.2-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48s1.06 2.88 1.21 3.08c.15.2 2.09 3.19 5.06 4.47.71.3 1.26.49 1.69.63.71.23 1.36.2 1.87.12.57-.08 1.76-.72 2.01-1.41.25-.7.25-1.3.17-1.42-.07-.12-.27-.2-.57-.35z"/></svg>
+          Enviar convites
+        </button>
+      </div>
+    </div>
+
+    <div class="stats-bar">
+      <div class="stat-mini"><div class="stat-mini-dot" style="background:var(--color-text)"></div><div><div class="stat-mini-value">45</div><div class="stat-mini-label">Total</div></div></div>
+      <div class="stat-mini"><div class="stat-mini-dot" style="background:var(--color-accent)"></div><div><div class="stat-mini-value">32</div><div class="stat-mini-label">Confirmados</div></div></div>
+      <div class="stat-mini"><div class="stat-mini-dot" style="background:#D4A843"></div><div><div class="stat-mini-value">10</div><div class="stat-mini-label">Pendentes</div></div></div>
+      <div class="stat-mini"><div class="stat-mini-dot" style="background:#E74C3C"></div><div><div class="stat-mini-value">3</div><div class="stat-mini-label">Recusaram</div></div></div>
+    </div>
+
+    <div class="filter-bar">
+      <input type="text" class="search-input" placeholder="Buscar convidado...">
+      <select class="filter-select">
+        <option>Todos os status</option>
+        <option>Confirmados</option>
+        <option>Pendentes</option>
+        <option>Recusaram</option>
+      </select>
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Convidado</th><th>E-mail</th><th>Status</th><th>Presente</th><th>Data RSVP</th><th></th></tr></thead>
+        <tbody>
+          <tr><td><div class="guest-info"><div class="guest-avatar">AS</div><span class="guest-name-col">Ana Silva</span></div></td><td>ana@email.com</td><td><span class="badge badge-success">Confirmado</span></td><td>Sim</td><td>28/02/2026</td><td><button class="action-btn" title="Remover">✕</button></td></tr>
+          <tr><td><div class="guest-info"><div class="guest-avatar">JC</div><span class="guest-name-col">João Carlos</span></div></td><td>joao@email.com</td><td><span class="badge badge-success">Confirmado</span></td><td>Não</td><td>01/03/2026</td><td><button class="action-btn">✕</button></td></tr>
+          <tr><td><div class="guest-info"><div class="guest-avatar">MC</div><span class="guest-name-col">Maria Costa</span></div></td><td>maria@email.com</td><td><span class="badge badge-success">Confirmado</span></td><td>Sim</td><td>27/02/2026</td><td><button class="action-btn">✕</button></td></tr>
+          <tr><td><div class="guest-info"><div class="guest-avatar">PL</div><span class="guest-name-col">Pedro Lima</span></div></td><td>pedro@email.com</td><td><span class="badge badge-success">Confirmado</span></td><td>Sim</td><td>26/02/2026</td><td><button class="action-btn">✕</button></td></tr>
+          <tr><td><div class="guest-info"><div class="guest-avatar">JS</div><span class="guest-name-col">Julia Santos</span></div></td><td>julia@email.com</td><td><span class="badge badge-warning">Pendente</span></td><td>—</td><td>—</td><td><button class="action-btn">✕</button></td></tr>
+          <tr><td><div class="guest-info"><div class="guest-avatar">RF</div><span class="guest-name-col">Roberto Ferreira</span></div></td><td>roberto@email.com</td><td><span class="badge badge-warning">Pendente</span></td><td>—</td><td>—</td><td><button class="action-btn">✕</button></td></tr>
+          <tr><td><div class="guest-info"><div class="guest-avatar">LM</div><span class="guest-name-col">Lucia Mendes</span></div></td><td>lucia@email.com</td><td><span class="badge badge-danger">Recusou</span></td><td>—</td><td>02/03/2026</td><td><button class="action-btn">✕</button></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Mobile cards -->
+    <div class="mobile-card">
+      <div class="m-card"><div class="m-card-left"><div class="guest-avatar">AS</div><div><p class="m-card-name">Ana Silva</p><p class="m-card-email">ana@email.com</p></div></div><span class="badge badge-success">Confirmado</span></div>
+      <div class="m-card"><div class="m-card-left"><div class="guest-avatar">JC</div><div><p class="m-card-name">João Carlos</p><p class="m-card-email">joao@email.com</p></div></div><span class="badge badge-success">Confirmado</span></div>
+      <div class="m-card"><div class="m-card-left"><div class="guest-avatar">MC</div><div><p class="m-card-name">Maria Costa</p><p class="m-card-email">maria@email.com</p></div></div><span class="badge badge-success">Confirmado</span></div>
+      <div class="m-card"><div class="m-card-left"><div class="guest-avatar">JS</div><div><p class="m-card-name">Julia Santos</p><p class="m-card-email">julia@email.com</p></div></div><span class="badge badge-warning">Pendente</span></div>
+      <div class="m-card"><div class="m-card-left"><div class="guest-avatar">LM</div><div><p class="m-card-name">Lucia Mendes</p><p class="m-card-email">lucia@email.com</p></div></div><span class="badge badge-danger">Recusou</span></div>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="guestModal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <h2>Adicionar convidado</h2>
+    <form onsubmit="event.preventDefault();closeModal();">
+      <div class="form-group"><label>Nome</label><input type="text" class="form-input" placeholder="Nome do convidado"></div>
+      <div class="form-group"><label>E-mail</label><input type="email" class="form-input" placeholder="email@exemplo.com"></div>
+      <div class="form-group"><label>Telefone (opcional)</label><input type="tel" class="form-input" placeholder="(11) 99999-9999"></div>
+      <div class="modal-actions">
+        <button type="button" class="btn btn-outline" onclick="closeModal()">Cancelar</button>
+        <button type="submit" class="btn btn-primary">Adicionar</button>
+      </div>
+    </form>
+  </div>
+</div>

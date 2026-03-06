@@ -1,0 +1,98 @@
+<%- include('../partials/sidebar') %>
+<div class="main">
+  <%- include('../partials/topbar') %>
+  <div class="content">
+    <!-- Stepper -->
+    <div class="stepper-row" id="stepper">
+      <div class="step-wrap active" data-step="0"><div class="step-circle">1</div><span class="step-label">Tipo de Chá</span></div>
+      <div class="step-line"></div>
+      <div class="step-wrap" data-step="1"><div class="step-circle">2</div><span class="step-label">Detalhes</span></div>
+      <div class="step-line"></div>
+      <div class="step-wrap" data-step="2"><div class="step-circle">3</div><span class="step-label">Aparência</span></div>
+      <div class="step-line"></div>
+      <div class="step-wrap" data-step="3"><div class="step-circle">4</div><span class="step-label">Revisão</span></div>
+    </div>
+
+    <!-- Step 1: Tipo -->
+    <div class="step-content active" id="step0">
+      <h2>Que tipo de chá você quer criar?</h2>
+      <div class="type-grid">
+        <div class="type-card" data-type="Chá de Bebê" onclick="selectType(this)">
+          <svg width="60" height="60" viewBox="0 0 80 80" fill="none"><circle cx="40" cy="44" r="24" fill="#FFE4D6"/><circle cx="28" cy="28" r="10" fill="#FFE4D6"/><circle cx="52" cy="28" r="10" fill="#FFE4D6"/><circle cx="28" cy="28" r="6" fill="#FF8C69" opacity="0.3"/><circle cx="52" cy="28" r="6" fill="#FF8C69" opacity="0.3"/><circle cx="34" cy="42" r="3" fill="#3D3535"/><circle cx="46" cy="42" r="3" fill="#3D3535"/><path d="M36 54 Q40 58 44 54" stroke="#3D3535" stroke-width="1.5" fill="none"/></svg>
+          <h3>Chá de Bebê</h3>
+          <p>O clássico que a gente ama</p>
+        </div>
+        <div class="type-card" data-type="Chá de Fraldas" onclick="selectType(this)">
+          <svg width="60" height="60" viewBox="0 0 80 80" fill="none"><path d="M20 30 Q20 18 40 18 Q60 18 60 30 L60 52 Q60 62 50 62 L30 62 Q20 62 20 52 Z" fill="#FFE4D6"/><ellipse cx="40" cy="40" rx="14" ry="16" fill="#C3B1E1" opacity="0.4"/><path d="M28 28 Q40 36 52 28" stroke="#FF8C69" stroke-width="2" fill="none"/></svg>
+          <h3>Chá de Fraldas</h3>
+          <p>Só fraldas, só em dinheiro</p>
+        </div>
+        <div class="type-card" data-type="Chá Revelação" onclick="selectType(this)">
+          <svg width="60" height="60" viewBox="0 0 80 80" fill="none"><ellipse cx="40" cy="50" rx="18" ry="22" fill="#C3B1E1" opacity="0.5"/><path d="M34 50 Q34 28 40 22 Q46 28 46 50" fill="#FF8C69" opacity="0.3"/><path d="M30 50 L50 50" stroke="#FF8C69" stroke-width="2"/><text x="36" y="56" font-size="14" font-weight="800" fill="#fff">?</text></svg>
+          <h3>Chá Revelação</h3>
+          <p>A surpresa mais esperada</p>
+        </div>
+        <div class="type-card" data-type="Chá Rifa" onclick="selectType(this)">
+          <svg width="60" height="60" viewBox="0 0 80 80" fill="none"><rect x="16" y="20" width="48" height="32" rx="6" fill="#FFE4D6"/><rect x="16" y="20" width="48" height="10" rx="6" fill="#FF8C69" opacity="0.3"/><text x="21" y="42" font-size="8" font-family="Nunito" font-weight="800" fill="#FF8C69">RIFA</text><path d="M50 58 L53 62 L60 60 L57 66 L62 70 L55 70 L52 76 L50 70 L43 70 L48 66 L45 60Z" fill="#FFE5A0" opacity="0.8"/></svg>
+          <h3>Chá Rifa</h3>
+          <p>Divertido com sorteio</p>
+        </div>
+      </div>
+      <div class="step-nav"><div></div><button class="btn btn-primary" onclick="nextStep()">Próximo →</button></div>
+    </div>
+
+    <!-- Step 2: Detalhes -->
+    <div class="step-content" id="step1">
+      <h2>Conte-nos sobre o seu chá</h2>
+      <div class="form-group"><label>Nome do bebê</label><input type="text" id="babyName" class="form-input" placeholder="Ex: Helena"></div>
+      <div class="form-group"><label>Título do chá</label><input type="text" id="chaTitle" class="form-input" placeholder="Ex: Chá da Helena"></div>
+      <div class="form-group"><label>Data prevista</label><input type="date" id="chaDate" class="form-input"></div>
+      <div class="form-group"><label>Descrição</label><textarea id="chaDesc" class="form-textarea" placeholder="Conte um pouquinho sobre esse momento especial..." rows="4"></textarea></div>
+      <div class="form-group">
+        <label>Modalidade</label>
+        <div class="radio-group">
+          <label class="radio-label" onclick="selectRadio(this)"><input type="radio" name="mode" value="presencial" checked> Presencial</label>
+          <label class="radio-label" onclick="selectRadio(this)"><input type="radio" name="mode" value="online"> Online</label>
+        </div>
+      </div>
+      <div class="form-group" id="locationGroup"><label>Local do evento</label><input type="text" id="chaLocation" class="form-input" placeholder="Endereço ou nome do local"></div>
+      <div class="step-nav"><button class="btn btn-outline" onclick="prevStep()">← Voltar</button><button class="btn btn-primary" onclick="nextStep()">Próximo →</button></div>
+    </div>
+
+    <!-- Step 3: Aparência -->
+    <div class="step-content" id="step2">
+      <h2>Escolha a cara do seu chá</h2>
+      <h3 style="font-size:1rem;margin-bottom:16px">Tema</h3>
+      <div class="theme-grid">
+        <div class="theme-card selected" data-theme="Nuvens" onclick="selectTheme(this)"><div class="theme-swatch" style="background:#EDE9F8"></div><span class="theme-name">Nuvens</span></div>
+        <div class="theme-card" data-theme="Safári" onclick="selectTheme(this)"><div class="theme-swatch" style="background:#FFE5A0"></div><span class="theme-name">Safári</span></div>
+        <div class="theme-card" data-theme="Jardim" onclick="selectTheme(this)"><div class="theme-swatch" style="background:#A8D8B9"></div><span class="theme-name">Jardim</span></div>
+        <div class="theme-card" data-theme="Princesa" onclick="selectTheme(this)"><div class="theme-swatch" style="background:#FFE4D6"></div><span class="theme-name">Princesa</span></div>
+        <div class="theme-card" data-theme="Estrelas" onclick="selectTheme(this)"><div class="theme-swatch" style="background:#C3B1E1"></div><span class="theme-name">Estrelas</span></div>
+        <div class="theme-card" data-theme="Oceano" onclick="selectTheme(this)"><div class="theme-swatch" style="background:#B8D4E3"></div><span class="theme-name">Oceano</span></div>
+      </div>
+      <h3 style="font-size:1rem;margin-bottom:12px">Foto de capa</h3>
+      <div class="upload-zone" onclick="document.getElementById('fileInput').click()">
+        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="var(--color-text-light)" stroke-width="1.5" stroke-linecap="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M17 8l-5-5-5 5M12 3v12"/></svg>
+        <p>Arraste uma foto ou clique para enviar</p>
+        <small>PNG, JPG até 5MB</small>
+        <input type="file" id="fileInput" accept="image/*" style="display:none">
+      </div>
+      <div class="step-nav"><button class="btn btn-outline" onclick="prevStep()">← Voltar</button><button class="btn btn-primary" onclick="nextStep()">Próximo →</button></div>
+    </div>
+
+    <!-- Step 4: Revisão -->
+    <div class="step-content" id="step3">
+      <h2>Revise e publique! 🎉</h2>
+      <div style="background:#fff;border-radius:var(--radius-md);box-shadow:var(--shadow-card);padding:24px">
+        <div class="review-section"><span class="review-edit" onclick="goToStep(0)">Editar</span><p class="review-label">Tipo de chá</p><p class="review-value" id="revType">—</p></div>
+        <div class="review-section"><span class="review-edit" onclick="goToStep(1)">Editar</span><p class="review-label">Nome do bebê</p><p class="review-value" id="revBaby">—</p></div>
+        <div class="review-section"><span class="review-edit" onclick="goToStep(1)">Editar</span><p class="review-label">Título</p><p class="review-value" id="revTitle">—</p></div>
+        <div class="review-section"><span class="review-edit" onclick="goToStep(1)">Editar</span><p class="review-label">Data</p><p class="review-value" id="revDate">—</p></div>
+        <div class="review-section"><span class="review-edit" onclick="goToStep(1)">Editar</span><p class="review-label">Modalidade</p><p class="review-value" id="revMode">—</p></div>
+        <div class="review-section"><span class="review-edit" onclick="goToStep(2)">Editar</span><p class="review-label">Tema</p><p class="review-value" id="revTheme">—</p></div>
+      </div>
+      <div class="step-nav"><button class="btn btn-outline" onclick="prevStep()">← Voltar</button><button class="btn btn-primary" onclick="publish()">Publicar meu chá ✨</button></div>
+    </div>
+  </div>
+</div>

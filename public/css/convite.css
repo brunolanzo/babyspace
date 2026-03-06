@@ -1,0 +1,81 @@
+/* HERO */
+.invite-hero{background:linear-gradient(135deg,var(--color-primary-light) 0%,var(--color-secondary-light) 100%);padding:60px 24px 80px;text-align:center;position:relative;overflow:hidden}
+.invite-hero .deco{position:absolute;border-radius:50%;opacity:0.3;pointer-events:none}
+.invite-hero .d1{width:120px;height:120px;background:var(--color-secondary);top:-20px;right:-30px}
+.invite-hero .d2{width:80px;height:80px;background:var(--color-yellow);bottom:10%;left:5%}
+.invite-hero .d3{width:50px;height:50px;background:var(--color-accent);top:20%;left:10%}
+.invite-logo{display:inline-flex;align-items:center;gap:6px;font-family:'Nunito',sans-serif;font-weight:700;font-size:0.9rem;color:var(--color-primary);opacity:0.7;margin-bottom:24px}
+.invite-hero h1{font-size:2.8rem;margin-bottom:8px;color:var(--color-text);position:relative;z-index:1}
+.invite-hero h1 span{color:var(--color-primary)}
+.invite-hero .subtitle{font-size:1.1rem;color:var(--color-text-light);margin-bottom:32px;position:relative;z-index:1}
+.countdown{display:flex;justify-content:center;gap:20px;position:relative;z-index:1}
+.countdown-item{text-align:center}
+.countdown-num{font-family:'Nunito',sans-serif;font-weight:800;font-size:2rem;color:var(--color-primary);background:#fff;width:64px;height:64px;border-radius:var(--radius-md);display:flex;align-items:center;justify-content:center;box-shadow:var(--shadow-card);margin-bottom:4px}
+.countdown-label{font-size:0.75rem;color:var(--color-text-light);text-transform:uppercase;letter-spacing:0.5px}
+
+.container{max-width:800px;margin:0 auto;padding:0 24px}
+
+/* PARENTS */
+.parents{display:flex;align-items:center;justify-content:center;gap:24px;padding:40px 0;text-align:center}
+.parent-avatar{width:64px;height:64px;border-radius:50%;background:var(--color-primary-light);display:flex;align-items:center;justify-content:center;font-family:'Nunito',sans-serif;font-weight:800;font-size:1.2rem;color:var(--color-primary);margin:0 auto 8px}
+.parent-name{font-weight:600;font-size:0.95rem}
+.parents-heart{font-size:1.5rem;color:var(--color-primary)}
+
+/* DETAILS */
+.section{padding:40px 0}
+.section-title{text-align:center;font-size:1.6rem;margin-bottom:24px}
+.details-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.detail-card{background:#fff;border-radius:var(--radius-md);padding:20px;box-shadow:var(--shadow-card);text-align:center}
+.detail-icon{font-size:1.5rem;margin-bottom:8px}
+.detail-label{font-size:0.78rem;color:var(--color-text-light);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:4px}
+.detail-value{font-family:'Nunito',sans-serif;font-weight:700;font-size:0.95rem}
+
+/* GIFTS */
+.gifts-section{background:var(--color-secondary-light);padding:48px 0;margin:0 -9999px;padding-left:9999px;padding-right:9999px}
+.gifts-inner{max-width:800px;margin:0 auto}
+.gifts-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px;margin-top:24px}
+.gift-card{background:#fff;border-radius:var(--radius-md);padding:20px;text-align:center;box-shadow:var(--shadow-card);transition:all var(--transition)}
+.gift-card:hover{transform:translateY(-2px);box-shadow:0 8px 32px rgba(61,53,53,0.12)}
+.gift-icon{width:48px;height:48px;border-radius:12px;margin:0 auto 12px;display:flex;align-items:center;justify-content:center}
+.gift-name{font-family:'Nunito',sans-serif;font-weight:700;font-size:0.95rem;margin-bottom:4px}
+.gift-price{color:var(--color-primary);font-family:'Nunito',sans-serif;font-weight:800;font-size:1.1rem;margin-bottom:12px}
+.gift-progress{height:4px;background:#E8E2DF;border-radius:2px;overflow:hidden;margin-bottom:12px}
+.gift-progress-fill{height:100%;background:var(--color-accent);border-radius:2px}
+.btn-full{width:100%}
+.btn-done{background:#E8E2DF;color:var(--color-text-light);cursor:default}
+
+/* RSVP */
+.rsvp-card{background:#fff;border-radius:var(--radius-lg);padding:32px;box-shadow:var(--shadow-card);max-width:500px;margin:0 auto}
+.radio-row{display:flex;gap:12px;margin:8px 0 16px}
+.radio-pill{padding:10px 20px;border:1.5px solid #E8E2DF;border-radius:50px;cursor:pointer;font-size:0.9rem;transition:all var(--transition);display:flex;align-items:center;gap:6px}
+.radio-pill:hover{border-color:var(--color-primary)}
+.radio-pill input{display:none}
+.radio-pill.selected{background:var(--color-primary);color:#fff;border-color:var(--color-primary)}
+
+/* MESSAGES */
+.messages-preview{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-top:20px}
+.msg-card{padding:16px;border-radius:var(--radius-sm);font-size:0.85rem;line-height:1.5}
+.msg-author{font-weight:600;font-size:0.82rem;margin-bottom:6px}
+
+/* SHARE */
+.share-section{text-align:center;padding:48px 0}
+.share-btns{display:flex;justify-content:center;gap:12px;margin-top:20px;flex-wrap:wrap}
+.share-btn{display:flex;align-items:center;gap:8px;padding:12px 24px;border-radius:50px;font-family:'Nunito',sans-serif;font-weight:700;font-size:0.9rem;border:none;cursor:pointer;transition:all var(--transition)}
+.share-whatsapp{background:#25D366;color:#fff}
+.share-whatsapp:hover{background:#1ebe57;transform:translateY(-2px)}
+.share-copy{background:#fff;color:var(--color-text);border:1.5px solid #E8E2DF}
+.share-copy:hover{border-color:var(--color-primary);color:var(--color-primary)}
+
+/* FOOTER */
+.invite-footer{text-align:center;padding:32px 24px;background:var(--color-primary-light)}
+.invite-footer p{font-size:0.85rem;color:var(--color-text-light);margin-bottom:8px}
+.invite-footer a{color:var(--color-primary);font-weight:600;font-size:0.9rem}
+
+@media(max-width:768px){
+  .invite-hero h1{font-size:2rem}
+  .countdown-num{width:52px;height:52px;font-size:1.5rem}
+  .details-grid{grid-template-columns:1fr}
+  .gifts-grid{grid-template-columns:1fr}
+  .messages-preview{grid-template-columns:1fr}
+  .parents{flex-direction:column;gap:16px}
+}

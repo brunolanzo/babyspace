@@ -1,0 +1,131 @@
+<%- include('../partials/sidebar') %>
+<div class="main">
+  <%- include('../partials/topbar') %>
+  <div class="content">
+    <!-- Welcome Banner -->
+    <div class="welcome">
+      <div class="welcome-text">
+        <h2>Olá, Camila! 👋</h2>
+        <p>Faltam <strong>45 dias</strong> para o chá da Helena</p>
+        <div class="progress-bar"><div class="progress-fill" style="width:60%"></div></div>
+      </div>
+      <div class="welcome-illus">
+        <svg width="120" height="120" viewBox="0 0 120 120" fill="none">
+          <circle cx="60" cy="60" r="50" fill="rgba(255,255,255,0.5)"/>
+          <circle cx="60" cy="50" r="18" fill="#FFD5C2"/>
+          <ellipse cx="60" cy="75" rx="22" ry="18" fill="#C3B1E1" opacity="0.6"/>
+          <circle cx="56" cy="48" r="2" fill="#3D3535"/><circle cx="64" cy="48" r="2" fill="#3D3535"/>
+          <path d="M57 54 Q60 57 63 54" stroke="#3D3535" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+          <path d="M85 30 L87 34 L91 35 L88 37 L89 41 L85 39 L81 41 L82 37 L79 35 L83 34Z" fill="#FFE5A0" opacity="0.7"/>
+          <path d="M35 25 L36.5 28 L40 28.5 L37.5 31 L38 34 L35 32.5 L32 34 L32.5 31 L30 28.5 L33.5 28Z" fill="#A8D8B9" opacity="0.6"/>
+        </svg>
+      </div>
+    </div>
+
+    <!-- Stats -->
+    <div class="stats">
+      <div class="stat-card">
+        <div class="stat-icon" style="background:rgba(168,216,185,0.2)">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#A8D8B9" stroke-width="2" stroke-linecap="round"><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
+        </div>
+        <div class="stat-value">R$ 2.450</div>
+        <div class="stat-label">Total arrecadado</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon" style="background:rgba(195,177,225,0.2)">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#C3B1E1" stroke-width="2" stroke-linecap="round"><rect x="3" y="8" width="18" height="13" rx="2"/><path d="M12 8V21M3 12h18"/></svg>
+        </div>
+        <div class="stat-value">18 <span style="font-size:1rem;font-weight:400;color:var(--color-text-light)">de 25</span></div>
+        <div class="stat-label">Presentes recebidos</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon" style="background:rgba(255,229,160,0.3)">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#D4A843" stroke-width="2" stroke-linecap="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+        </div>
+        <div class="stat-value">32 <span style="font-size:1rem;font-weight:400;color:var(--color-text-light)">de 45</span></div>
+        <div class="stat-label">Convidados confirmados</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon" style="background:rgba(255,140,105,0.15)">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#FF8C69" stroke-width="2" stroke-linecap="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+        </div>
+        <div class="stat-value">14</div>
+        <div class="stat-label">Mensagens no mural</div>
+      </div>
+    </div>
+
+    <!-- Two Col -->
+    <div class="two-col">
+      <div class="card-block">
+        <h3>Atividade recente</h3>
+        <div class="activity-item">
+          <div class="activity-dot" style="background:var(--color-accent)"></div>
+          <div class="activity-text">Ana Silva presenteou <strong>Carrinho de Bebê</strong></div>
+          <span class="activity-time">2 min atrás</span>
+        </div>
+        <div class="activity-item">
+          <div class="activity-dot" style="background:var(--color-secondary)"></div>
+          <div class="activity-text">João Carlos <strong>confirmou presença</strong></div>
+          <span class="activity-time">15 min atrás</span>
+        </div>
+        <div class="activity-item">
+          <div class="activity-dot" style="background:var(--color-primary)"></div>
+          <div class="activity-text">Maria Costa deixou um <strong>recadinho</strong></div>
+          <span class="activity-time">1 hora atrás</span>
+        </div>
+        <div class="activity-item">
+          <div class="activity-dot" style="background:var(--color-accent)"></div>
+          <div class="activity-text">Pedro Lima presenteou <strong>Kit Enxoval</strong></div>
+          <span class="activity-time">3 horas atrás</span>
+        </div>
+        <div class="activity-item">
+          <div class="activity-dot" style="background:var(--color-secondary)"></div>
+          <div class="activity-text">Julia Santos <strong>confirmou presença</strong></div>
+          <span class="activity-time">5 horas atrás</span>
+        </div>
+      </div>
+
+      <div class="card-block">
+        <h3>Ações rápidas</h3>
+        <div class="quick-grid">
+          <a href="/convite" class="quick-card" style="background:rgba(168,216,185,0.12)">
+            <div class="quick-icon" style="background:rgba(168,216,185,0.25)">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#6BAF8D" stroke-width="2" stroke-linecap="round"><path d="M4 12v8a2 2 0 002 2h12a2 2 0 002-2v-8M16 6l-4-4-4 4M12 2v13"/></svg>
+            </div>
+            Compartilhar Convite
+          </a>
+          <a href="/lista-presentes" class="quick-card" style="background:rgba(195,177,225,0.12)">
+            <div class="quick-icon" style="background:rgba(195,177,225,0.25)">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#9B86C6" stroke-width="2" stroke-linecap="round"><rect x="3" y="8" width="18" height="13" rx="2"/><path d="M12 8V21M3 12h18"/></svg>
+            </div>
+            Gerenciar Presentes
+          </a>
+          <a href="/convidados" class="quick-card" style="background:rgba(255,229,160,0.15)">
+            <div class="quick-icon" style="background:rgba(255,229,160,0.3)">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#D4A843" stroke-width="2" stroke-linecap="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+            </div>
+            Ver Convidados
+          </a>
+          <a href="/resgate" class="quick-card" style="background:rgba(255,140,105,0.08)">
+            <div class="quick-icon" style="background:rgba(255,140,105,0.15)">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#FF8C69" stroke-width="2" stroke-linecap="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 10h20"/></svg>
+            </div>
+            Resgatar Valores
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Premium Banner -->
+    <div class="premium-banner">
+      <div>
+        <h3>Desbloqueie o BabySpace Premium ✨</h3>
+        <p>Músicas, lembretes por WhatsApp, memórias em PDF e muito mais por apenas R$39,90</p>
+        <a href="/checkout" class="btn btn-white">Conhecer Premium →</a>
+      </div>
+      <svg width="100" height="100" viewBox="0 0 100 100" fill="none" style="flex-shrink:0;opacity:0.3">
+        <circle cx="50" cy="50" r="40" stroke="#fff" stroke-width="2"/><path d="M50 20 L55 35 L70 37 L59 47 L62 62 L50 55 L38 62 L41 47 L30 37 L45 35Z" fill="#fff" opacity="0.5"/>
+      </svg>
+    </div>
+  </div>
+</div>

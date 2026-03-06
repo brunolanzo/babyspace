@@ -1,0 +1,139 @@
+<%- include('../partials/sidebar') %>
+<div class="main">
+  <%- include('../partials/topbar') %>
+  <div class="content">
+    <div class="page-header">
+      <div>
+        <p style="color:var(--color-text-light);font-size:0.9rem">Gerencie os presentes do seu chá</p>
+      </div>
+      <button class="btn btn-primary" onclick="openModal()">+ Adicionar presente</button>
+    </div>
+
+    <div class="stats-bar">
+      <div class="stat-mini"><div class="stat-mini-value">8</div><div class="stat-mini-label">Presentes na lista</div></div>
+      <div class="stat-mini"><div class="stat-mini-value">R$ 3.280</div><div class="stat-mini-label">Valor total</div></div>
+      <div class="stat-mini"><div class="stat-mini-value" style="color:var(--color-accent)">62%</div><div class="stat-mini-label">Financiado</div></div>
+    </div>
+
+    <div class="gifts-grid">
+      <div class="gift-card">
+        <div class="gift-thumb" style="background:var(--color-primary-light)">
+          <svg width="48" height="48" viewBox="0 0 48 48" fill="none"><rect x="8" y="16" width="32" height="24" rx="4" fill="#FF8C69" opacity="0.3"/><rect x="8" y="16" width="32" height="8" rx="4" fill="#FF8C69" opacity="0.5"/><rect x="22" y="16" width="4" height="24" fill="#fff" opacity="0.5"/></svg>
+        </div>
+        <div class="gift-body">
+          <p class="gift-name">Carrinho de Bebê</p>
+          <p class="gift-price">R$ 450,00</p>
+          <div class="gift-progress"><div class="gift-progress-fill" style="width:100%"></div></div>
+          <p class="gift-progress-text">✓ Presenteado por Ana Silva</p>
+          <div class="gift-actions"><button class="btn btn-outline btn-sm">Editar</button><button class="btn btn-danger btn-sm">Remover</button></div>
+        </div>
+      </div>
+
+      <div class="gift-card">
+        <div class="gift-thumb" style="background:var(--color-secondary-light)">
+          <svg width="48" height="48" viewBox="0 0 48 48" fill="none"><rect x="10" y="12" width="28" height="28" rx="4" fill="#C3B1E1" opacity="0.3"/><rect x="16" y="18" width="16" height="16" rx="2" fill="#C3B1E1" opacity="0.5"/><circle cx="24" cy="26" r="4" fill="#fff" opacity="0.5"/></svg>
+        </div>
+        <div class="gift-body">
+          <p class="gift-name">Kit Enxoval Completo</p>
+          <p class="gift-price">R$ 280,00</p>
+          <div class="gift-progress"><div class="gift-progress-fill" style="width:75%"></div></div>
+          <p class="gift-progress-text">75% financiado</p>
+          <div class="gift-actions"><button class="btn btn-outline btn-sm">Editar</button><button class="btn btn-danger btn-sm">Remover</button></div>
+        </div>
+      </div>
+
+      <div class="gift-card">
+        <div class="gift-thumb" style="background:rgba(168,216,185,0.2)">
+          <svg width="48" height="48" viewBox="0 0 48 48" fill="none"><rect x="12" y="8" width="24" height="32" rx="4" fill="#A8D8B9" opacity="0.3"/><rect x="16" y="14" width="16" height="20" rx="2" fill="#A8D8B9" opacity="0.5"/><path d="M20 24 L24 28 L28 20" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg>
+        </div>
+        <div class="gift-body">
+          <p class="gift-name">Berço Portátil</p>
+          <p class="gift-price">R$ 350,00</p>
+          <div class="gift-progress"><div class="gift-progress-fill" style="width:45%"></div></div>
+          <p class="gift-progress-text">45% financiado</p>
+          <div class="gift-actions"><button class="btn btn-outline btn-sm">Editar</button><button class="btn btn-danger btn-sm">Remover</button></div>
+        </div>
+      </div>
+
+      <div class="gift-card">
+        <div class="gift-thumb" style="background:rgba(255,229,160,0.2)">
+          <svg width="48" height="48" viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="14" fill="#FFE5A0" opacity="0.4"/><path d="M24 16 L18 24 L30 24Z" fill="#FFE5A0" opacity="0.6"/><rect x="20" y="24" width="8" height="10" rx="1" fill="#FFE5A0" opacity="0.6"/></svg>
+        </div>
+        <div class="gift-body">
+          <p class="gift-name">Banheira Ergonômica</p>
+          <p class="gift-price">R$ 180,00</p>
+          <div class="gift-progress"><div class="gift-progress-fill" style="width:0%"></div></div>
+          <p class="gift-progress-text">Aguardando presente</p>
+          <div class="gift-actions"><button class="btn btn-outline btn-sm">Editar</button><button class="btn btn-danger btn-sm">Remover</button></div>
+        </div>
+      </div>
+
+      <div class="gift-card">
+        <div class="gift-thumb" style="background:var(--color-primary-light)">
+          <svg width="48" height="48" viewBox="0 0 48 48" fill="none"><rect x="10" y="14" width="28" height="22" rx="4" fill="#FF8C69" opacity="0.25"/><path d="M18 20h12M18 26h8" stroke="#FF8C69" stroke-width="2" stroke-linecap="round" opacity="0.5"/></svg>
+        </div>
+        <div class="gift-body">
+          <p class="gift-name">Kit Higiene</p>
+          <p class="gift-price">R$ 120,00</p>
+          <div class="gift-progress"><div class="gift-progress-fill" style="width:100%"></div></div>
+          <p class="gift-progress-text">✓ Presenteado por Pedro Lima</p>
+          <div class="gift-actions"><button class="btn btn-outline btn-sm">Editar</button><button class="btn btn-danger btn-sm">Remover</button></div>
+        </div>
+      </div>
+
+      <div class="gift-card">
+        <div class="gift-thumb" style="background:var(--color-secondary-light)">
+          <svg width="48" height="48" viewBox="0 0 48 48" fill="none"><ellipse cx="24" cy="26" rx="12" ry="14" fill="#C3B1E1" opacity="0.3"/><circle cx="24" cy="18" r="6" fill="#C3B1E1" opacity="0.5"/></svg>
+        </div>
+        <div class="gift-body">
+          <p class="gift-name">Roupinhas (P)</p>
+          <p class="gift-price">R$ 200,00</p>
+          <div class="gift-progress"><div class="gift-progress-fill" style="width:30%"></div></div>
+          <p class="gift-progress-text">30% financiado</p>
+          <div class="gift-actions"><button class="btn btn-outline btn-sm">Editar</button><button class="btn btn-danger btn-sm">Remover</button></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="suggestions">
+      <h3>Sugestões populares</h3>
+      <div class="suggest-grid">
+        <span class="suggest-chip" onclick="openModal()">🍼 Mamadeira — R$45</span>
+        <span class="suggest-chip" onclick="openModal()">🧸 Urso de pelúcia — R$60</span>
+        <span class="suggest-chip" onclick="openModal()">📖 Kit livros infantis — R$80</span>
+        <span class="suggest-chip" onclick="openModal()">🎵 Mobile musical — R$95</span>
+        <span class="suggest-chip" onclick="openModal()">👶 Babá eletrônica — R$250</span>
+        <span class="suggest-chip" onclick="openModal()">🧴 Kit banho — R$55</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Add Gift Modal -->
+<div class="modal-overlay" id="giftModal">
+  <div class="modal" style="position:relative">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <h2>Adicionar presente</h2>
+    <form onsubmit="event.preventDefault();closeModal();">
+      <div class="form-group"><label>Nome do presente</label><input type="text" class="form-input" placeholder="Ex: Carrinho de Bebê"></div>
+      <div class="form-group"><label>Descrição (opcional)</label><textarea class="form-textarea" placeholder="Detalhes sobre o presente..." rows="3"></textarea></div>
+      <div class="form-group"><label>Valor (R$)</label><input type="number" class="form-input" placeholder="0,00"></div>
+      <div class="form-group">
+        <label>Categoria</label>
+        <select class="form-select">
+          <option>Selecione...</option>
+          <option>Quarto</option>
+          <option>Passeio</option>
+          <option>Alimentação</option>
+          <option>Higiene</option>
+          <option>Roupas</option>
+          <option>Outros</option>
+        </select>
+      </div>
+      <div class="modal-actions">
+        <button type="button" class="btn btn-outline" onclick="closeModal()">Cancelar</button>
+        <button type="submit" class="btn btn-primary">Salvar presente</button>
+      </div>
+    </form>
+  </div>
+</div>

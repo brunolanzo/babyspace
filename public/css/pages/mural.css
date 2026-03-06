@@ -1,0 +1,216 @@
+/* ===== MURAL GRID ===== */
+.mural-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+  margin-bottom: 32px;
+}
+
+/* ===== MURAL CARD ===== */
+.mural-card {
+  border-radius: var(--radius-md);
+  padding: 24px;
+  position: relative;
+  transition: all var(--transition);
+}
+.mural-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-card-hover);
+}
+.mural-card.color-1 { background: #FFE4D6; }
+.mural-card.color-2 { background: #EDE9F8; }
+.mural-card.color-3 { background: #D4F0DF; }
+.mural-card.color-4 { background: #FFF3CC; }
+.mural-card.color-5 { background: #DBEAFE; }
+.mural-card.color-6 { background: #FCE4EC; }
+.mural-card.pinned {
+  border: 2px solid var(--color-primary);
+}
+
+.pin-badge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: var(--color-primary);
+  color: #fff;
+  font-size: 0.7rem;
+  padding: 3px 8px;
+  border-radius: 20px;
+  font-weight: 600;
+}
+
+/* ===== MURAL HEADER ===== */
+.mural-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+.mural-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 800;
+  font-size: 0.85rem;
+  color: #fff;
+  flex-shrink: 0;
+}
+.mural-author {
+  font-weight: 600;
+  font-size: 0.92rem;
+}
+.mural-time {
+  font-size: 0.78rem;
+  color: var(--color-text-light);
+}
+
+/* ===== MURAL TEXT ===== */
+.mural-text {
+  font-size: 0.95rem;
+  line-height: 1.7;
+  margin-bottom: 16px;
+}
+
+/* ===== MURAL ACTIONS ===== */
+.mural-actions {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+.mural-action-btn {
+  background: rgba(255, 255, 255, 0.6);
+  border: none;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 0.78rem;
+  font-family: 'DM Sans', sans-serif;
+  cursor: pointer;
+  transition: all var(--transition);
+  color: var(--color-text-light);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.mural-action-btn:hover {
+  background: rgba(255, 255, 255, 0.9);
+  color: var(--color-text);
+}
+.mural-action-btn.danger:hover {
+  background: #E74C3C;
+  color: #fff;
+}
+
+/* ===== FILTER BAR ===== */
+.filter-bar {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.search-box {
+  flex: 1;
+  min-width: 200px;
+  padding: 12px 16px 12px 40px;
+  border: 1.5px solid #E8E2DF;
+  border-radius: var(--radius-sm);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.9rem;
+  color: var(--color-text);
+  background: #fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%238A7F80' stroke-width='2'%3E%3Ccircle cx='11' cy='11' r='8'/%3E%3Cpath d='m21 21-4.35-4.35'/%3E%3C/svg%3E") no-repeat 14px center;
+  outline: none;
+  transition: all var(--transition);
+}
+.search-box:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(255, 140, 105, 0.15);
+}
+.filter-select {
+  padding: 12px 16px;
+  border: 1.5px solid #E8E2DF;
+  border-radius: var(--radius-sm);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.9rem;
+  color: var(--color-text);
+  background: #fff;
+  outline: none;
+  cursor: pointer;
+}
+
+/* ===== WRITE AREA ===== */
+.write-area {
+  background: #fff;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-card);
+  padding: 24px;
+  margin-bottom: 24px;
+}
+.write-area h3 {
+  font-size: 1.1rem;
+  margin-bottom: 16px;
+}
+.write-textarea {
+  width: 100%;
+  padding: 14px 16px;
+  border: 1.5px solid #E8E2DF;
+  border-radius: var(--radius-sm);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.95rem;
+  color: var(--color-text);
+  background: var(--color-bg);
+  transition: all var(--transition);
+  outline: none;
+  resize: vertical;
+  min-height: 80px;
+}
+.write-textarea:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(255, 140, 105, 0.15);
+}
+.write-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 12px;
+}
+.write-hint {
+  font-size: 0.82rem;
+  color: var(--color-text-light);
+}
+
+/* ===== EMPTY STATE ===== */
+.empty-state {
+  text-align: center;
+  padding: 60px 24px;
+}
+.empty-state svg {
+  margin-bottom: 20px;
+}
+.empty-state h3 {
+  font-size: 1.3rem;
+  margin-bottom: 8px;
+}
+.empty-state p {
+  color: var(--color-text-light);
+  margin-bottom: 24px;
+  max-width: 360px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .mural-grid {
+    grid-template-columns: 1fr;
+  }
+  .filter-bar {
+    flex-direction: column;
+  }
+  .search-box {
+    min-width: 100%;
+  }
+}
