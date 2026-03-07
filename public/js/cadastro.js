@@ -39,5 +39,5 @@ document.getElementById('signupForm').addEventListener('submit', function(e) {
   if (!date.value) { date.closest('.form-group').classList.add('has-error'); valid = false; }
   if (!terms.checked) { alert('Você precisa aceitar os termos para continuar.'); valid = false; }
 
-  if (valid) window.location.href = '/dashboard';
+  if (valid) alert('Cadastro com e-mail em breve! Por enquanto, use Google ou Facebook.');
 });

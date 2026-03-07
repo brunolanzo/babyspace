@@ -16,6 +16,6 @@ document.getElementById('loginForm').addEventListener('submit', function(e) {
     valid = false;
   }
   if (valid) {
-    window.location.href = '/dashboard';
+    alert('Login com e-mail em breve! Por enquanto, use Google ou Facebook.');
   }
 });

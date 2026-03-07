@@ -5,7 +5,7 @@
     <!-- Welcome Banner -->
     <div class="welcome">
       <div class="welcome-text">
-        <h2>Olá, Camila! 👋</h2>
+        <h2>Olá, <%= user ? user.name.split(' ')[0] : 'Usuário' %>! 👋</h2>
         <p>Faltam <strong>45 dias</strong> para o chá da Helena</p>
         <div class="progress-bar"><div class="progress-fill" style="width:60%"></div></div>
       </div>

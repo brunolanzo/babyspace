@@ -12,6 +12,6 @@
       <span class="notif-dot"></span>
     </button>
     <% } %>
-    <div class="topbar-avatar">CA</div>
+    <div class="topbar-avatar"><%= user ? user.name.split(' ').map(function(w){ return w[0]; }).slice(0,2).join('').toUpperCase() : 'U' %></div>
   </div>
 </header>
