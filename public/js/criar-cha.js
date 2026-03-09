@@ -1,8 +1,9 @@
-// Criar Chá — Stepper logic, type selection, theme selection, form validation
+// Criar Chá — Stepper logic, type selection, theme selection, twins toggle, form validation
 
 let currentStep = 0;
 let selectedType = '';
 let selectedTheme = 'Nuvens';
+let isGemeos = false;
 
 function updateStepper() {
   document.querySelectorAll('.step-wrap').forEach(function(w, i) {
@@ -63,9 +64,64 @@ function selectRadio(el) {
   document.getElementById('locationGroup').style.display = v === 'presencial' ? 'block' : 'none';
 }
 
+// ===== TWINS TOGGLE =====
+function toggleGemeos() {
+  var checkbox = document.getElementById('toggleGemeos');
+  isGemeos = checkbox.checked;
+  var group2 = document.getElementById('babyName2Group');
+  var toggleText = document.getElementById('toggleText');
+  var babyNameLabel = document.getElementById('babyNameLabel');
+
+  if (isGemeos) {
+    group2.style.display = 'block';
+    toggleText.textContent = 'Sim, s\u00e3o g\u00eameos!';
+    toggleText.classList.add('active');
+    babyNameLabel.textContent = 'Nome do 1\u00ba beb\u00ea';
+  } else {
+    group2.style.display = 'none';
+    toggleText.textContent = 'N\u00e3o, apenas um beb\u00ea';
+    toggleText.classList.remove('active');
+    babyNameLabel.textContent = 'Nome do beb\u00ea';
+    document.getElementById('babyName2').value = '';
+  }
+
+  // Auto-update title suggestion placeholder
+  autoSuggestTitle();
+}
+
+function autoSuggestTitle() {
+  var name1 = document.getElementById('babyName').value.trim();
+  var name2 = isGemeos ? document.getElementById('babyName2').value.trim() : '';
+  var titleInput = document.getElementById('chaTitle');
+
+  if (isGemeos && name1 && name2) {
+    titleInput.placeholder = 'Ex: Ch\u00e1 da ' + name1 + ' e do(a) ' + name2;
+  } else if (name1) {
+    titleInput.placeholder = 'Ex: Ch\u00e1 da ' + name1;
+  } else {
+    titleInput.placeholder = 'Ex: Ch\u00e1 da Helena';
+  }
+}
+
+// ===== REVIEW =====
 function updateReview() {
   document.getElementById('revType').textContent = selectedType || '\u2014';
-  document.getElementById('revBaby').textContent = document.getElementById('babyName').value || '\u2014';
+
+  var name1 = document.getElementById('babyName').value || '';
+  var name2 = isGemeos ? (document.getElementById('babyName2').value || '') : '';
+  var revBabyLabel = document.getElementById('revBabyLabel');
+
+  if (isGemeos && name1 && name2) {
+    document.getElementById('revBaby').textContent = name1 + ' e ' + name2;
+    revBabyLabel.textContent = 'Nomes dos beb\u00eas';
+  } else if (isGemeos && name1) {
+    document.getElementById('revBaby').textContent = name1 + ' (+ g\u00eameo)';
+    revBabyLabel.textContent = 'Nomes dos beb\u00eas';
+  } else {
+    document.getElementById('revBaby').textContent = name1 || '\u2014';
+    revBabyLabel.textContent = 'Nome do beb\u00ea';
+  }
+
   document.getElementById('revTitle').textContent = document.getElementById('chaTitle').value || '\u2014';
   document.getElementById('revDate').textContent = document.getElementById('chaDate').value || '\u2014';
   var mode = document.querySelector('input[name="mode"]:checked');
@@ -74,9 +130,13 @@ function updateReview() {
 }
 
 function publish() {
-  alert('Chá publicado com sucesso! 🎉');
+  alert('Ch\u00e1 publicado com sucesso! \uD83C\uDF89');
   window.location.href = '/dashboard';
 }
 
 // Init first radio as checked
 document.querySelector('.radio-label').classList.add('checked');
+
+// Listen for baby name changes to auto-suggest title
+document.getElementById('babyName').addEventListener('input', autoSuggestTitle);
+document.getElementById('babyName2').addEventListener('input', autoSuggestTitle);

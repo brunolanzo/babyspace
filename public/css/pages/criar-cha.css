@@ -59,6 +59,17 @@
 .review-edit { font-size: 0.85rem; color: var(--color-primary); cursor: pointer; float: right; }
 .review-edit:hover { text-decoration: underline; }
 
+/* ===== TWINS TOGGLE ===== */
+.toggle-row { display: flex; align-items: center; gap: 12px; margin-top: 8px; }
+.toggle-switch { position: relative; display: inline-block; width: 48px; height: 26px; flex-shrink: 0; }
+.toggle-switch input { opacity: 0; width: 0; height: 0; }
+.toggle-slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background: #E8E2DF; border-radius: 26px; transition: all var(--transition); }
+.toggle-slider:before { content: ''; position: absolute; height: 20px; width: 20px; left: 3px; bottom: 3px; background: #fff; border-radius: 50%; transition: all var(--transition); box-shadow: 0 1px 3px rgba(0,0,0,0.15); }
+.toggle-switch input:checked + .toggle-slider { background: var(--color-primary); }
+.toggle-switch input:checked + .toggle-slider:before { transform: translateX(22px); }
+.toggle-text { font-size: 0.9rem; color: var(--color-text-light); transition: color var(--transition); }
+.toggle-text.active { color: var(--color-primary); font-weight: 600; }
+
 /* ===== STEP NAV ===== */
 .step-nav { display: flex; justify-content: space-between; margin-top: 36px; gap: 12px; }
 

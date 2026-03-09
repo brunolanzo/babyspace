@@ -44,7 +44,18 @@
     <!-- Step 2: Detalhes -->
     <div class="step-content" id="step1">
       <h2>Conte-nos sobre o seu chá</h2>
-      <div class="form-group"><label>Nome do bebê</label><input type="text" id="babyName" class="form-input" placeholder="Ex: Helena"></div>
+      <div class="form-group">
+        <label>Gêmeos?</label>
+        <div class="toggle-row">
+          <label class="toggle-switch">
+            <input type="checkbox" id="toggleGemeos" onchange="toggleGemeos()">
+            <span class="toggle-slider"></span>
+          </label>
+          <span class="toggle-text" id="toggleText">Não, apenas um bebê</span>
+        </div>
+      </div>
+      <div class="form-group"><label id="babyNameLabel">Nome do bebê</label><input type="text" id="babyName" class="form-input" placeholder="Ex: Helena"></div>
+      <div class="form-group" id="babyName2Group" style="display:none"><label>Nome do 2º bebê</label><input type="text" id="babyName2" class="form-input" placeholder="Ex: Miguel"></div>
       <div class="form-group"><label>Título do chá</label><input type="text" id="chaTitle" class="form-input" placeholder="Ex: Chá da Helena"></div>
       <div class="form-group"><label>Data prevista</label><input type="date" id="chaDate" class="form-input"></div>
       <div class="form-group"><label>Descrição</label><textarea id="chaDesc" class="form-textarea" placeholder="Conte um pouquinho sobre esse momento especial..." rows="4"></textarea></div>
@@ -86,7 +97,7 @@
       <h2>Revise e publique! 🎉</h2>
       <div style="background:#fff;border-radius:var(--radius-md);box-shadow:var(--shadow-card);padding:24px">
         <div class="review-section"><span class="review-edit" onclick="goToStep(0)">Editar</span><p class="review-label">Tipo de chá</p><p class="review-value" id="revType">—</p></div>
-        <div class="review-section"><span class="review-edit" onclick="goToStep(1)">Editar</span><p class="review-label">Nome do bebê</p><p class="review-value" id="revBaby">—</p></div>
+        <div class="review-section"><span class="review-edit" onclick="goToStep(1)">Editar</span><p class="review-label" id="revBabyLabel">Nome do bebê</p><p class="review-value" id="revBaby">—</p></div>
         <div class="review-section"><span class="review-edit" onclick="goToStep(1)">Editar</span><p class="review-label">Título</p><p class="review-value" id="revTitle">—</p></div>
         <div class="review-section"><span class="review-edit" onclick="goToStep(1)">Editar</span><p class="review-label">Data</p><p class="review-value" id="revDate">—</p></div>
         <div class="review-section"><span class="review-edit" onclick="goToStep(1)">Editar</span><p class="review-label">Modalidade</p><p class="review-value" id="revMode">—</p></div>
