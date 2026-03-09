@@ -7,13 +7,13 @@
     <!-- Page Header -->
     <div class="page-header">
       <div>
-        <h2 style="font-size:1.3rem;margin-bottom:4px">Chá da Helena</h2>
+        <h2 style="font-size:1.3rem;margin-bottom:4px">Mural de Recados</h2>
         <p style="color:var(--color-text-light);font-size:0.9rem">Gerencie as mensagens dos convidados</p>
       </div>
       <div style="display:flex;gap:8px">
         <button class="btn btn-outline btn-sm" onclick="togglePending()">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
-          Pendentes (2)
+          Pendentes (0)
         </button>
         <button class="btn btn-primary btn-sm" onclick="document.getElementById('shareModal').classList.add('open')">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8M16 6l-4-4-4 4M12 2v13"/></svg>
@@ -25,19 +25,19 @@
     <!-- Stats bar -->
     <div class="stats-bar">
       <div class="stat-mini">
-        <div class="stat-mini-value">18</div>
+        <div class="stat-mini-value">0</div>
         <div class="stat-mini-label">Total de recados</div>
       </div>
       <div class="stat-mini">
-        <div class="stat-mini-value" style="color:var(--color-accent)">16</div>
+        <div class="stat-mini-value" style="color:var(--color-accent)">0</div>
         <div class="stat-mini-label">Aprovados</div>
       </div>
       <div class="stat-mini">
-        <div class="stat-mini-value" style="color:var(--color-primary)">2</div>
+        <div class="stat-mini-value" style="color:var(--color-primary)">0</div>
         <div class="stat-mini-label">Pendentes</div>
       </div>
       <div class="stat-mini">
-        <div class="stat-mini-value">3</div>
+        <div class="stat-mini-value">0</div>
         <div class="stat-mini-label">Fixados</div>
       </div>
     </div>
@@ -55,135 +55,11 @@
 
     <!-- Mural Grid -->
     <div class="mural-grid">
-      <!-- Pinned card -->
-      <div class="mural-card color-1 pinned">
-        <span class="pin-badge">📌 Fixado</span>
-        <div class="mural-header">
-          <div class="mural-avatar" style="background:var(--color-primary)">MR</div>
-          <div>
-            <div class="mural-author">Maria Rita</div>
-            <div class="mural-time">Há 2 dias</div>
-          </div>
-        </div>
-        <div class="mural-text">Helena, você é a melhor coisa que vai acontecer na vida dos seus pais! Mal posso esperar para te conhecer e te encher de beijos. Vovó já te ama muito! 💕</div>
-        <div class="mural-actions">
-          <button class="mural-action-btn" onclick="togglePin(this)">📌 Desafixar</button>
-          <button class="mural-action-btn danger">🗑️ Excluir</button>
-        </div>
-      </div>
-
-      <!-- Card 2 -->
-      <div class="mural-card color-2">
-        <div class="mural-header">
-          <div class="mural-avatar" style="background:var(--color-secondary)">JP</div>
-          <div>
-            <div class="mural-author">João Pedro</div>
-            <div class="mural-time">Há 3 dias</div>
-          </div>
-        </div>
-        <div class="mural-text">Parabéns Camila e Rafael! A Helena tem muita sorte de ter pais tão incríveis. Que venha com muita saúde! 🎉</div>
-        <div class="mural-actions">
-          <button class="mural-action-btn" onclick="togglePin(this)">📌 Fixar</button>
-          <button class="mural-action-btn danger">🗑️ Excluir</button>
-        </div>
-      </div>
-
-      <!-- Card 3 -->
-      <div class="mural-card color-3 pinned">
-        <span class="pin-badge">📌 Fixado</span>
-        <div class="mural-header">
-          <div class="mural-avatar" style="background:var(--color-accent)">AS</div>
-          <div>
-            <div class="mural-author">Ana Silva</div>
-            <div class="mural-time">Há 4 dias</div>
-          </div>
-        </div>
-        <div class="mural-text">Amiga, estou tão feliz por vocês! A Helena vai ser a princesinha mais linda do mundo. Contando os dias para o chá! 👶✨</div>
-        <div class="mural-actions">
-          <button class="mural-action-btn" onclick="togglePin(this)">📌 Desafixar</button>
-          <button class="mural-action-btn danger">🗑️ Excluir</button>
-        </div>
-      </div>
-
-      <!-- Card 4 -->
-      <div class="mural-card color-4">
-        <div class="mural-header">
-          <div class="mural-avatar" style="background:#D4A574">FM</div>
-          <div>
-            <div class="mural-author">Fernando Mendes</div>
-            <div class="mural-time">Há 5 dias</div>
-          </div>
-        </div>
-        <div class="mural-text">Rafa, prepare-se para a melhor aventura da sua vida! Ser pai é a coisa mais incrível que existe. Abraço grande!</div>
-        <div class="mural-actions">
-          <button class="mural-action-btn" onclick="togglePin(this)">📌 Fixar</button>
-          <button class="mural-action-btn danger">🗑️ Excluir</button>
-        </div>
-      </div>
-
-      <!-- Card 5 -->
-      <div class="mural-card color-5">
-        <div class="mural-header">
-          <div class="mural-avatar" style="background:#7CA5D8">LC</div>
-          <div>
-            <div class="mural-author">Letícia Costa</div>
-            <div class="mural-time">Há 1 semana</div>
-          </div>
-        </div>
-        <div class="mural-text">Que Deus abençoe a chegada da Helena! Vocês vão ser pais maravilhosos. Com muito amor e carinho 🙏💛</div>
-        <div class="mural-actions">
-          <button class="mural-action-btn" onclick="togglePin(this)">📌 Fixar</button>
-          <button class="mural-action-btn danger">🗑️ Excluir</button>
-        </div>
-      </div>
-
-      <!-- Card 6 -->
-      <div class="mural-card color-6 pinned">
-        <span class="pin-badge">📌 Fixado</span>
-        <div class="mural-header">
-          <div class="mural-avatar" style="background:#D88A9A">BR</div>
-          <div>
-            <div class="mural-author">Beatriz Rocha</div>
-            <div class="mural-time">Há 1 semana</div>
-          </div>
-        </div>
-        <div class="mural-text">Helena, titia já separou um cantinho especial no coração pra você! Vai ser a sobrinha mais paparicada do mundo! 😍🍼</div>
-        <div class="mural-actions">
-          <button class="mural-action-btn" onclick="togglePin(this)">📌 Desafixar</button>
-          <button class="mural-action-btn danger">🗑️ Excluir</button>
-        </div>
-      </div>
-
-      <!-- Card 7 -->
-      <div class="mural-card color-1">
-        <div class="mural-header">
-          <div class="mural-avatar" style="background:var(--color-primary)">PS</div>
-          <div>
-            <div class="mural-author">Paulo Santos</div>
-            <div class="mural-time">Há 1 semana</div>
-          </div>
-        </div>
-        <div class="mural-text">Felicidades para toda família! Helena é um nome lindo, combina com essa família incrível. 🌟</div>
-        <div class="mural-actions">
-          <button class="mural-action-btn" onclick="togglePin(this)">📌 Fixar</button>
-          <button class="mural-action-btn danger">🗑️ Excluir</button>
-        </div>
-      </div>
-
-      <!-- Card 8 -->
-      <div class="mural-card color-3">
-        <div class="mural-header">
-          <div class="mural-avatar" style="background:var(--color-accent)">JA</div>
-          <div>
-            <div class="mural-author">Juliana Alves</div>
-            <div class="mural-time">Há 2 semanas</div>
-          </div>
-        </div>
-        <div class="mural-text">Camila, como estou feliz por você! A maternidade vai transformar sua vida. Conte comigo para o que precisar! 💗</div>
-        <div class="mural-actions">
-          <button class="mural-action-btn" onclick="togglePin(this)">📌 Fixar</button>
-          <button class="mural-action-btn danger">🗑️ Excluir</button>
-        </div>
+      <div style="grid-column:1/-1;text-align:center;padding:48px 16px;color:var(--color-text-light)">
+        <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" style="opacity:0.3;margin-bottom:16px"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+        <p style="font-weight:600;color:var(--color-text);margin-bottom:4px;font-size:1.1rem">Nenhum recado ainda</p>
+        <p style="font-size:0.9rem;margin-bottom:16px">Compartilhe o link do mural para que amigos e familiares deixem mensagens carinhosas!</p>
+        <button class="btn btn-primary btn-sm" onclick="document.getElementById('shareModal').classList.add('open')">Compartilhar link do mural</button>
       </div>
     </div>
   </div>
@@ -193,8 +69,8 @@
 <div class="modal-overlay" id="shareModal">
   <div class="modal">
     <h2>Compartilhar Mural</h2>
-    <p style="color:var(--color-text-light);margin-bottom:16px;font-size:0.9rem">Compartilhe o link para que mais pessoas deixem mensagens carinhosas para Helena.</p>
-    <div style="background:var(--color-bg);border-radius:var(--radius-sm);padding:12px 16px;font-family:monospace;font-size:0.85rem;color:var(--color-text-light);margin-bottom:12px;word-break:break-all">babyspace.com.br/cha/helena-2026/mural</div>
+    <p style="color:var(--color-text-light);margin-bottom:16px;font-size:0.9rem">Compartilhe o link para que mais pessoas deixem mensagens carinhosas.</p>
+    <div style="background:var(--color-bg);border-radius:var(--radius-sm);padding:12px 16px;font-family:monospace;font-size:0.85rem;color:var(--color-text-light);margin-bottom:12px;word-break:break-all">Crie seu chá para gerar o link do mural</div>
     <div class="modal-actions">
       <button class="btn btn-primary" onclick="showToast('Link copiado!');document.getElementById('shareModal').classList.remove('open')">📋 Copiar link</button>
       <button class="btn btn-outline" onclick="document.getElementById('shareModal').classList.remove('open')">Fechar</button>

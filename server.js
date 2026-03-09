@@ -96,7 +96,7 @@ app.get('/esqueci-senha', (req, res) => {
 // Public invite & checkout
 app.get('/convite', (req, res) => {
   res.render('pages/convite', {
-    title: 'Chá da Helena',
+    title: 'Convite',
     bodyClass: '',
     cssIncludes: '<link rel="stylesheet" href="/css/convite.css">',
     jsIncludes: '<script src="/js/convite.js"></script>'

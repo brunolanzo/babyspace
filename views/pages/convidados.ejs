@@ -16,10 +16,10 @@
     </div>
 
     <div class="stats-bar">
-      <div class="stat-mini"><div class="stat-mini-dot" style="background:var(--color-text)"></div><div><div class="stat-mini-value">45</div><div class="stat-mini-label">Total</div></div></div>
-      <div class="stat-mini"><div class="stat-mini-dot" style="background:var(--color-accent)"></div><div><div class="stat-mini-value">32</div><div class="stat-mini-label">Confirmados</div></div></div>
-      <div class="stat-mini"><div class="stat-mini-dot" style="background:#D4A843"></div><div><div class="stat-mini-value">10</div><div class="stat-mini-label">Pendentes</div></div></div>
-      <div class="stat-mini"><div class="stat-mini-dot" style="background:#E74C3C"></div><div><div class="stat-mini-value">3</div><div class="stat-mini-label">Recusaram</div></div></div>
+      <div class="stat-mini"><div class="stat-mini-dot" style="background:var(--color-text)"></div><div><div class="stat-mini-value">0</div><div class="stat-mini-label">Total</div></div></div>
+      <div class="stat-mini"><div class="stat-mini-dot" style="background:var(--color-accent)"></div><div><div class="stat-mini-value">0</div><div class="stat-mini-label">Confirmados</div></div></div>
+      <div class="stat-mini"><div class="stat-mini-dot" style="background:#D4A843"></div><div><div class="stat-mini-value">0</div><div class="stat-mini-label">Pendentes</div></div></div>
+      <div class="stat-mini"><div class="stat-mini-dot" style="background:#E74C3C"></div><div><div class="stat-mini-value">0</div><div class="stat-mini-label">Recusaram</div></div></div>
     </div>
 
     <div class="filter-bar">
@@ -36,24 +36,21 @@
       <table>
         <thead><tr><th>Convidado</th><th>E-mail</th><th>Status</th><th>Presente</th><th>Data RSVP</th><th></th></tr></thead>
         <tbody>
-          <tr><td><div class="guest-info"><div class="guest-avatar">AS</div><span class="guest-name-col">Ana Silva</span></div></td><td>ana@email.com</td><td><span class="badge badge-success">Confirmado</span></td><td>Sim</td><td>28/02/2026</td><td><button class="action-btn" title="Remover">✕</button></td></tr>
-          <tr><td><div class="guest-info"><div class="guest-avatar">JC</div><span class="guest-name-col">João Carlos</span></div></td><td>joao@email.com</td><td><span class="badge badge-success">Confirmado</span></td><td>Não</td><td>01/03/2026</td><td><button class="action-btn">✕</button></td></tr>
-          <tr><td><div class="guest-info"><div class="guest-avatar">MC</div><span class="guest-name-col">Maria Costa</span></div></td><td>maria@email.com</td><td><span class="badge badge-success">Confirmado</span></td><td>Sim</td><td>27/02/2026</td><td><button class="action-btn">✕</button></td></tr>
-          <tr><td><div class="guest-info"><div class="guest-avatar">PL</div><span class="guest-name-col">Pedro Lima</span></div></td><td>pedro@email.com</td><td><span class="badge badge-success">Confirmado</span></td><td>Sim</td><td>26/02/2026</td><td><button class="action-btn">✕</button></td></tr>
-          <tr><td><div class="guest-info"><div class="guest-avatar">JS</div><span class="guest-name-col">Julia Santos</span></div></td><td>julia@email.com</td><td><span class="badge badge-warning">Pendente</span></td><td>—</td><td>—</td><td><button class="action-btn">✕</button></td></tr>
-          <tr><td><div class="guest-info"><div class="guest-avatar">RF</div><span class="guest-name-col">Roberto Ferreira</span></div></td><td>roberto@email.com</td><td><span class="badge badge-warning">Pendente</span></td><td>—</td><td>—</td><td><button class="action-btn">✕</button></td></tr>
-          <tr><td><div class="guest-info"><div class="guest-avatar">LM</div><span class="guest-name-col">Lucia Mendes</span></div></td><td>lucia@email.com</td><td><span class="badge badge-danger">Recusou</span></td><td>—</td><td>02/03/2026</td><td><button class="action-btn">✕</button></td></tr>
+          <tr><td colspan="6" style="text-align:center;padding:48px 16px;color:var(--color-text-light)">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" style="opacity:0.3;margin-bottom:12px"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+            <p style="font-weight:600;color:var(--color-text);margin-bottom:4px">Nenhum convidado adicionado</p>
+            <p style="font-size:0.85rem">Clique em "+ Adicionar" para convidar seus amigos e familiares</p>
+          </td></tr>
         </tbody>
       </table>
     </div>
 
     <!-- Mobile cards -->
     <div class="mobile-card">
-      <div class="m-card"><div class="m-card-left"><div class="guest-avatar">AS</div><div><p class="m-card-name">Ana Silva</p><p class="m-card-email">ana@email.com</p></div></div><span class="badge badge-success">Confirmado</span></div>
-      <div class="m-card"><div class="m-card-left"><div class="guest-avatar">JC</div><div><p class="m-card-name">João Carlos</p><p class="m-card-email">joao@email.com</p></div></div><span class="badge badge-success">Confirmado</span></div>
-      <div class="m-card"><div class="m-card-left"><div class="guest-avatar">MC</div><div><p class="m-card-name">Maria Costa</p><p class="m-card-email">maria@email.com</p></div></div><span class="badge badge-success">Confirmado</span></div>
-      <div class="m-card"><div class="m-card-left"><div class="guest-avatar">JS</div><div><p class="m-card-name">Julia Santos</p><p class="m-card-email">julia@email.com</p></div></div><span class="badge badge-warning">Pendente</span></div>
-      <div class="m-card"><div class="m-card-left"><div class="guest-avatar">LM</div><div><p class="m-card-name">Lucia Mendes</p><p class="m-card-email">lucia@email.com</p></div></div><span class="badge badge-danger">Recusou</span></div>
+      <div style="text-align:center;padding:32px 16px;color:var(--color-text-light)">
+        <p style="font-weight:600;color:var(--color-text)">Nenhum convidado adicionado</p>
+        <p style="font-size:0.85rem">Use o botão "+ Adicionar" acima</p>
+      </div>
     </div>
   </div>
 </div>
