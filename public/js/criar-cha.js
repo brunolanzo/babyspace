@@ -134,9 +134,94 @@ function publish() {
   window.location.href = '/dashboard';
 }
 
+// ===== COVER PHOTO UPLOAD =====
+var coverFile = null;
+
+function initUpload() {
+  var zone = document.getElementById('uploadZone');
+  var fileInput = document.getElementById('fileInput');
+  var removeBtn = document.getElementById('removePhoto');
+
+  // Click to select
+  zone.addEventListener('click', function(e) {
+    if (e.target === removeBtn || e.target.closest('.upload-remove')) return;
+    fileInput.click();
+  });
+
+  // File selected
+  fileInput.addEventListener('change', function() {
+    if (fileInput.files && fileInput.files[0]) {
+      handleFile(fileInput.files[0]);
+    }
+  });
+
+  // Remove photo
+  removeBtn.addEventListener('click', function(e) {
+    e.stopPropagation();
+    clearPreview();
+  });
+
+  // Drag & drop
+  zone.addEventListener('dragover', function(e) {
+    e.preventDefault();
+    zone.classList.add('drag-over');
+  });
+
+  zone.addEventListener('dragleave', function(e) {
+    e.preventDefault();
+    zone.classList.remove('drag-over');
+  });
+
+  zone.addEventListener('drop', function(e) {
+    e.preventDefault();
+    zone.classList.remove('drag-over');
+    var files = e.dataTransfer.files;
+    if (files && files[0]) {
+      handleFile(files[0]);
+    }
+  });
+}
+
+function handleFile(file) {
+  // Validate type
+  if (!file.type.match(/^image\/(jpeg|jpg|png|webp)$/)) {
+    alert('Formato inv\u00e1lido. Use PNG, JPG ou WEBP.');
+    return;
+  }
+  // Validate size (5MB)
+  if (file.size > 5 * 1024 * 1024) {
+    alert('Arquivo muito grande. M\u00e1ximo 5MB.');
+    return;
+  }
+
+  coverFile = file;
+  var reader = new FileReader();
+  reader.onload = function(e) {
+    var img = document.getElementById('previewImg');
+    img.src = e.target.result;
+    document.getElementById('uploadPlaceholder').style.display = 'none';
+    document.getElementById('uploadPreview').style.display = 'block';
+    document.getElementById('uploadZone').classList.add('has-preview');
+  };
+  reader.readAsDataURL(file);
+}
+
+function clearPreview() {
+  coverFile = null;
+  document.getElementById('previewImg').src = '';
+  document.getElementById('uploadPlaceholder').style.display = '';
+  document.getElementById('uploadPreview').style.display = 'none';
+  document.getElementById('uploadZone').classList.remove('has-preview');
+  document.getElementById('fileInput').value = '';
+}
+
+// ===== INIT =====
 // Init first radio as checked
 document.querySelector('.radio-label').classList.add('checked');
 
 // Listen for baby name changes to auto-suggest title
 document.getElementById('babyName').addEventListener('input', autoSuggestTitle);
 document.getElementById('babyName2').addEventListener('input', autoSuggestTitle);
+
+// Init upload zone
+initUpload();

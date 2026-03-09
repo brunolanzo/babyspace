@@ -83,10 +83,16 @@
         <div class="theme-card" data-theme="Oceano" onclick="selectTheme(this)"><div class="theme-swatch" style="background:#B8D4E3"></div><span class="theme-name">Oceano</span></div>
       </div>
       <h3 style="font-size:1rem;margin-bottom:12px">Foto de capa</h3>
-      <div class="upload-zone" onclick="document.getElementById('fileInput').click()">
-        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="var(--color-text-light)" stroke-width="1.5" stroke-linecap="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M17 8l-5-5-5 5M12 3v12"/></svg>
-        <p>Arraste uma foto ou clique para enviar</p>
-        <small>PNG, JPG até 5MB</small>
+      <div class="upload-zone" id="uploadZone">
+        <div class="upload-placeholder" id="uploadPlaceholder">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="var(--color-text-light)" stroke-width="1.5" stroke-linecap="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M17 8l-5-5-5 5M12 3v12"/></svg>
+          <p>Arraste uma foto ou clique para enviar</p>
+          <small>PNG, JPG até 5MB</small>
+        </div>
+        <div class="upload-preview" id="uploadPreview" style="display:none">
+          <img id="previewImg" src="" alt="Preview">
+          <button type="button" class="upload-remove" id="removePhoto" title="Remover foto">✕</button>
+        </div>
         <input type="file" id="fileInput" accept="image/*" style="display:none">
       </div>
       <div class="step-nav"><button class="btn btn-outline" onclick="prevStep()">← Voltar</button><button class="btn btn-primary" onclick="nextStep()">Próximo →</button></div>
