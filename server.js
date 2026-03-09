@@ -7,6 +7,7 @@ const passport = require('./config/passport');
 const { ensureAuthenticated } = require('./middleware/auth');
 const path = require('path');
 const fs = require('fs');
+const Datastore = require('nedb-promises');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -18,14 +19,19 @@ const sessionsDir = path.join(dataDir, 'sessions');
 if (!fs.existsSync(dataDir)) fs.mkdirSync(dataDir, { recursive: true });
 if (!fs.existsSync(sessionsDir)) fs.mkdirSync(sessionsDir, { recursive: true });
 
+// Events database
+const eventsDb = Datastore.create({ filename: path.join(__dirname, 'data', 'events.db'), autoload: true });
+
 // View engine
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 app.use(expressLayouts);
 app.set('layout', 'layouts/main');
 
-// Static files
+// Static files & body parsing
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 // Session
 app.use(session({
@@ -144,11 +150,115 @@ app.get('/logout', (req, res, next) => {
   });
 });
 
+// ===== EVENT API ROUTES =====
+
+// Create event (one per user)
+app.post('/api/events', ensureAuthenticated, async (req, res) => {
+  try {
+    const existing = await eventsDb.findOne({ userId: req.user._id });
+    if (existing) {
+      return res.status(409).json({ error: 'Você já possui um chá criado.' });
+    }
+    const { selectedType, isGemeos, babyName, babyName2, chaTitle, chaDate, chaDesc, modality, chaLocation, selectedTheme } = req.body;
+    if (!selectedType || !chaTitle) {
+      return res.status(400).json({ error: 'Tipo de chá e título são obrigatórios.' });
+    }
+    const event = await eventsDb.insert({
+      userId: req.user._id,
+      selectedType,
+      isGemeos: !!isGemeos,
+      babyName: babyName || '',
+      babyName2: babyName2 || '',
+      chaTitle,
+      chaDate: chaDate || null,
+      chaDesc: chaDesc || '',
+      modality: modality || 'presencial',
+      chaLocation: chaLocation || '',
+      selectedTheme: selectedTheme || 'Nuvens',
+      status: 'published',
+      createdAt: new Date(),
+      updatedAt: new Date()
+    });
+    res.status(201).json({ success: true, event });
+  } catch (err) {
+    console.error('Error creating event:', err);
+    res.status(500).json({ error: 'Erro ao criar o chá.' });
+  }
+});
+
+// Get current user's event
+app.get('/api/events/me', ensureAuthenticated, async (req, res) => {
+  try {
+    const event = await eventsDb.findOne({ userId: req.user._id });
+    res.json({ event: event || null });
+  } catch (err) {
+    console.error('Error fetching event:', err);
+    res.status(500).json({ error: 'Erro ao buscar o chá.' });
+  }
+});
+
+// Update event
+app.put('/api/events/me', ensureAuthenticated, async (req, res) => {
+  try {
+    const existing = await eventsDb.findOne({ userId: req.user._id });
+    if (!existing) {
+      return res.status(404).json({ error: 'Nenhum chá encontrado.' });
+    }
+    const { selectedType, isGemeos, babyName, babyName2, chaTitle, chaDate, chaDesc, modality, chaLocation, selectedTheme } = req.body;
+    const updates = {
+      selectedType: selectedType || existing.selectedType,
+      isGemeos: isGemeos !== undefined ? !!isGemeos : existing.isGemeos,
+      babyName: babyName !== undefined ? babyName : existing.babyName,
+      babyName2: babyName2 !== undefined ? babyName2 : existing.babyName2,
+      chaTitle: chaTitle || existing.chaTitle,
+      chaDate: chaDate !== undefined ? chaDate : existing.chaDate,
+      chaDesc: chaDesc !== undefined ? chaDesc : existing.chaDesc,
+      modality: modality || existing.modality,
+      chaLocation: chaLocation !== undefined ? chaLocation : existing.chaLocation,
+      selectedTheme: selectedTheme || existing.selectedTheme,
+      updatedAt: new Date()
+    };
+    await eventsDb.update({ _id: existing._id }, { $set: updates });
+    const updated = await eventsDb.findOne({ _id: existing._id });
+    res.json({ success: true, event: updated });
+  } catch (err) {
+    console.error('Error updating event:', err);
+    res.status(500).json({ error: 'Erro ao atualizar o chá.' });
+  }
+});
+
 // ===== PROTECTED DASHBOARD PAGES =====
 
+// Dashboard (custom: loads event data)
+app.get('/dashboard', ensureAuthenticated, async (req, res) => {
+  const event = await eventsDb.findOne({ userId: req.user._id });
+  const css = `<link rel="stylesheet" href="/css/dashboard.css?v=${ASSET_V}">` +
+              `<link rel="stylesheet" href="/css/pages/dashboard-home.css?v=${ASSET_V}">`;
+  const js = `<script src="/js/sidebar.js?v=${ASSET_V}"></script>`;
+  res.render('pages/dashboard', {
+    title: 'Painel', bodyClass: '', cssIncludes: css, jsIncludes: js,
+    activePage: 'dashboard', pageTitle: 'Painel', showNotif: true,
+    event: event || null
+  });
+});
+
+// Meu Chá (custom: loads event data for view/edit mode)
+app.get('/criar-cha', ensureAuthenticated, async (req, res) => {
+  const event = await eventsDb.findOne({ userId: req.user._id });
+  const editMode = req.query.edit === '1';
+  const css = `<link rel="stylesheet" href="/css/dashboard.css?v=${ASSET_V}">` +
+              `<link rel="stylesheet" href="/css/pages/criar-cha.css?v=${ASSET_V}">`;
+  const js = `<script src="/js/sidebar.js?v=${ASSET_V}"></script>` +
+             `<script src="/js/criar-cha.js?v=${ASSET_V}"></script>`;
+  res.render('pages/criar-cha', {
+    title: 'Meu Chá', bodyClass: '', cssIncludes: css, jsIncludes: js,
+    activePage: 'criar-cha', pageTitle: 'Meu Chá', showNotif: false,
+    event: event || null, editMode: editMode
+  });
+});
+
+// Remaining dashboard pages (generic loop)
 const dashboardPages = [
-  { path: '/dashboard',        view: 'dashboard',        title: 'Painel',             activePage: 'dashboard',        pageCss: 'dashboard-home', pageJs: null,               showNotif: true },
-  { path: '/criar-cha',        view: 'criar-cha',        title: 'Meu Chá',            activePage: 'criar-cha',        pageCss: 'criar-cha',      pageJs: 'criar-cha',        showNotif: false },
   { path: '/lista-presentes',  view: 'lista-presentes',  title: 'Lista de Presentes', activePage: 'lista-presentes',  pageCss: 'lista-presentes',pageJs: 'lista-presentes',  showNotif: false },
   { path: '/convidados',       view: 'convidados',       title: 'Convidados',         activePage: 'convidados',       pageCss: 'convidados',     pageJs: 'convidados',       showNotif: false },
   { path: '/mural',            view: 'mural',            title: 'Mural de Recados',   activePage: 'mural',            pageCss: 'mural',          pageJs: 'mural',            showNotif: false, hasToast: true },

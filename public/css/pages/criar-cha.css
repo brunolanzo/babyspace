@@ -79,12 +79,34 @@
 /* ===== STEP NAV ===== */
 .step-nav { display: flex; justify-content: space-between; margin-top: 36px; gap: 12px; }
 
+/* ===== EVENT SUMMARY VIEW ===== */
+.event-summary { max-width: 720px; margin: 0 auto; }
+.event-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; margin-bottom: 28px; }
+.event-header-info h2 { font-size: 1.5rem; margin-top: 8px; margin-bottom: 4px; }
+.event-type { font-size: 0.9rem; color: var(--color-text-light); }
+.status-badge { display: inline-block; padding: 4px 12px; border-radius: 20px; font-size: 0.78rem; font-weight: 700; background: rgba(168,216,185,0.2); color: #4a9d6e; text-transform: uppercase; letter-spacing: 0.5px; }
+.event-details-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.event-detail-card { background: #fff; border-radius: var(--radius-md); box-shadow: var(--shadow-card); padding: 20px; }
+.event-detail-label { font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.5px; color: var(--color-text-light); font-weight: 600; margin-bottom: 6px; }
+.event-detail-value { font-size: 1rem; font-weight: 600; }
+.event-desc-card { background: #fff; border-radius: var(--radius-md); box-shadow: var(--shadow-card); padding: 20px; margin-top: 16px; }
+.event-desc-text { font-size: 0.95rem; color: var(--color-text-light); line-height: 1.7; margin-top: 8px; }
+.event-next-steps { margin-top: 28px; }
+.event-next-steps h3 { font-size: 1.1rem; margin-bottom: 16px; }
+.next-steps-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+.next-step-card { display: flex; align-items: center; gap: 12px; padding: 18px 16px; background: #fff; border-radius: var(--radius-md); box-shadow: var(--shadow-card); transition: all var(--transition); font-size: 0.9rem; font-weight: 500; }
+.next-step-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-card-hover); }
+.next-step-card svg { flex-shrink: 0; }
+
 /* ===== RESPONSIVE ===== */
 @media(max-width:768px) {
   .type-grid { grid-template-columns: 1fr; }
   .theme-grid { grid-template-columns: 1fr 1fr; }
   .stepper-row { gap: 0; }
   .stepper-row .step-line { width: 30px; }
+  .event-details-grid { grid-template-columns: 1fr; }
+  .event-header { flex-direction: column; }
+  .next-steps-grid { grid-template-columns: 1fr; }
 }
 
 @media(max-width:480px) {

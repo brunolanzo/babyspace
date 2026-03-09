@@ -6,7 +6,11 @@
     <div class="welcome">
       <div class="welcome-text">
         <h2>Olá, <%= user ? user.name.split(' ')[0] : 'Usuário' %>! 👋</h2>
+        <% if (event) { %>
+        <p><%= event.chaTitle %> está no ar!</p>
+        <% } else { %>
         <p>Crie seu primeiro chá para começar!</p>
+        <% } %>
       </div>
       <div class="welcome-illus">
         <svg width="120" height="120" viewBox="0 0 120 120" fill="none">
@@ -57,11 +61,19 @@
     <div class="two-col">
       <div class="card-block">
         <h3>Atividade recente</h3>
+        <% if (event) { %>
+        <div class="activity-item">
+          <div class="activity-dot" style="background: var(--color-accent)"></div>
+          <div class="activity-text"><strong><%= event.chaTitle %></strong> foi criado</div>
+          <div class="activity-time"><%= new Date(event.createdAt).toLocaleDateString('pt-BR') %></div>
+        </div>
+        <% } else { %>
         <div style="text-align:center;padding:32px 16px;color:var(--color-text-light)">
           <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" style="opacity:0.4;margin-bottom:12px"><path d="M12 8v4l3 3"/><circle cx="12" cy="12" r="10"/></svg>
           <p style="margin-bottom:4px;font-weight:600;color:var(--color-text)">Nenhuma atividade ainda</p>
           <p style="font-size:0.85rem">Crie seu chá e compartilhe com amigos para ver a atividade aqui!</p>
         </div>
+        <% } %>
       </div>
 
       <div class="card-block">
