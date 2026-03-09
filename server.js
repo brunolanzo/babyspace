@@ -10,6 +10,7 @@ const fs = require('fs');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+const ASSET_V = Date.now(); // cache-buster for static assets
 
 // Ensure data directories exist
 const dataDir = path.join(__dirname, 'data');
@@ -45,9 +46,10 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-// Make user available to all templates
+// Make user + asset version available to all templates
 app.use((req, res, next) => {
   res.locals.user = req.user || null;
+  res.locals.v = ASSET_V;
   next();
 });
 
@@ -58,8 +60,8 @@ app.get('/', (req, res) => {
   res.render('pages/index', {
     title: 'O espaço do seu bebê começa aqui',
     bodyClass: '',
-    cssIncludes: '<link rel="stylesheet" href="/css/landing.css">',
-    jsIncludes: '<script src="/js/landing.js"></script>'
+    cssIncludes: `<link rel="stylesheet" href="/css/landing.css?v=${ASSET_V}">`,
+    jsIncludes: `<script src="/js/landing.js?v=${ASSET_V}"></script>`
   });
 });
 
@@ -69,8 +71,8 @@ app.get('/login', (req, res) => {
   res.render('pages/login', {
     title: 'Entrar',
     bodyClass: 'auth-body',
-    cssIncludes: '<link rel="stylesheet" href="/css/auth.css">',
-    jsIncludes: '<script src="/js/auth.js"></script><script src="/js/login.js"></script>'
+    cssIncludes: `<link rel="stylesheet" href="/css/auth.css?v=${ASSET_V}">`,
+    jsIncludes: `<script src="/js/auth.js?v=${ASSET_V}"></script><script src="/js/login.js?v=${ASSET_V}"></script>`
   });
 });
 
@@ -79,8 +81,8 @@ app.get('/cadastro', (req, res) => {
   res.render('pages/cadastro', {
     title: 'Cadastro',
     bodyClass: 'auth-body',
-    cssIncludes: '<link rel="stylesheet" href="/css/auth.css">',
-    jsIncludes: '<script src="/js/auth.js"></script><script src="/js/cadastro.js"></script>'
+    cssIncludes: `<link rel="stylesheet" href="/css/auth.css?v=${ASSET_V}">`,
+    jsIncludes: `<script src="/js/auth.js?v=${ASSET_V}"></script><script src="/js/cadastro.js?v=${ASSET_V}"></script>`
   });
 });
 
@@ -88,8 +90,8 @@ app.get('/esqueci-senha', (req, res) => {
   res.render('pages/esqueci-senha', {
     title: 'Recuperar Senha',
     bodyClass: 'auth-body',
-    cssIncludes: '<link rel="stylesheet" href="/css/auth.css">',
-    jsIncludes: '<script src="/js/esqueci-senha.js"></script>'
+    cssIncludes: `<link rel="stylesheet" href="/css/auth.css?v=${ASSET_V}">`,
+    jsIncludes: `<script src="/js/esqueci-senha.js?v=${ASSET_V}"></script>`
   });
 });
 
@@ -98,8 +100,8 @@ app.get('/convite', (req, res) => {
   res.render('pages/convite', {
     title: 'Convite',
     bodyClass: '',
-    cssIncludes: '<link rel="stylesheet" href="/css/convite.css">',
-    jsIncludes: '<script src="/js/convite.js"></script>'
+    cssIncludes: `<link rel="stylesheet" href="/css/convite.css?v=${ASSET_V}">`,
+    jsIncludes: `<script src="/js/convite.js?v=${ASSET_V}"></script>`
   });
 });
 
@@ -107,8 +109,8 @@ app.get('/checkout', (req, res) => {
   res.render('pages/checkout', {
     title: 'Pagamento',
     bodyClass: '',
-    cssIncludes: '<link rel="stylesheet" href="/css/checkout.css">',
-    jsIncludes: '<script src="/js/checkout.js"></script>'
+    cssIncludes: `<link rel="stylesheet" href="/css/checkout.css?v=${ASSET_V}">`,
+    jsIncludes: `<script src="/js/checkout.js?v=${ASSET_V}"></script>`
   });
 });
 
@@ -157,11 +159,11 @@ const dashboardPages = [
 
 dashboardPages.forEach(({ path: routePath, view, title, activePage, pageCss, pageJs, showNotif, hasToast }) => {
   app.get(routePath, ensureAuthenticated, (req, res) => {
-    const css = '<link rel="stylesheet" href="/css/dashboard.css">' +
-                `<link rel="stylesheet" href="/css/pages/${pageCss}.css">`;
-    let js = '<script src="/js/sidebar.js"></script>';
-    if (hasToast) js += '<script src="/js/toast.js"></script>';
-    if (pageJs) js += `<script src="/js/${pageJs}.js"></script>`;
+    const css = `<link rel="stylesheet" href="/css/dashboard.css?v=${ASSET_V}">` +
+                `<link rel="stylesheet" href="/css/pages/${pageCss}.css?v=${ASSET_V}">`;
+    let js = `<script src="/js/sidebar.js?v=${ASSET_V}"></script>`;
+    if (hasToast) js += `<script src="/js/toast.js?v=${ASSET_V}"></script>`;
+    if (pageJs) js += `<script src="/js/${pageJs}.js?v=${ASSET_V}"></script>`;
     res.render(`pages/${view}`, {
       title,
       bodyClass: '',
