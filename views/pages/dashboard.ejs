@@ -8,8 +8,10 @@
         <h2>Olá, <%= user ? user.name.split(' ')[0] : 'Usuário' %>! 👋</h2>
         <% if (event) { %>
         <p><%= event.chaTitle %> está no ar!</p>
+        <a href="/criar-cha" class="btn btn-primary btn-sm" style="margin-top:8px">Ver meu chá →</a>
         <% } else { %>
         <p>Crie seu primeiro chá para começar!</p>
+        <a href="/criar-cha" class="btn btn-primary btn-sm" style="margin-top:8px">Criar meu chá</a>
         <% } %>
       </div>
       <div class="welcome-illus">
@@ -24,6 +26,15 @@
         </svg>
       </div>
     </div>
+
+    <% if (event && event.pregnancyWeeks) { %>
+    <div class="pregnancy-banner" id="dashPregnancy" style="display:none"></div>
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        renderPregnancyBanner('dashPregnancy', <%= event.pregnancyWeeks %>, <%= event.weekCountDay || 0 %>, '<%= event.createdAt %>');
+      });
+    </script>
+    <% } %>
 
     <!-- Stats -->
     <div class="stats">

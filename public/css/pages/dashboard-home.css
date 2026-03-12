@@ -30,6 +30,13 @@
 .quick-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-card); }
 .quick-icon { width: 44px; height: 44px; border-radius: 12px; display: flex; align-items: center; justify-content: center; }
 
+/* ===== PREGNANCY BANNER ===== */
+.pregnancy-banner { background: #fff; border-radius: var(--radius-md); box-shadow: var(--shadow-card); padding: 24px; display: flex; align-items: center; gap: 20px; margin-bottom: 28px; }
+.pregnancy-fruit { font-size: 3rem; line-height: 1; }
+.pregnancy-info { flex: 1; }
+.pregnancy-week { font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 1.3rem; }
+.pregnancy-comparison { font-size: 0.9rem; color: var(--color-text-light); margin-top: 2px; }
+
 /* ===== PREMIUM BANNER ===== */
 .premium-banner { background: linear-gradient(135deg, var(--color-secondary), var(--color-primary)); border-radius: var(--radius-lg); padding: 32px; display: flex; align-items: center; justify-content: space-between; gap: 24px; color: #fff; }
 .premium-banner h3 { font-size: 1.3rem; margin-bottom: 8px; }

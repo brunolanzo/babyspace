@@ -6,14 +6,35 @@
 <% if (event && !editMode) { %>
     <!-- ===== EVENT SUMMARY VIEW ===== -->
     <div class="event-summary">
+
+      <% if (event.coverPhoto) { %>
+      <div class="event-cover-banner">
+        <img src="<%= event.coverPhoto %>?v=<%= v %>" alt="Foto de capa" style="object-position: center <%= event.coverPosition || 50 %>%">
+      </div>
+      <% } %>
+
       <div class="event-header">
         <div class="event-header-info">
           <span class="status-badge">Publicado</span>
           <h2><%= event.chaTitle %></h2>
           <p class="event-type"><%= event.selectedType %></p>
         </div>
-        <a href="/criar-cha?edit=1" class="btn btn-outline">Editar</a>
+        <div class="event-header-actions">
+          <a href="/criar-cha?edit=1" class="btn btn-outline btn-sm">Editar</a>
+          <% if (event.slug) { %>
+          <a href="/convite/<%= event.slug %>" class="btn btn-primary btn-sm" target="_blank">Ver convite</a>
+          <% } %>
+        </div>
       </div>
+
+      <% if (event.pregnancyWeeks) { %>
+      <div class="pregnancy-banner" id="summaryPregnancy" style="display:none"></div>
+      <script>
+        document.addEventListener('DOMContentLoaded', function() {
+          renderPregnancyBanner('summaryPregnancy', <%= event.pregnancyWeeks %>, <%= event.weekCountDay || 0 %>, '<%= event.createdAt %>');
+        });
+      </script>
+      <% } %>
 
       <div class="event-details-grid">
         <div class="event-detail-card">
@@ -47,6 +68,16 @@
       </div>
       <% } %>
 
+      <% if (event.modality === 'presencial' && event.chaLocation) { %>
+      <div class="event-map-card">
+        <p class="event-detail-label">Mapa</p>
+        <div class="map-embed">
+          <iframe src="https://maps.google.com/maps?q=<%= encodeURIComponent(event.chaLocation) %>&output=embed" width="100%" height="250" style="border:0;border-radius:var(--radius-sm)" allowfullscreen loading="lazy"></iframe>
+        </div>
+        <a href="https://www.google.com/maps/search/?api=1&query=<%= encodeURIComponent(event.chaLocation) %>" target="_blank" rel="noopener" class="map-link">Abrir no Google Maps →</a>
+      </div>
+      <% } %>
+
       <div class="event-next-steps">
         <h3>Próximos passos</h3>
         <div class="next-steps-grid">
@@ -58,10 +89,12 @@
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--color-primary)" stroke-width="2" stroke-linecap="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
             <span>Adicionar convidados</span>
           </a>
-          <a href="/convite" class="next-step-card">
+          <% if (event.slug) { %>
+          <a href="/convite/<%= event.slug %>" class="next-step-card" target="_blank">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--color-primary)" stroke-width="2" stroke-linecap="round"><path d="M4 12v8a2 2 0 002 2h12a2 2 0 002-2v-8M16 6l-4-4-4 4M12 2v13"/></svg>
             <span>Compartilhar convite</span>
           </a>
+          <% } %>
         </div>
       </div>
     </div>
@@ -128,7 +161,27 @@
       <div class="form-group" id="babyName2Group" style="display:none"><label>Nome do 2º bebê</label><input type="text" id="babyName2" class="form-input" placeholder="Ex: Miguel"></div>
       <div class="form-group"><label>Título do chá</label><input type="text" id="chaTitle" class="form-input" placeholder="Ex: Chá da Helena"></div>
       <div class="form-group"><label>Data prevista</label><input type="date" id="chaDate" class="form-input"></div>
-      <div class="form-group"><label>Descrição</label><textarea id="chaDesc" class="form-textarea" placeholder="Conte um pouquinho sobre esse momento especial..." rows="4"></textarea></div>
+
+      <div class="form-row">
+        <div class="form-group"><label>Semanas de gestação</label><input type="number" id="pregnancyWeeks" class="form-input" placeholder="Ex: 20" min="1" max="42"></div>
+        <div class="form-group">
+          <label>Dia que a contagem avança</label>
+          <select id="weekCountDay" class="form-input">
+            <option value="0">Domingo</option>
+            <option value="1">Segunda-feira</option>
+            <option value="2">Terça-feira</option>
+            <option value="3">Quarta-feira</option>
+            <option value="4">Quinta-feira</option>
+            <option value="5">Sexta-feira</option>
+            <option value="6">Sábado</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Descrição <a href="#" onclick="resetDescTemplate(); return false" style="float:right;font-size:0.8rem;color:var(--color-primary)">Usar modelo</a></label>
+        <textarea id="chaDesc" class="form-textarea" placeholder="Conte um pouquinho sobre esse momento especial..." rows="4"></textarea>
+      </div>
       <div class="form-group">
         <label>Modalidade</label>
         <div class="radio-group">
@@ -157,13 +210,17 @@
         <div class="upload-placeholder" id="uploadPlaceholder">
           <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="var(--color-text-light)" stroke-width="1.5" stroke-linecap="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M17 8l-5-5-5 5M12 3v12"/></svg>
           <p>Arraste uma foto ou clique para enviar</p>
-          <small>PNG, JPG até 5MB</small>
+          <small>PNG, JPG até 5MB — Proporção ideal: 1200x400px (3:1)</small>
         </div>
         <div class="upload-preview" id="uploadPreview" style="display:none">
           <img id="previewImg" src="" alt="Preview">
           <button type="button" class="upload-remove" id="removePhoto" title="Remover foto">✕</button>
         </div>
         <input type="file" id="fileInput" accept="image/*" style="display:none">
+      </div>
+      <div class="reposition-control" id="repositionControl" style="display:none">
+        <label>Reposicionar imagem <small>(arraste para ajustar a posição vertical)</small></label>
+        <input type="range" id="coverPosition" min="0" max="100" value="50" class="position-slider">
       </div>
       <div class="step-nav"><button class="btn btn-outline" onclick="prevStep()">← Voltar</button><button class="btn btn-primary" onclick="nextStep()">Próximo →</button></div>
     </div>
@@ -176,6 +233,7 @@
         <div class="review-section"><span class="review-edit" onclick="goToStep(1)">Editar</span><p class="review-label" id="revBabyLabel">Nome do bebê</p><p class="review-value" id="revBaby">—</p></div>
         <div class="review-section"><span class="review-edit" onclick="goToStep(1)">Editar</span><p class="review-label">Título</p><p class="review-value" id="revTitle">—</p></div>
         <div class="review-section"><span class="review-edit" onclick="goToStep(1)">Editar</span><p class="review-label">Data</p><p class="review-value" id="revDate">—</p></div>
+        <div class="review-section" id="revPregnancyRow" style="display:none"><span class="review-edit" onclick="goToStep(1)">Editar</span><p class="review-label">Gestação</p><p class="review-value" id="revPregnancy">—</p></div>
         <div class="review-section"><span class="review-edit" onclick="goToStep(1)">Editar</span><p class="review-label">Modalidade</p><p class="review-value" id="revMode">—</p></div>
         <div class="review-section"><span class="review-edit" onclick="goToStep(2)">Editar</span><p class="review-label">Tema</p><p class="review-value" id="revTheme">—</p></div>
       </div>

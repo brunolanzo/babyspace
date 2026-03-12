@@ -1,4 +1,4 @@
-// Criar Chá — Stepper logic, type selection, theme selection, twins toggle, publish API
+// Criar Chá — Stepper, type/theme selection, twins, pregnancy, description template, cover upload + reposition, publish API
 
 // Guard: only run wizard JS if wizard DOM exists (not in summary view)
 if (!document.getElementById('stepper')) {
@@ -11,6 +11,7 @@ var selectedType = '';
 var selectedTheme = 'Nuvens';
 var isGemeos = false;
 var coverFile = null;
+var coverPosition = 50;
 var isPublishing = false;
 
 // ===== STEPPER =====
@@ -40,17 +41,11 @@ window.nextStep = function() {
 };
 
 window.prevStep = function() {
-  if (currentStep > 0) {
-    currentStep--;
-    updateStepper();
-    window.scrollTo(0, 0);
-  }
+  if (currentStep > 0) { currentStep--; updateStepper(); window.scrollTo(0, 0); }
 };
 
 window.goToStep = function(n) {
-  currentStep = n;
-  updateStepper();
-  window.scrollTo(0, 0);
+  currentStep = n; updateStepper(); window.scrollTo(0, 0);
 };
 
 // ===== TYPE & THEME SELECTION =====
@@ -109,6 +104,22 @@ function autoSuggestTitle() {
   }
 }
 
+// ===== DESCRIPTION TEMPLATE =====
+function getDescriptionTemplate() {
+  var name1 = document.getElementById('babyName').value.trim();
+  var name2 = isGemeos ? document.getElementById('babyName2').value.trim() : '';
+  if (isGemeos && name1 && name2) {
+    return 'Estamos radiantes com a chegada de ' + name1 + ' e ' + name2 + '! Venham compartilhar esse momento especial conosco em um dia cheio de amor, carinho e muita alegria. Ser\u00e1 uma honra ter voc\u00eas celebrando essa nova fase das nossas vidas. Esperamos voc\u00eas com o cora\u00e7\u00e3o transbordando!';
+  } else if (name1) {
+    return 'Estamos muito felizes com a chegada de ' + name1 + '! Venham compartilhar esse momento especial conosco em um dia cheio de amor, carinho e muita alegria. Ser\u00e1 uma honra ter voc\u00eas celebrando essa nova fase das nossas vidas. Esperamos voc\u00eas com o cora\u00e7\u00e3o transbordando!';
+  }
+  return 'Estamos muito felizes em compartilhar esse momento com voc\u00eas! Venham celebrar a chegada do(a) nosso(a) beb\u00ea em um dia especial cheio de amor e carinho. Ser\u00e1 uma honra ter voc\u00eas conosco nessa nova fase. Esperamos voc\u00eas com o cora\u00e7\u00e3o transbordando!';
+}
+
+window.resetDescTemplate = function() {
+  document.getElementById('chaDesc').value = getDescriptionTemplate();
+};
+
 // ===== REVIEW =====
 function updateReview() {
   document.getElementById('revType').textContent = selectedType || '\u2014';
@@ -130,9 +141,21 @@ function updateReview() {
   var mode = document.querySelector('input[name="mode"]:checked');
   document.getElementById('revMode').textContent = mode ? (mode.value === 'presencial' ? 'Presencial' : 'Online') : '\u2014';
   document.getElementById('revTheme').textContent = selectedTheme;
+
+  // Pregnancy review
+  var pw = document.getElementById('pregnancyWeeks').value;
+  var revRow = document.getElementById('revPregnancyRow');
+  if (pw) {
+    revRow.style.display = '';
+    var dayNames = ['Domingo', 'Segunda', 'Ter\u00e7a', 'Quarta', 'Quinta', 'Sexta', 'S\u00e1bado'];
+    var wcd = document.getElementById('weekCountDay').value;
+    document.getElementById('revPregnancy').textContent = pw + ' semanas (avan\u00e7a toda ' + dayNames[wcd] + ')';
+  } else {
+    revRow.style.display = 'none';
+  }
 }
 
-// ===== PUBLISH (real API call) =====
+// ===== PUBLISH (real API call + cover upload) =====
 window.publish = function() {
   if (isPublishing) return;
   var mode = document.querySelector('input[name="mode"]:checked');
@@ -146,7 +169,9 @@ window.publish = function() {
     chaDesc: document.getElementById('chaDesc').value.trim(),
     modality: mode ? mode.value : 'presencial',
     chaLocation: document.getElementById('chaLocation').value.trim(),
-    selectedTheme: selectedTheme
+    selectedTheme: selectedTheme,
+    pregnancyWeeks: document.getElementById('pregnancyWeeks').value || null,
+    weekCountDay: document.getElementById('weekCountDay').value || '0'
   };
 
   if (!payload.selectedType) { alert('Selecione o tipo de ch\u00e1.'); goToStep(0); return; }
@@ -170,7 +195,15 @@ window.publish = function() {
     if (!res.ok) return res.json().then(function(d) { throw new Error(d.error || 'Erro ao salvar'); });
     return res.json();
   })
-  .then(function() {
+  .then(function(data) {
+    // Upload cover photo if selected
+    if (coverFile) {
+      var formData = new FormData();
+      formData.append('cover', coverFile);
+      formData.append('coverPosition', coverPosition);
+      return fetch('/api/events/cover', { method: 'POST', body: formData })
+        .then(function() { window.location.href = '/criar-cha'; });
+    }
     window.location.href = '/criar-cha';
   })
   .catch(function(err) {
@@ -208,6 +241,12 @@ function initUpload() {
     zone.classList.remove('drag-over');
     if (e.dataTransfer.files && e.dataTransfer.files[0]) handleFile(e.dataTransfer.files[0]);
   });
+
+  // Reposition slider
+  document.getElementById('coverPosition').addEventListener('input', function() {
+    coverPosition = parseInt(this.value);
+    document.getElementById('previewImg').style.objectPosition = 'center ' + coverPosition + '%';
+  });
 }
 
 function handleFile(file) {
@@ -216,21 +255,34 @@ function handleFile(file) {
   coverFile = file;
   var reader = new FileReader();
   reader.onload = function(e) {
-    document.getElementById('previewImg').src = e.target.result;
+    var previewImg = document.getElementById('previewImg');
+    previewImg.src = e.target.result;
+    previewImg.style.objectPosition = 'center ' + coverPosition + '%';
     document.getElementById('uploadPlaceholder').style.display = 'none';
     document.getElementById('uploadPreview').style.display = 'block';
     document.getElementById('uploadZone').classList.add('has-preview');
+
+    // Check aspect ratio — show reposition if taller than 3:1
+    var img = new Image();
+    img.onload = function() {
+      var ratio = img.width / img.height;
+      document.getElementById('repositionControl').style.display = ratio < 2.5 ? 'block' : 'none';
+    };
+    img.src = e.target.result;
   };
   reader.readAsDataURL(file);
 }
 
 function clearPreview() {
   coverFile = null;
+  coverPosition = 50;
   document.getElementById('previewImg').src = '';
   document.getElementById('uploadPlaceholder').style.display = '';
   document.getElementById('uploadPreview').style.display = 'none';
   document.getElementById('uploadZone').classList.remove('has-preview');
   document.getElementById('fileInput').value = '';
+  document.getElementById('repositionControl').style.display = 'none';
+  document.getElementById('coverPosition').value = 50;
 }
 
 // ===== INIT =====
@@ -238,6 +290,19 @@ document.querySelector('.radio-label').classList.add('checked');
 document.getElementById('babyName').addEventListener('input', autoSuggestTitle);
 document.getElementById('babyName2').addEventListener('input', autoSuggestTitle);
 initUpload();
+
+// Pre-fill description template if empty and not editing
+if (!window.__eventData && !document.getElementById('chaDesc').value) {
+  document.getElementById('chaDesc').value = getDescriptionTemplate();
+  // Update template when names change
+  document.getElementById('babyName').addEventListener('blur', function() {
+    var desc = document.getElementById('chaDesc');
+    // Only update if it looks like a template (contains the key phrase)
+    if (desc.value.indexOf('compartilhar esse momento') > -1 || desc.value.indexOf('chegada de') > -1) {
+      desc.value = getDescriptionTemplate();
+    }
+  });
+}
 
 // ===== PRE-POPULATE IF EDITING =====
 if (window.__eventData) {
@@ -262,6 +327,10 @@ if (window.__eventData) {
   document.getElementById('chaDate').value = e.chaDate || '';
   document.getElementById('chaDesc').value = e.chaDesc || '';
 
+  // Pregnancy fields
+  if (e.pregnancyWeeks) document.getElementById('pregnancyWeeks').value = e.pregnancyWeeks;
+  if (e.weekCountDay !== undefined) document.getElementById('weekCountDay').value = e.weekCountDay;
+
   // Set modality radio
   var modeRadio = document.querySelector('input[name="mode"][value="' + (e.modality || 'presencial') + '"]');
   if (modeRadio) {
@@ -274,6 +343,12 @@ if (window.__eventData) {
   document.querySelectorAll('.theme-card').forEach(function(c) {
     c.classList.toggle('selected', c.dataset.theme === selectedTheme);
   });
+
+  // Cover position
+  if (e.coverPosition !== undefined) {
+    coverPosition = e.coverPosition;
+    document.getElementById('coverPosition').value = coverPosition;
+  }
 
   autoSuggestTitle();
 }
