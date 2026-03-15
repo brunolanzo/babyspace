@@ -22,8 +22,9 @@ if (!fs.existsSync(dataDir)) fs.mkdirSync(dataDir, { recursive: true });
 if (!fs.existsSync(sessionsDir)) fs.mkdirSync(sessionsDir, { recursive: true });
 if (!fs.existsSync(uploadsDir)) fs.mkdirSync(uploadsDir, { recursive: true });
 
-// Events database
+// Databases
 const eventsDb = Datastore.create({ filename: path.join(__dirname, 'data', 'events.db'), autoload: true });
+const giftsDb = Datastore.create({ filename: path.join(__dirname, 'data', 'gifts.db'), autoload: true });
 
 // Multer setup for cover photo uploads
 const storage = multer.diskStorage({
@@ -314,6 +315,37 @@ app.post('/api/events/cover', ensureAuthenticated, upload.single('cover'), async
   } catch (err) {
     console.error('Error uploading cover:', err);
     res.status(500).json({ error: 'Erro ao salvar a foto.' });
+  }
+});
+
+// ===== GIFT LIST API =====
+
+// Get user's selected gifts
+app.get('/api/gifts', ensureAuthenticated, async (req, res) => {
+  try {
+    const doc = await giftsDb.findOne({ userId: req.user._id });
+    res.json({ gifts: doc ? doc.gifts : [] });
+  } catch (err) {
+    console.error('Error fetching gifts:', err);
+    res.status(500).json({ error: 'Erro ao buscar presentes.' });
+  }
+});
+
+// Save user's selected gifts (upsert)
+app.post('/api/gifts', ensureAuthenticated, async (req, res) => {
+  try {
+    const { gifts } = req.body; // array of { productId, customPrice }
+    if (!Array.isArray(gifts)) return res.status(400).json({ error: 'gifts deve ser um array.' });
+    const existing = await giftsDb.findOne({ userId: req.user._id });
+    if (existing) {
+      await giftsDb.update({ _id: existing._id }, { $set: { gifts, updatedAt: new Date() } });
+    } else {
+      await giftsDb.insert({ userId: req.user._id, gifts, createdAt: new Date(), updatedAt: new Date() });
+    }
+    res.json({ success: true });
+  } catch (err) {
+    console.error('Error saving gifts:', err);
+    res.status(500).json({ error: 'Erro ao salvar presentes.' });
   }
 });
 

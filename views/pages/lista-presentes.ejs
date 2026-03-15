@@ -3,59 +3,10 @@
   <%- include('../partials/topbar') %>
   <div class="content">
     <div class="stats-bar">
-      <div class="stat-mini"><div class="stat-mini-value">0</div><div class="stat-mini-label">Presentes na lista</div></div>
-      <div class="stat-mini"><div class="stat-mini-value">R$ 0</div><div class="stat-mini-label">Valor total</div></div>
-      <div class="stat-mini"><div class="stat-mini-value" style="color:var(--color-accent)">0%</div><div class="stat-mini-label">Financiado</div></div>
+      <div class="stat-mini"><div class="stat-mini-value" id="statCount">0</div><div class="stat-mini-label">Presentes na lista</div></div>
+      <div class="stat-mini"><div class="stat-mini-value" id="statValue">R$ 0</div><div class="stat-mini-label">Valor total</div></div>
     </div>
 
-    <div class="gifts-grid">
-      <div style="grid-column:1/-1;text-align:center;padding:48px 16px;color:var(--color-text-light)">
-        <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" style="opacity:0.3;margin-bottom:16px"><rect x="3" y="8" width="18" height="13" rx="2"/><path d="M12 8V21M3 12h18"/><path d="M12 8c-2-3-6-3-6 0h6zm0 0c2-3 6-3 6 0h-6z"/></svg>
-        <p style="font-weight:600;color:var(--color-text);margin-bottom:4px;font-size:1.1rem">Nenhum presente na lista ainda</p>
-        <p style="font-size:0.9rem;margin-bottom:16px">Adicione presentes para compartilhar com seus convidados</p>
-        <button class="btn btn-primary" onclick="openModal()">+ Adicionar primeiro presente</button>
-      </div>
-    </div>
-
-    <div class="suggestions">
-      <h3>Sugestões populares</h3>
-      <div class="suggest-grid">
-        <span class="suggest-chip" onclick="openModal()">🍼 Mamadeira — R$45</span>
-        <span class="suggest-chip" onclick="openModal()">🧸 Urso de pelúcia — R$60</span>
-        <span class="suggest-chip" onclick="openModal()">📖 Kit livros infantis — R$80</span>
-        <span class="suggest-chip" onclick="openModal()">🎵 Mobile musical — R$95</span>
-        <span class="suggest-chip" onclick="openModal()">👶 Babá eletrônica — R$250</span>
-        <span class="suggest-chip" onclick="openModal()">🧴 Kit banho — R$55</span>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- Add Gift Modal -->
-<div class="modal-overlay" id="giftModal">
-  <div class="modal" style="position:relative">
-    <button class="modal-close" onclick="closeModal()">✕</button>
-    <h2>Adicionar presente</h2>
-    <form onsubmit="event.preventDefault();closeModal();">
-      <div class="form-group"><label>Nome do presente</label><input type="text" class="form-input" placeholder="Ex: Carrinho de Bebê"></div>
-      <div class="form-group"><label>Descrição (opcional)</label><textarea class="form-textarea" placeholder="Detalhes sobre o presente..." rows="3"></textarea></div>
-      <div class="form-group"><label>Valor (R$)</label><input type="number" class="form-input" placeholder="0,00"></div>
-      <div class="form-group">
-        <label>Categoria</label>
-        <select class="form-select">
-          <option>Selecione...</option>
-          <option>Quarto</option>
-          <option>Passeio</option>
-          <option>Alimentação</option>
-          <option>Higiene</option>
-          <option>Roupas</option>
-          <option>Outros</option>
-        </select>
-      </div>
-      <div class="modal-actions">
-        <button type="button" class="btn btn-outline" onclick="closeModal()">Cancelar</button>
-        <button type="submit" class="btn btn-primary">Salvar presente</button>
-      </div>
-    </form>
+    <div id="catalogContainer"></div>
   </div>
 </div>
