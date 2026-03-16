@@ -13,7 +13,7 @@
 .invite-title-section{text-align:center;padding:32px 0 8px}
 .invite-logo{display:inline-flex;align-items:center;gap:6px;font-family:'Nunito',sans-serif;font-weight:700;font-size:0.9rem;color:var(--color-primary);opacity:0.7;margin-bottom:16px}
 .invite-main-title{font-size:2.8rem;margin-bottom:8px;color:var(--color-text);font-family:'Nunito',sans-serif;font-weight:800}
-.invite-main-subtitle{font-size:1.1rem;color:var(--color-text-light);margin-bottom:0}
+.invite-main-subtitle{font-size:1.1rem;color:var(--color-text-light);margin-bottom:24px}
 
 .container{max-width:800px;margin:0 auto;padding:0 24px}
 
@@ -34,7 +34,7 @@
 .detail-card-full{grid-column:1 / -1}
 
 /* PREGNANCY BADGE */
-.pregnancy-badge{background:#fff;border-radius:var(--radius-md);box-shadow:var(--shadow-card);padding:20px 24px;display:flex;align-items:center;gap:16px;margin:-24px auto 0;max-width:500px;position:relative;z-index:3}
+.pregnancy-badge{background:#fff;border-radius:var(--radius-md);box-shadow:var(--shadow-card);padding:20px 24px;display:flex;align-items:center;gap:16px;margin:8px auto 0;max-width:500px;position:relative;z-index:3}
 .pregnancy-badge-emoji{font-size:2.4rem;line-height:1}
 .pregnancy-badge-text{font-size:0.95rem;color:var(--color-text-light)}
 .pregnancy-badge-text strong{color:var(--color-text);font-family:'Nunito',sans-serif}
@@ -135,7 +135,7 @@ textarea.form-input{resize:vertical;min-height:80px}
 .cart-bar .btn{background:#fff;color:var(--color-primary)}
 
 /* CART MODAL */
-.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.5);display:flex;align-items:flex-end;justify-content:center;z-index:200;padding:24px}
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.5);display:flex;align-items:center;justify-content:center;z-index:200;padding:24px}
 .modal-content{background:#fff;border-radius:var(--radius-lg);padding:28px;width:100%;max-width:480px;max-height:85vh;overflow-y:auto}
 .modal-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px}
 .modal-header h3{font-size:1.2rem;margin:0}
@@ -181,7 +181,7 @@ textarea.form-input{resize:vertical;min-height:80px}
   .public-gifts-row{grid-template-columns:repeat(auto-fill,minmax(150px,1fr))}
   .messages-wall{grid-template-columns:1fr}
   .parents{flex-direction:column;gap:16px}
-  .pregnancy-badge{margin-top:-16px;flex-direction:column;text-align:center;gap:8px}
+  .pregnancy-badge{flex-direction:column;text-align:center;gap:8px}
   .invite-card{padding:24px 20px}
   .modal-content{margin-top:auto;border-radius:var(--radius-lg) var(--radius-lg) 0 0;max-height:90vh}
   .cart-bar{padding:12px 16px}
