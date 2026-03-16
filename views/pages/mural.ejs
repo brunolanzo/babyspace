@@ -11,9 +11,9 @@
         <p style="color:var(--color-text-light);font-size:0.9rem">Gerencie as mensagens dos convidados</p>
       </div>
       <div style="display:flex;gap:8px">
-        <button class="btn btn-outline btn-sm" onclick="togglePending()">
+        <button class="btn btn-outline btn-sm" onclick="filterMessages('pending')" id="btnPending">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
-          Pendentes (0)
+          Pendentes (<span id="pendingCount">0</span>)
         </button>
         <button class="btn btn-primary btn-sm" onclick="document.getElementById('shareModal').classList.add('open')">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8M16 6l-4-4-4 4M12 2v13"/></svg>
@@ -25,43 +25,36 @@
     <!-- Stats bar -->
     <div class="stats-bar">
       <div class="stat-mini">
-        <div class="stat-mini-value">0</div>
+        <div class="stat-mini-value" id="statTotal">0</div>
         <div class="stat-mini-label">Total de recados</div>
       </div>
       <div class="stat-mini">
-        <div class="stat-mini-value" style="color:var(--color-accent)">0</div>
+        <div class="stat-mini-value" id="statApproved" style="color:var(--color-accent)">0</div>
         <div class="stat-mini-label">Aprovados</div>
       </div>
       <div class="stat-mini">
-        <div class="stat-mini-value" style="color:var(--color-primary)">0</div>
+        <div class="stat-mini-value" id="statPending" style="color:var(--color-primary)">0</div>
         <div class="stat-mini-label">Pendentes</div>
       </div>
       <div class="stat-mini">
-        <div class="stat-mini-value">0</div>
+        <div class="stat-mini-value" id="statPinned">0</div>
         <div class="stat-mini-label">Fixados</div>
       </div>
     </div>
 
     <!-- Filter bar -->
     <div class="filter-bar">
-      <input type="text" class="search-box" placeholder="Buscar recados...">
-      <select class="filter-select">
-        <option>Todos</option>
-        <option>Fixados</option>
-        <option>Aprovados</option>
-        <option>Pendentes</option>
+      <input type="text" class="search-box" placeholder="Buscar recados..." id="searchBox" oninput="renderMessages()">
+      <select class="filter-select" id="filterSelect" onchange="renderMessages()">
+        <option value="all">Todos</option>
+        <option value="pinned">Fixados</option>
+        <option value="approved">Aprovados</option>
+        <option value="pending">Pendentes</option>
       </select>
     </div>
 
     <!-- Mural Grid -->
-    <div class="mural-grid">
-      <div style="grid-column:1/-1;text-align:center;padding:48px 16px;color:var(--color-text-light)">
-        <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" style="opacity:0.3;margin-bottom:16px"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
-        <p style="font-weight:600;color:var(--color-text);margin-bottom:4px;font-size:1.1rem">Nenhum recado ainda</p>
-        <p style="font-size:0.9rem;margin-bottom:16px">Compartilhe o link do mural para que amigos e familiares deixem mensagens carinhosas!</p>
-        <button class="btn btn-primary btn-sm" onclick="document.getElementById('shareModal').classList.add('open')">Compartilhar link do mural</button>
-      </div>
-    </div>
+    <div class="mural-grid" id="muralGrid"></div>
   </div>
 </div>
 
@@ -70,9 +63,9 @@
   <div class="modal">
     <h2>Compartilhar Mural</h2>
     <p style="color:var(--color-text-light);margin-bottom:16px;font-size:0.9rem">Compartilhe o link para que mais pessoas deixem mensagens carinhosas.</p>
-    <div style="background:var(--color-bg);border-radius:var(--radius-sm);padding:12px 16px;font-family:monospace;font-size:0.85rem;color:var(--color-text-light);margin-bottom:12px;word-break:break-all">Crie seu chá para gerar o link do mural</div>
+    <div style="background:var(--color-bg);border-radius:var(--radius-sm);padding:12px 16px;font-family:monospace;font-size:0.85rem;color:var(--color-text-light);margin-bottom:12px;word-break:break-all" id="shareUrl">Carregando...</div>
     <div class="modal-actions">
-      <button class="btn btn-primary" onclick="showToast('Link copiado!');document.getElementById('shareModal').classList.remove('open')">📋 Copiar link</button>
+      <button class="btn btn-primary" onclick="copyShareLink()">Copiar link</button>
       <button class="btn btn-outline" onclick="document.getElementById('shareModal').classList.remove('open')">Fechar</button>
     </div>
   </div>

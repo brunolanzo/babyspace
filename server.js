@@ -25,6 +25,9 @@ if (!fs.existsSync(uploadsDir)) fs.mkdirSync(uploadsDir, { recursive: true });
 // Databases
 const eventsDb = Datastore.create({ filename: path.join(__dirname, 'data', 'events.db'), autoload: true });
 const giftsDb = Datastore.create({ filename: path.join(__dirname, 'data', 'gifts.db'), autoload: true });
+const rsvpsDb = Datastore.create({ filename: path.join(__dirname, 'data', 'rsvps.db'), autoload: true });
+const messagesDb = Datastore.create({ filename: path.join(__dirname, 'data', 'messages.db'), autoload: true });
+const purchasesDb = Datastore.create({ filename: path.join(__dirname, 'data', 'purchases.db'), autoload: true });
 
 // Multer setup for cover photo uploads
 const storage = multer.diskStorage({
@@ -166,7 +169,7 @@ app.get('/convite/:slug', async (req, res) => {
   res.render('pages/convite', {
     title: event.chaTitle + ' — Convite', bodyClass: '', event: event,
     cssIncludes: `<link rel="stylesheet" href="/css/convite.css?v=${ASSET_V}">`,
-    jsIncludes: `<script src="/js/pregnancy-utils.js?v=${ASSET_V}"></script><script src="/js/convite.js?v=${ASSET_V}"></script>`
+    jsIncludes: `<script src="/js/pregnancy-utils.js?v=${ASSET_V}"></script><script src="/js/gift-catalog.js?v=${ASSET_V}"></script><script src="/js/convite.js?v=${ASSET_V}"></script>`
   });
 });
 
@@ -349,11 +352,190 @@ app.post('/api/gifts', ensureAuthenticated, async (req, res) => {
   }
 });
 
+// ===== PUBLIC API (by slug, no auth) =====
+
+// Helper: resolve slug to event
+async function eventBySlug(slug) {
+  return eventsDb.findOne({ slug });
+}
+
+// Get event owner's gift list (public)
+app.get('/api/public/:slug/gifts', async (req, res) => {
+  try {
+    const event = await eventBySlug(req.params.slug);
+    if (!event) return res.status(404).json({ error: 'Evento não encontrado.' });
+    const giftDoc = await giftsDb.findOne({ userId: event.userId });
+    const ownerGifts = giftDoc ? giftDoc.gifts : [];
+    // Get purchased product IDs for this event
+    const purchases = await purchasesDb.find({ eventId: event._id });
+    const purchasedIds = new Set();
+    purchases.forEach(p => p.items.forEach(i => purchasedIds.add(i.productId)));
+    res.json({
+      gifts: ownerGifts.map(g => ({ productId: g.productId, customPrice: g.customPrice, purchased: purchasedIds.has(g.productId) }))
+    });
+  } catch (err) {
+    console.error('Error fetching public gifts:', err);
+    res.status(500).json({ error: 'Erro ao buscar presentes.' });
+  }
+});
+
+// Guest purchases gifts
+app.post('/api/public/:slug/purchases', async (req, res) => {
+  try {
+    const event = await eventBySlug(req.params.slug);
+    if (!event) return res.status(404).json({ error: 'Evento não encontrado.' });
+    const { guestName, items, paymentMethod } = req.body;
+    if (!guestName || !items || !items.length) return res.status(400).json({ error: 'Nome e itens são obrigatórios.' });
+    const totalAmount = items.reduce((sum, i) => sum + (i.price || 0), 0);
+    await purchasesDb.insert({
+      eventId: event._id,
+      guestName,
+      items, // [{productId, name, price}]
+      totalAmount,
+      paymentMethod: paymentMethod || 'pix',
+      status: 'confirmed',
+      createdAt: new Date()
+    });
+    res.status(201).json({ success: true });
+  } catch (err) {
+    console.error('Error saving purchase:', err);
+    res.status(500).json({ error: 'Erro ao salvar compra.' });
+  }
+});
+
+// Get public messages
+app.get('/api/public/:slug/messages', async (req, res) => {
+  try {
+    const event = await eventBySlug(req.params.slug);
+    if (!event) return res.status(404).json({ error: 'Evento não encontrado.' });
+    const messages = await messagesDb.find({ eventId: event._id, status: 'approved' });
+    messages.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+    res.json({ messages });
+  } catch (err) {
+    console.error('Error fetching messages:', err);
+    res.status(500).json({ error: 'Erro ao buscar mensagens.' });
+  }
+});
+
+// Guest posts a message
+app.post('/api/public/:slug/messages', async (req, res) => {
+  try {
+    const event = await eventBySlug(req.params.slug);
+    if (!event) return res.status(404).json({ error: 'Evento não encontrado.' });
+    const { guestName, text } = req.body;
+    if (!guestName || !text) return res.status(400).json({ error: 'Nome e mensagem são obrigatórios.' });
+    const msg = await messagesDb.insert({
+      eventId: event._id,
+      guestName,
+      text: text.substring(0, 500),
+      status: 'approved',
+      pinned: false,
+      createdAt: new Date()
+    });
+    res.status(201).json({ success: true, message: msg });
+  } catch (err) {
+    console.error('Error saving message:', err);
+    res.status(500).json({ error: 'Erro ao salvar mensagem.' });
+  }
+});
+
+// Guest RSVP
+app.post('/api/public/:slug/rsvp', async (req, res) => {
+  try {
+    const event = await eventBySlug(req.params.slug);
+    if (!event) return res.status(404).json({ error: 'Evento não encontrado.' });
+    const { guestName, companions } = req.body;
+    if (!guestName) return res.status(400).json({ error: 'Nome é obrigatório.' });
+    const companionsList = Array.isArray(companions) ? companions.map(c => ({
+      name: c.name || '',
+      isChild: !!c.isChild,
+      childAge: c.isChild ? (parseInt(c.childAge) || null) : null
+    })) : [];
+    await rsvpsDb.insert({
+      eventId: event._id,
+      guestName,
+      companions: companionsList,
+      totalGuests: 1 + companionsList.length,
+      createdAt: new Date()
+    });
+    res.status(201).json({ success: true });
+  } catch (err) {
+    console.error('Error saving RSVP:', err);
+    res.status(500).json({ error: 'Erro ao confirmar presença.' });
+  }
+});
+
+// ===== AUTHENTICATED MESSAGE API =====
+
+// Get all messages for user's event
+app.get('/api/messages', ensureAuthenticated, async (req, res) => {
+  try {
+    const event = await eventsDb.findOne({ userId: req.user._id });
+    if (!event) return res.json({ messages: [] });
+    const messages = await messagesDb.find({ eventId: event._id });
+    messages.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+    res.json({ messages });
+  } catch (err) {
+    console.error('Error fetching messages:', err);
+    res.status(500).json({ error: 'Erro ao buscar mensagens.' });
+  }
+});
+
+// Toggle pin
+app.put('/api/messages/:id/pin', ensureAuthenticated, async (req, res) => {
+  try {
+    const event = await eventsDb.findOne({ userId: req.user._id });
+    if (!event) return res.status(404).json({ error: 'Evento não encontrado.' });
+    const msg = await messagesDb.findOne({ _id: req.params.id, eventId: event._id });
+    if (!msg) return res.status(404).json({ error: 'Mensagem não encontrada.' });
+    await messagesDb.update({ _id: msg._id }, { $set: { pinned: !msg.pinned } });
+    res.json({ success: true, pinned: !msg.pinned });
+  } catch (err) {
+    res.status(500).json({ error: 'Erro ao fixar mensagem.' });
+  }
+});
+
+// Update message status
+app.put('/api/messages/:id/status', ensureAuthenticated, async (req, res) => {
+  try {
+    const event = await eventsDb.findOne({ userId: req.user._id });
+    if (!event) return res.status(404).json({ error: 'Evento não encontrado.' });
+    const msg = await messagesDb.findOne({ _id: req.params.id, eventId: event._id });
+    if (!msg) return res.status(404).json({ error: 'Mensagem não encontrada.' });
+    const newStatus = req.body.status || (msg.status === 'approved' ? 'pending' : 'approved');
+    await messagesDb.update({ _id: msg._id }, { $set: { status: newStatus } });
+    res.json({ success: true, status: newStatus });
+  } catch (err) {
+    res.status(500).json({ error: 'Erro ao atualizar status.' });
+  }
+});
+
+// Delete message
+app.delete('/api/messages/:id', ensureAuthenticated, async (req, res) => {
+  try {
+    const event = await eventsDb.findOne({ userId: req.user._id });
+    if (!event) return res.status(404).json({ error: 'Evento não encontrado.' });
+    await messagesDb.remove({ _id: req.params.id, eventId: event._id });
+    res.json({ success: true });
+  } catch (err) {
+    res.status(500).json({ error: 'Erro ao deletar mensagem.' });
+  }
+});
+
 // ===== PROTECTED DASHBOARD PAGES =====
 
 // Dashboard (custom: loads event data)
 app.get('/dashboard', ensureAuthenticated, async (req, res) => {
   const event = await eventsDb.findOne({ userId: req.user._id });
+  let stats = { totalRaised: 0, giftsReceived: 0, confirmedGuests: 0, messagesCount: 0 };
+  if (event) {
+    const purchases = await purchasesDb.find({ eventId: event._id });
+    stats.totalRaised = purchases.reduce((sum, p) => sum + (p.totalAmount || 0), 0);
+    stats.giftsReceived = purchases.reduce((sum, p) => sum + (p.items ? p.items.length : 0), 0);
+    const rsvps = await rsvpsDb.find({ eventId: event._id });
+    stats.confirmedGuests = rsvps.reduce((sum, r) => sum + (r.totalGuests || 0), 0);
+    stats.messagesCount = await messagesDb.count({ eventId: event._id });
+  }
   const css = `<link rel="stylesheet" href="/css/dashboard.css?v=${ASSET_V}">` +
               `<link rel="stylesheet" href="/css/pages/dashboard-home.css?v=${ASSET_V}">`;
   const js = `<script src="/js/pregnancy-utils.js?v=${ASSET_V}"></script>` +
@@ -361,7 +543,7 @@ app.get('/dashboard', ensureAuthenticated, async (req, res) => {
   res.render('pages/dashboard', {
     title: 'Painel', bodyClass: '', cssIncludes: css, jsIncludes: js,
     activePage: 'dashboard', pageTitle: 'Painel', showNotif: true,
-    event: event || null
+    event: event || null, stats
   });
 });
 
@@ -383,7 +565,7 @@ app.get('/criar-cha', ensureAuthenticated, async (req, res) => {
 
 // Remaining dashboard pages (generic loop)
 const dashboardPages = [
-  { path: '/lista-presentes',  view: 'lista-presentes',  title: 'Lista de Presentes', activePage: 'lista-presentes',  pageCss: 'lista-presentes',pageJs: 'lista-presentes',  showNotif: false },
+  { path: '/lista-presentes',  view: 'lista-presentes',  title: 'Lista de Presentes', activePage: 'lista-presentes',  pageCss: 'lista-presentes',pageJs: 'lista-presentes',  showNotif: false, extraJs: 'gift-catalog' },
   { path: '/convidados',       view: 'convidados',       title: 'Convidados',         activePage: 'convidados',       pageCss: 'convidados',     pageJs: 'convidados',       showNotif: false },
   { path: '/mural',            view: 'mural',            title: 'Mural de Recados',   activePage: 'mural',            pageCss: 'mural',          pageJs: 'mural',            showNotif: false, hasToast: true },
   { path: '/album',            view: 'album',            title: 'Álbum de Fotos',     activePage: 'album',            pageCss: 'album',          pageJs: 'album',            showNotif: false, hasToast: true },
@@ -391,12 +573,13 @@ const dashboardPages = [
   { path: '/perfil',           view: 'perfil',           title: 'Perfil',             activePage: 'perfil',           pageCss: 'perfil',         pageJs: 'perfil',           showNotif: false, hasToast: true },
 ];
 
-dashboardPages.forEach(({ path: routePath, view, title, activePage, pageCss, pageJs, showNotif, hasToast }) => {
+dashboardPages.forEach(({ path: routePath, view, title, activePage, pageCss, pageJs, showNotif, hasToast, extraJs }) => {
   app.get(routePath, ensureAuthenticated, (req, res) => {
     const css = `<link rel="stylesheet" href="/css/dashboard.css?v=${ASSET_V}">` +
                 `<link rel="stylesheet" href="/css/pages/${pageCss}.css?v=${ASSET_V}">`;
     let js = `<script src="/js/sidebar.js?v=${ASSET_V}"></script>`;
     if (hasToast) js += `<script src="/js/toast.js?v=${ASSET_V}"></script>`;
+    if (extraJs) js += `<script src="/js/${extraJs}.js?v=${ASSET_V}"></script>`;
     if (pageJs) js += `<script src="/js/${pageJs}.js?v=${ASSET_V}"></script>`;
     res.render(`pages/${view}`, {
       title,

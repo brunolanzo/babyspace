@@ -5,7 +5,9 @@
     chaDate: event.chaDate,
     pregnancyWeeks: event.pregnancyWeeks,
     weekCountDay: event.weekCountDay,
-    createdAt: event.createdAt
+    createdAt: event.createdAt,
+    slug: event.slug,
+    eventId: event._id
   }).replace(/<\//g, '<\\/') %>;
 </script>
 
@@ -91,6 +93,97 @@
     </div>
   </div>
   <% } %>
+
+  <!-- RSVP Section -->
+  <div class="section" id="rsvpSection">
+    <h2 class="section-title">Confirme sua presença</h2>
+    <div class="invite-card" id="rsvpCard">
+      <form id="rsvpForm">
+        <div class="form-group">
+          <label class="form-label">Seu nome</label>
+          <input type="text" id="rsvpName" class="form-input" required placeholder="Nome completo">
+        </div>
+        <div id="companionsContainer"></div>
+        <button type="button" class="btn btn-outline btn-sm" id="addCompanionBtn" style="margin-top:8px">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg>
+          Adicionar acompanhante
+        </button>
+        <button type="submit" class="btn btn-primary btn-full" style="margin-top:16px">Confirmar presença</button>
+      </form>
+      <div id="rsvpSuccess" class="success-state" style="display:none">
+        <div class="success-icon">✅</div>
+        <h3>Presença confirmada!</h3>
+        <p>Obrigado por confirmar. Nos vemos no evento!</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Gift List Section -->
+  <div class="section" id="giftSection">
+    <h2 class="section-title">Lista de Presentes</h2>
+    <div id="publicGiftsGrid" class="public-gifts-grid"></div>
+    <div id="emptyGifts" class="empty-state-small" style="display:none">
+      <p>Nenhum presente na lista ainda.</p>
+    </div>
+  </div>
+
+  <!-- Cart floating bar -->
+  <div id="cartBar" class="cart-bar" style="display:none">
+    <div class="cart-bar-info">
+      <span id="cartCount">0</span> presente(s) — <strong id="cartTotal">R$ 0</strong>
+    </div>
+    <button class="btn btn-primary btn-sm" onclick="openCartModal()">Ver carrinho</button>
+  </div>
+
+  <!-- Cart Modal -->
+  <div id="cartModal" class="modal-overlay" style="display:none">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>Seu carrinho</h3>
+        <button class="modal-close" onclick="closeCartModal()">&times;</button>
+      </div>
+      <div id="cartItems" class="cart-items"></div>
+      <div class="cart-total-row">
+        <strong>Total:</strong> <strong id="cartModalTotal">R$ 0</strong>
+      </div>
+      <div class="form-group" style="margin-top:16px">
+        <label class="form-label">Seu nome</label>
+        <input type="text" id="cartGuestName" class="form-input" placeholder="Nome completo">
+      </div>
+      <div class="pix-info">
+        <div class="pix-badge">PIX</div>
+        <p>O pagamento será via PIX. Após confirmar, você receberá as instruções.</p>
+      </div>
+      <button class="btn btn-primary btn-full" onclick="submitPurchase()" id="purchaseBtn">Confirmar presente</button>
+      <div id="purchaseSuccess" class="success-state" style="display:none">
+        <div class="success-icon">🎉</div>
+        <h3>Presente enviado!</h3>
+        <p>Obrigado pela generosidade!</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mural Section -->
+  <div class="section" id="muralSection">
+    <h2 class="section-title">Mural de Recados</h2>
+    <div id="messagesWall" class="messages-wall"></div>
+    <div class="mural-form-card">
+      <form id="messageForm">
+        <div class="form-group">
+          <label class="form-label">Seu nome</label>
+          <input type="text" id="msgName" class="form-input" placeholder="Seu nome" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Mensagem</label>
+          <textarea id="msgText" class="form-input" placeholder="Deixe uma mensagem carinhosa..." rows="3" required maxlength="500"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Enviar recado 💌</button>
+      </form>
+      <div id="msgSuccess" class="success-state" style="display:none">
+        <p>✨ Recado enviado com carinho!</p>
+      </div>
+    </div>
+  </div>
 
   <div class="share-section">
     <h2 class="section-title">Compartilhe com os amigos</h2>
