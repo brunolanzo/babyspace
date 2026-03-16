@@ -522,6 +522,34 @@ app.delete('/api/messages/:id', ensureAuthenticated, async (req, res) => {
   }
 });
 
+// ===== RSVP API (authenticated) =====
+
+// Get all RSVPs for user's event
+app.get('/api/rsvps', ensureAuthenticated, async (req, res) => {
+  try {
+    const event = await eventsDb.findOne({ userId: req.user._id });
+    if (!event) return res.json({ rsvps: [] });
+    const rsvps = await rsvpsDb.find({ eventId: event._id });
+    rsvps.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+    res.json({ rsvps });
+  } catch (err) {
+    console.error('Error fetching RSVPs:', err);
+    res.status(500).json({ error: 'Erro ao buscar confirmações.' });
+  }
+});
+
+// Delete RSVP
+app.delete('/api/rsvps/:id', ensureAuthenticated, async (req, res) => {
+  try {
+    const event = await eventsDb.findOne({ userId: req.user._id });
+    if (!event) return res.status(404).json({ error: 'Evento não encontrado.' });
+    await rsvpsDb.remove({ _id: req.params.id, eventId: event._id });
+    res.json({ success: true });
+  } catch (err) {
+    res.status(500).json({ error: 'Erro ao remover confirmação.' });
+  }
+});
+
 // ===== PROTECTED DASHBOARD PAGES =====
 
 // Dashboard (custom: loads event data)

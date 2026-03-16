@@ -400,46 +400,13 @@ window.submitPurchase = async function() {
 
       cart.clear();
       updateCartUI();
+      // Mark step 2 as done
+      if (typeof markStepDone === 'function') markStepDone(2);
     }
   } catch(err) { console.error('Purchase error:', err); }
 };
 
 // ===== MURAL =====
-async function loadMessages() {
-  var wall = document.getElementById('messagesWall');
-  if (!wall) return;
-
-  try {
-    var res = await fetch(apiBase + '/messages');
-    var data = await res.json();
-    var messages = data.messages || [];
-
-    if (!messages.length) {
-      wall.innerHTML = '<p class="mural-empty">Seja o primeiro a deixar um recado! 💬</p>';
-      return;
-    }
-
-    wall.innerHTML = '';
-    messages.forEach(function(msg) {
-      wall.appendChild(createMessageCard(msg));
-    });
-  } catch(err) { console.error('Error loading messages:', err); }
-}
-
-function createMessageCard(msg) {
-  var card = document.createElement('div');
-  card.className = 'msg-card';
-  var date = new Date(msg.createdAt);
-  var dateStr = date.toLocaleDateString('pt-BR', { day: '2-digit', month: 'short' });
-  card.innerHTML =
-    '<div class="msg-card-header">' +
-      '<div class="msg-avatar">' + (msg.guestName ? msg.guestName.charAt(0).toUpperCase() : '?') + '</div>' +
-      '<div class="msg-meta"><strong>' + msg.guestName + '</strong><span>' + dateStr + '</span></div>' +
-    '</div>' +
-    '<p class="msg-text">' + msg.text.replace(/</g, '&lt;').replace(/>/g, '&gt;') + '</p>';
-  return card;
-}
-
 var msgForm = document.getElementById('messageForm');
 if (msgForm) {
   msgForm.addEventListener('submit', async function(e) {
@@ -455,21 +422,12 @@ if (msgForm) {
         body: JSON.stringify({ guestName: name, text: text })
       });
       if (res.ok) {
-        var data = await res.json();
         storeName(name);
-        // Prepend new message
-        var wall = document.getElementById('messagesWall');
-        var emptyMsg = wall.querySelector('.mural-empty');
-        if (emptyMsg) emptyMsg.remove();
-        wall.prepend(createMessageCard(data.message));
-        // Show success briefly
+        // Show permanent success message
         document.getElementById('messageForm').style.display = 'none';
         document.getElementById('msgSuccess').style.display = 'block';
-        setTimeout(function() {
-          document.getElementById('messageForm').style.display = 'block';
-          document.getElementById('msgSuccess').style.display = 'none';
-          document.getElementById('msgText').value = '';
-        }, 3000);
+        // Mark step 3 as done
+        markStepDone(3);
       }
     } catch(err) { console.error('Message error:', err); }
   });
@@ -482,8 +440,39 @@ if (msgForm) {
   }
 }
 
+// ===== JOURNEY STEPS =====
+window.scrollToSection = function(sectionId) {
+  var el = document.getElementById(sectionId);
+  if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+};
+
+function markStepDone(stepNum) {
+  var step = document.querySelector('.journey-step[data-step="' + stepNum + '"]');
+  if (step) {
+    step.classList.add('done');
+    step.classList.remove('active');
+  }
+  // Activate next step
+  var next = document.querySelector('.journey-step[data-step="' + (stepNum + 1) + '"]');
+  if (next && !next.classList.contains('done')) {
+    next.classList.add('active');
+  }
+}
+
+// Mark step 1 done on RSVP success (hook into existing logic)
+var origRsvpSuccess = document.getElementById('rsvpSuccess');
+if (origRsvpSuccess) {
+  var observer = new MutationObserver(function(mutations) {
+    mutations.forEach(function(m) {
+      if (m.attributeName === 'style' && origRsvpSuccess.style.display === 'block') {
+        markStepDone(1);
+      }
+    });
+  });
+  observer.observe(origRsvpSuccess, { attributes: true });
+}
+
 // ===== INIT =====
 loadPublicGifts();
-loadMessages();
 
 })();

@@ -94,6 +94,24 @@
   </div>
   <% } %>
 
+  <!-- Journey Steps -->
+  <div class="journey-steps">
+    <div class="journey-step active" data-step="1" onclick="scrollToSection('rsvpSection')">
+      <div class="journey-step-num">1</div>
+      <div class="journey-step-label">Confirmar presença</div>
+    </div>
+    <div class="journey-step-line"></div>
+    <div class="journey-step" data-step="2" onclick="scrollToSection('giftSection')">
+      <div class="journey-step-num">2</div>
+      <div class="journey-step-label">Escolher presente</div>
+    </div>
+    <div class="journey-step-line"></div>
+    <div class="journey-step" data-step="3" onclick="scrollToSection('muralSection')">
+      <div class="journey-step-num">3</div>
+      <div class="journey-step-label">Deixar recado</div>
+    </div>
+  </div>
+
   <!-- RSVP Section -->
   <div class="section" id="rsvpSection">
     <h2 class="section-title">Confirme sua presença</h2>
@@ -165,8 +183,7 @@
 
   <!-- Mural Section -->
   <div class="section" id="muralSection">
-    <h2 class="section-title">Mural de Recados</h2>
-    <div id="messagesWall" class="messages-wall"></div>
+    <h2 class="section-title">Deixe um Recado</h2>
     <div class="mural-form-card">
       <form id="messageForm">
         <div class="form-group">
@@ -177,10 +194,12 @@
           <label class="form-label">Mensagem</label>
           <textarea id="msgText" class="form-input" placeholder="Deixe uma mensagem carinhosa..." rows="3" required maxlength="500"></textarea>
         </div>
-        <button type="submit" class="btn btn-primary">Enviar recado 💌</button>
+        <button type="submit" class="btn btn-primary btn-full">Enviar recado 💌</button>
       </form>
       <div id="msgSuccess" class="success-state" style="display:none">
-        <p>✨ Recado enviado com carinho!</p>
+        <div class="success-icon">💌</div>
+        <h3>Recado enviado com carinho!</h3>
+        <p>Sua mensagem será exibida no mural do chá. Obrigado!</p>
       </div>
     </div>
   </div>

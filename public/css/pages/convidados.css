@@ -4,6 +4,7 @@
 .btn-whatsapp:hover { background: #1ebe57; transform: translateY(-2px); }
 
 /* ===== CONVIDADOS STATS ===== */
+.stat-mini { display: flex; align-items: center; gap: 12px; }
 .stat-mini-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
 
 /* ===== FILTER BAR ===== */
@@ -36,16 +37,27 @@ tr:hover { background: rgba(255,140,105,0.02); }
 .modal-close { position: absolute; top: 16px; right: 16px; background: none; border: none; cursor: pointer; color: var(--color-text-light); font-size: 1.2rem; }
 .modal-actions .btn { flex: 1; }
 
+/* ===== BADGE CHILD ===== */
+.badge-child { display: inline-block; background: #FFE5A0; color: #8B6914; padding: 2px 8px; border-radius: 50px; font-size: 0.72rem; font-weight: 600; margin-left: 4px; }
+
+/* ===== COMPANION TAG ===== */
+.companion-tag { display: inline-flex; align-items: center; gap: 4px; background: var(--color-bg, #f8f6f4); padding: 4px 10px; border-radius: 50px; font-size: 0.82rem; margin: 2px 4px 2px 0; }
+
+/* ===== ICON BUTTON ===== */
+.btn-icon { background: none; border: none; cursor: pointer; color: var(--color-text-light); padding: 6px; border-radius: var(--radius-sm); transition: all var(--transition); display: inline-flex; align-items: center; justify-content: center; }
+.btn-icon:hover { color: #e74c3c; background: rgba(231,76,60,0.08); }
+
 /* ===== MOBILE CARDS ===== */
-.mobile-card { display: none; }
+.mobile-cards { display: none; }
+
+.guest-card-mobile { background: #fff; border-radius: var(--radius-md); box-shadow: var(--shadow-card); padding: 16px; margin-bottom: 12px; }
+.guest-card-header { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+.guest-card-companions { display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 10px; padding-top: 10px; border-top: 1px solid #f0ece9; }
+.guest-card-footer { display: flex; gap: 16px; font-size: 0.82rem; color: var(--color-text-light); padding-top: 10px; border-top: 1px solid #f0ece9; }
 
 /* ===== RESPONSIVE ===== */
 @media(max-width:768px) {
   .search-input { width: 100%; }
   .table-wrap { display: none; }
-  .mobile-card { display: block; }
-  .m-card { background: #fff; border-radius: var(--radius-sm); box-shadow: var(--shadow-card); padding: 16px; margin-bottom: 12px; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
-  .m-card-left { display: flex; align-items: center; gap: 12px; }
-  .m-card-name { font-weight: 600; font-size: 0.9rem; }
-  .m-card-email { font-size: 0.78rem; color: var(--color-text-light); }
+  .mobile-cards { display: block; }
 }
