@@ -1,4 +1,4 @@
-// Convite — Countdown, pregnancy badge, share, RSVP, gifts, mural
+// Convite — Pregnancy badge, share, RSVP, gifts, mural
 
 (function() {
 
@@ -7,43 +7,6 @@ if (!eventData) return;
 
 var slug = eventData.slug;
 var apiBase = '/api/public/' + slug;
-
-// ===== COUNTDOWN =====
-if (eventData.chaDate) {
-  var target = new Date(eventData.chaDate + 'T12:00:00');
-
-  function updateCountdown() {
-    var daysEl = document.getElementById('days');
-    var hoursEl = document.getElementById('hours');
-    var minsEl = document.getElementById('mins');
-    var secsEl = document.getElementById('secs');
-    if (!daysEl) return;
-
-    var now = new Date();
-    var diff = target - now;
-
-    if (diff <= 0) {
-      daysEl.textContent = '0';
-      hoursEl.textContent = '00';
-      minsEl.textContent = '00';
-      secsEl.textContent = '00';
-      return;
-    }
-
-    var d = Math.floor(diff / (1000 * 60 * 60 * 24));
-    var h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    var m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-    var s = Math.floor((diff % (1000 * 60)) / 1000);
-
-    daysEl.textContent = d;
-    hoursEl.textContent = String(h).padStart(2, '0');
-    minsEl.textContent = String(m).padStart(2, '0');
-    secsEl.textContent = String(s).padStart(2, '0');
-  }
-
-  setInterval(updateCountdown, 1000);
-  updateCountdown();
-}
 
 // ===== PREGNANCY BADGE =====
 if (eventData.pregnancyWeeks && typeof calculateCurrentWeek === 'function') {
@@ -420,10 +383,23 @@ if (msgForm) {
         body: JSON.stringify({ guestName: name, text: text })
       });
       if (res.ok) {
+        var data = await res.json();
         storeName(name);
-        // Show permanent success message
+        // Show success briefly then reset form
         document.getElementById('messageForm').style.display = 'none';
         document.getElementById('msgSuccess').style.display = 'block';
+        // Prepend new message to wall
+        var wall = document.getElementById('messagesWall');
+        if (wall) {
+          var emptyMsg = wall.querySelector('.mural-empty');
+          if (emptyMsg) emptyMsg.remove();
+          wall.prepend(createMessageCard(data.message));
+        }
+        setTimeout(function() {
+          document.getElementById('messageForm').style.display = 'block';
+          document.getElementById('msgSuccess').style.display = 'none';
+          document.getElementById('msgText').value = '';
+        }, 3000);
       }
     } catch(err) { console.error('Message error:', err); }
   });
@@ -434,6 +410,43 @@ if (msgForm) {
     var sn = getStoredName();
     if (sn) msgNameEl.value = sn;
   }
+}
+
+// Load and display existing messages
+async function loadMessages() {
+  var wall = document.getElementById('messagesWall');
+  if (!wall) return;
+
+  try {
+    var res = await fetch(apiBase + '/messages');
+    var data = await res.json();
+    var messages = data.messages || [];
+
+    if (!messages.length) {
+      wall.innerHTML = '<p class="mural-empty">Seja o primeiro a deixar um recado! 💬</p>';
+      return;
+    }
+
+    wall.innerHTML = '';
+    messages.forEach(function(msg) {
+      wall.appendChild(createMessageCard(msg));
+    });
+  } catch(err) { console.error('Error loading messages:', err); }
+}
+
+function createMessageCard(msg) {
+  var card = document.createElement('div');
+  card.className = 'msg-card';
+  var date = new Date(msg.createdAt);
+  var dateStr = date.toLocaleDateString('pt-BR', { day: '2-digit', month: 'short' });
+  var initial = msg.guestName ? msg.guestName.charAt(0).toUpperCase() : '?';
+  card.innerHTML =
+    '<div class="msg-card-header">' +
+      '<div class="msg-avatar">' + initial + '</div>' +
+      '<div class="msg-meta"><strong>' + (msg.guestName || '').replace(/</g, '&lt;') + '</strong><span>' + dateStr + '</span></div>' +
+    '</div>' +
+    '<p class="msg-text">' + (msg.text || '').replace(/</g, '&lt;').replace(/>/g, '&gt;') + '</p>';
+  return card;
 }
 
 // ===== NAV SCROLL TRACKING =====
@@ -482,5 +495,6 @@ updateActiveNav();
 
 // ===== INIT =====
 loadPublicGifts();
+loadMessages();
 
 })();

@@ -14,17 +14,29 @@
 <section class="invite-hero">
   <% if (event.coverPhoto) { %>
   <img class="invite-hero-cover" src="<%= event.coverPhoto %>?v=<%= v %>" alt="Foto de capa" style="object-position: center <%= event.coverPosition || 50 %>%">
-  <div class="invite-hero-overlay"></div>
   <% } else { %>
   <div class="deco d1"></div><div class="deco d2"></div><div class="deco d3"></div>
   <% } %>
-  <div class="invite-hero-content">
+</section>
+
+<!-- Sticky Nav -->
+<nav class="invite-nav" id="inviteNav">
+  <a href="#heroSection" class="invite-nav-link active" data-section="heroSection">Home</a>
+  <a href="#rsvpSection" class="invite-nav-link" data-section="rsvpSection">Confirmar Presença</a>
+  <a href="#giftSection" class="invite-nav-link" data-section="giftSection">Lista de Presentes</a>
+  <a href="#muralSection" class="invite-nav-link" data-section="muralSection">Deixar Recado</a>
+</nav>
+
+<div class="container" id="heroSection">
+
+  <!-- Title below hero -->
+  <div class="invite-title-section">
     <div class="invite-logo">
       <svg width="20" height="20" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="14" fill="#FF8C69" opacity="0.15"/><path d="M16 6 L18.5 12 L25 12.5 L20 17 L21.5 24 L16 20.5 L10.5 24 L12 17 L7 12.5 L13.5 12 Z" fill="#FF8C69"/></svg>
       BabySpace
     </div>
-    <h1><%= event.chaTitle %></h1>
-    <p class="subtitle">
+    <h1 class="invite-main-title"><%= event.chaTitle %></h1>
+    <p class="invite-main-subtitle">
       <% if (event.isGemeos && event.babyName && event.babyName2) { %>
         <%= event.babyName %> e <%= event.babyName2 %> estão chegando!
       <% } else if (event.babyName) { %>
@@ -33,26 +45,7 @@
         Um bebê está chegando!
       <% } %>
     </p>
-    <% if (event.chaDate) { %>
-    <div class="countdown" id="countdown">
-      <div class="countdown-item"><div class="countdown-num" id="days">--</div><div class="countdown-label">Dias</div></div>
-      <div class="countdown-item"><div class="countdown-num" id="hours">--</div><div class="countdown-label">Horas</div></div>
-      <div class="countdown-item"><div class="countdown-num" id="mins">--</div><div class="countdown-label">Min</div></div>
-      <div class="countdown-item"><div class="countdown-num" id="secs">--</div><div class="countdown-label">Seg</div></div>
-    </div>
-    <% } %>
   </div>
-</section>
-
-<!-- Sticky Nav -->
-<nav class="invite-nav" id="inviteNav">
-  <a href="#heroSection" class="invite-nav-link active" data-section="heroSection">Home</a>
-  <a href="#giftSection" class="invite-nav-link" data-section="giftSection">Lista de Presentes</a>
-  <a href="#rsvpSection" class="invite-nav-link" data-section="rsvpSection">Confirmar Presença</a>
-  <a href="#muralSection" class="invite-nav-link" data-section="muralSection">Deixar Recado</a>
-</nav>
-
-<div class="container" id="heroSection">
 
   <% if (event.pregnancyWeeks) { %>
   <div class="pregnancy-badge" id="convitePregnancy"></div>
@@ -173,7 +166,7 @@
 
   <!-- Mural Section -->
   <div class="section" id="muralSection">
-    <h2 class="section-title">Deixe um Recado</h2>
+    <h2 class="section-title">Mural de Recados</h2>
     <div class="mural-form-card">
       <form id="messageForm">
         <div class="form-group">
@@ -192,6 +185,9 @@
         <p>Sua mensagem será exibida no mural do chá. Obrigado!</p>
       </div>
     </div>
+
+    <!-- Messages Wall -->
+    <div id="messagesWall" class="messages-wall" style="margin-top:32px"></div>
   </div>
 
   <div class="share-section">
