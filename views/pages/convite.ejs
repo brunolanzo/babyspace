@@ -44,7 +44,15 @@
   </div>
 </section>
 
-<div class="container">
+<!-- Sticky Nav -->
+<nav class="invite-nav" id="inviteNav">
+  <a href="#heroSection" class="invite-nav-link active" data-section="heroSection">Home</a>
+  <a href="#giftSection" class="invite-nav-link" data-section="giftSection">Lista de Presentes</a>
+  <a href="#rsvpSection" class="invite-nav-link" data-section="rsvpSection">Confirmar Presença</a>
+  <a href="#muralSection" class="invite-nav-link" data-section="muralSection">Deixar Recado</a>
+</nav>
+
+<div class="container" id="heroSection">
 
   <% if (event.pregnancyWeeks) { %>
   <div class="pregnancy-badge" id="convitePregnancy"></div>
@@ -93,24 +101,6 @@
     </div>
   </div>
   <% } %>
-
-  <!-- Journey Steps -->
-  <div class="journey-steps">
-    <div class="journey-step active" data-step="1" onclick="scrollToSection('rsvpSection')">
-      <div class="journey-step-num">1</div>
-      <div class="journey-step-label">Confirmar presença</div>
-    </div>
-    <div class="journey-step-line"></div>
-    <div class="journey-step" data-step="2" onclick="scrollToSection('giftSection')">
-      <div class="journey-step-num">2</div>
-      <div class="journey-step-label">Escolher presente</div>
-    </div>
-    <div class="journey-step-line"></div>
-    <div class="journey-step" data-step="3" onclick="scrollToSection('muralSection')">
-      <div class="journey-step-num">3</div>
-      <div class="journey-step-label">Deixar recado</div>
-    </div>
-  </div>
 
   <!-- RSVP Section -->
   <div class="section" id="rsvpSection">

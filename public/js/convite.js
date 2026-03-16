@@ -400,8 +400,6 @@ window.submitPurchase = async function() {
 
       cart.clear();
       updateCartUI();
-      // Mark step 2 as done
-      if (typeof markStepDone === 'function') markStepDone(2);
     }
   } catch(err) { console.error('Purchase error:', err); }
 };
@@ -426,8 +424,6 @@ if (msgForm) {
         // Show permanent success message
         document.getElementById('messageForm').style.display = 'none';
         document.getElementById('msgSuccess').style.display = 'block';
-        // Mark step 3 as done
-        markStepDone(3);
       }
     } catch(err) { console.error('Message error:', err); }
   });
@@ -440,37 +436,49 @@ if (msgForm) {
   }
 }
 
-// ===== JOURNEY STEPS =====
-window.scrollToSection = function(sectionId) {
-  var el = document.getElementById(sectionId);
-  if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-};
+// ===== NAV SCROLL TRACKING =====
+var navLinks = document.querySelectorAll('.invite-nav-link');
+var navSections = [];
 
-function markStepDone(stepNum) {
-  var step = document.querySelector('.journey-step[data-step="' + stepNum + '"]');
-  if (step) {
-    step.classList.add('done');
-    step.classList.remove('active');
-  }
-  // Activate next step
-  var next = document.querySelector('.journey-step[data-step="' + (stepNum + 1) + '"]');
-  if (next && !next.classList.contains('done')) {
-    next.classList.add('active');
-  }
-}
+navLinks.forEach(function(link) {
+  var sectionId = link.getAttribute('data-section');
+  if (sectionId) navSections.push(sectionId);
 
-// Mark step 1 done on RSVP success (hook into existing logic)
-var origRsvpSuccess = document.getElementById('rsvpSuccess');
-if (origRsvpSuccess) {
-  var observer = new MutationObserver(function(mutations) {
-    mutations.forEach(function(m) {
-      if (m.attributeName === 'style' && origRsvpSuccess.style.display === 'block') {
-        markStepDone(1);
-      }
-    });
+  link.addEventListener('click', function(e) {
+    e.preventDefault();
+    var target = document.getElementById(sectionId);
+    if (target) {
+      var navHeight = document.getElementById('inviteNav') ? document.getElementById('inviteNav').offsetHeight : 0;
+      var top = target.getBoundingClientRect().top + window.pageYOffset - navHeight;
+      window.scrollTo({ top: top, behavior: 'smooth' });
+    }
   });
-  observer.observe(origRsvpSuccess, { attributes: true });
+});
+
+function updateActiveNav() {
+  var navHeight = document.getElementById('inviteNav') ? document.getElementById('inviteNav').offsetHeight : 0;
+  var scrollPos = window.pageYOffset + navHeight + 60;
+  var activeId = navSections[0];
+
+  for (var i = navSections.length - 1; i >= 0; i--) {
+    var el = document.getElementById(navSections[i]);
+    if (el && el.offsetTop <= scrollPos) {
+      activeId = navSections[i];
+      break;
+    }
+  }
+
+  navLinks.forEach(function(link) {
+    if (link.getAttribute('data-section') === activeId) {
+      link.classList.add('active');
+    } else {
+      link.classList.remove('active');
+    }
+  });
 }
+
+window.addEventListener('scroll', updateActiveNav, { passive: true });
+updateActiveNav();
 
 // ===== INIT =====
 loadPublicGifts();
